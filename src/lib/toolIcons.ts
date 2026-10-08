@@ -80,6 +80,17 @@ const toolIconMap: Record<string, LucideIcon> = {
   "file-archive": FileArchive,
   file: FileText,
 
+  // SEO Tool Specific Icons
+  "meta-tag-analyzer": Search,
+  "serp-snippet-preview": Search,
+  "robots-txt-generator": FileText,
+  "sitemap-generator": FileText,
+  "open-graph-checker": Globe2,
+  "schema-markup-generator": Code2,
+  "robots": FileText,
+  "sitemap": FileText,
+  "schema": Code2,
+
   brain: Brain,
   law: Scale,
   security: ShieldCheck,
