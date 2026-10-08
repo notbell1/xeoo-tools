@@ -18,6 +18,8 @@ import Header from "../components/Header";
 
 import Footer from "../components/Footer";
 
+import SocialLinks from "../components/SocialLinks";
+
 import ToolStatus from "../components/ToolStatus";
 
 import { BACKEND_URL } from "../config/backend";
@@ -485,6 +487,17 @@ export default function Home() {
                     className="transition-transform duration-200 group-hover:translate-y-0.5"
                   />
                 </button>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUp}
+                className="mt-5 flex justify-center"
+              >
+                <SocialLinks
+                  className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5"
+                  itemClassName="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-xeoo-border bg-xeoo-surface/90 text-xeoo-muted transition-all duration-200 hover:scale-110 hover:bg-xeoo-surface-soft shadow-xs hover:shadow-md"
+                  iconClassName="h-4.5 w-4.5 sm:h-5 sm:w-5 transition-colors"
+                />
               </motion.div>
             </motion.div>
           </div>
