@@ -5,8 +5,13 @@ declare(strict_types=1);
 require_once __DIR__ . '/env.php';
 
 $envPath = dirname(__DIR__, 2) . '/.env';
+if (!file_exists($envPath)) {
+    $envPath = dirname(__DIR__) . '/.env';
+}
 
-loadEnv($envPath);
+if (file_exists($envPath)) {
+    loadEnv($envPath);
+}
 
 $dbHost = env('DB_HOST', '127.0.0.1');
 $dbPort = env('DB_PORT', '3306');

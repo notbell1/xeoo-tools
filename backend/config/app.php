@@ -17,6 +17,9 @@ require_once __DIR__ . '/env.php';
 
 // Ensure .env is loaded if not already loaded
 $envFile = dirname(__DIR__, 2) . '/.env';
+if (!file_exists($envFile)) {
+    $envFile = dirname(__DIR__) . '/.env';
+}
 if (file_exists($envFile) && !getenv('APP_ENV')) {
     loadEnv($envFile);
 }
