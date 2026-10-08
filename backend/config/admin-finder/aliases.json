@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "aliases": [
+    { "value": "login", "category": "authentication", "priority": 100 },
+    { "value": "signin", "category": "authentication", "priority": 95 },
+    { "value": "admin", "category": "admin", "priority": 90 },
+    { "value": "administrator", "category": "admin", "priority": 85 },
+    { "value": "portal", "category": "portal", "priority": 80 },
+    { "value": "auth", "category": "authentication", "priority": 75 },
+    { "value": "account", "category": "account", "priority": 70 },
+    { "value": "member", "category": "member", "priority": 65 },
+    { "value": "dashboard", "category": "dashboard", "priority": 60 },
+    { "value": "panel", "category": "panel", "priority": 55 },
+    { "value": "console", "category": "console", "priority": 50 },
+    { "value": "manage", "category": "management", "priority": 45 },
+    { "value": "staff", "category": "staff", "priority": 40 },
+    { "value": "secure", "category": "secure", "priority": 35 },
+    { "value": "backend", "category": "backend", "priority": 30 }
+  ]
+}
+

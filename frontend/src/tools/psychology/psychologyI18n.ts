@@ -1,0 +1,53 @@
+export type ToolLanguage = "en" | "id";
+
+export const PSYCH_COMMON = {
+  en: {
+    start: "Start Assessment",
+    previous: "Previous",
+    next: "Next",
+    viewResults: "View Results",
+    retake: "Retake Assessment",
+    clear: "Clear",
+    analyze: "Analyze Thought",
+    copySummary: "Copy Summary",
+    copied: "Summary Copied!",
+    question: "Question",
+    of: "of",
+    answered: "answered",
+    disclaimerTitle: "Educational Notice & Disclaimer",
+    disclaimerBody:
+      "This self-assessment tool is designed solely for self-reflection and educational exploration. It does not provide clinical diagnosis, psychological treatment, or replace professional mental health evaluation.",
+    strongest: "Primary Orientation",
+    lowest: "Lowest Dimension",
+    scoreBreakdown: "Dimension Breakdown",
+    recommendedFocus: "Constructive Action Areas & Practical Strategies",
+    selfAssessmentBadge: "Self-Assessment",
+    educationalBadge: "Educational Only",
+    ready: "Ready",
+  },
+  id: {
+    start: "Mulai Asesmen",
+    previous: "Sebelumnya",
+    next: "Selanjutnya",
+    viewResults: "Lihat Hasil",
+    retake: "Ulangi Asesmen",
+    clear: "Bersihkan",
+    analyze: "Analisis Pikiran",
+    copySummary: "Salin Ringkasan",
+    copied: "Ringkasan Tersalin!",
+    question: "Pertanyaan",
+    of: "dari",
+    answered: "terjawab",
+    disclaimerTitle: "Pemberitahuan Edukatif & Penafian",
+    disclaimerBody:
+      "Alat asesmen mandiri ini dirancang semata-mata untuk refleksi diri dan eksplorasi edukatif. Alat ini tidak memberikan diagnosis klinis, perawatan psikologis, atau menggantikan evaluasi dari profesional kesehatan mental.",
+    strongest: "Orientasi Utama",
+    lowest: "Dimensi Terendah",
+    scoreBreakdown: "Rincian Dimensi",
+    recommendedFocus: "Area Aksi Konstruktif & Strategi Praktis",
+    selfAssessmentBadge: "Asesmen Mandiri",
+    educationalBadge: "Edukasi Saja",
+    ready: "Siap Digunakan",
+  },
+} as const;
+

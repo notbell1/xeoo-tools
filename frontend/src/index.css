@@ -1,0 +1,670 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+/* =========================================================
+   XeooTools - Global Design System
+========================================================= */
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+  color-scheme: light;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   DARK THEME VARIABLES
+========================================================= */
+
+html.dark {
+  color-scheme: dark;
+
+  --color-xeoo-bg: #090b10;
+  --color-xeoo-surface: #12151b;
+  --color-xeoo-surface-soft: #1a1e27;
+
+  --color-xeoo-border: #232936;
+  --color-xeoo-border-dark: #323a4c;
+
+  --color-xeoo-text: #f1f4f9;
+  --color-xeoo-text-soft: #c8cfdc;
+  --color-xeoo-muted: #ffffff;
+
+  --color-xeoo-black: #040507;
+  --color-xeoo-dark: #090b10;
+  --color-xeoo-dark-soft: #12151d;
+
+  --color-xeoo-primary: #3b82f6;
+  --color-xeoo-primary-hover: #60a5fa;
+  --color-xeoo-primary-soft: rgba(59, 130, 246, 0.16);
+
+  --color-xeoo-accent: #8b5cf6;
+  --color-xeoo-accent-soft: rgba(139, 92, 246, 0.16);
+
+  --color-xeoo-success: #22c55e;
+  --color-xeoo-success-soft: rgba(34, 197, 94, 0.16);
+
+  --color-xeoo-warning: #f59e0b;
+  --color-xeoo-warning-soft: rgba(245, 158, 11, 0.16);
+
+  --color-xeoo-danger: #ef4444;
+  --color-xeoo-danger-soft: rgba(239, 68, 68, 0.16);
+
+  --color-xeoo-info: #06b6d4;
+  --color-xeoo-info-soft: rgba(6, 182, 212, 0.16);
+}
+
+/* Smooth transition when switching themes */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.18s ease, fill 0.18s ease, stroke 0.18s ease !important;
+}
+
+/* =========================================================
+   HTML
+========================================================= */
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: var(--color-xeoo-bg);
+  scroll-behavior: smooth;
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--color-xeoo-bg);
+  color: var(--color-xeoo-text);
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================================
+   TEXT SELECTION
+========================================================= */
+
+::selection {
+  background: var(--color-xeoo-primary-soft);
+  color: var(--color-xeoo-text);
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-xeoo-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-xeoo-border-dark);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-xeoo-muted);
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--color-xeoo-primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   SWEETALERT2
+   XeooTools Compact Modal
+========================================================= */
+
+.xeoo-swal-popup {
+  width: min(340px, calc(100vw - 28px)) !important;
+  padding: 18px !important;
+  margin: 0 !important;
+
+  border: 1px solid var(--color-xeoo-border) !important;
+  border-radius: 14px !important;
+
+  background: var(--color-xeoo-surface) !important;
+  color: var(--color-xeoo-text) !important;
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 4px 12px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* =========================================================
+   SweetAlert Title
+========================================================= */
+
+.xeoo-swal-title {
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+
+  color: var(--color-xeoo-text) !important;
+}
+
+/* =========================================================
+   SweetAlert Text
+========================================================= */
+
+.xeoo-swal-text {
+  margin: 5px auto 0 !important;
+  padding: 0 !important;
+
+  max-width: 280px !important;
+
+  font-size: 0.82rem !important;
+  line-height: 1.45 !important;
+
+  color: var(--color-xeoo-muted) !important;
+}
+
+/* =========================================================
+   SweetAlert Custom Icon Wrapper
+========================================================= */
+
+.xeoo-swal-icon {
+  width: 40px !important;
+  height: 40px !important;
+
+  margin: 0 auto 8px !important;
+
+  border: 0 !important;
+  border-radius: 50% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
+}
+
+/* =========================================================
+   Success Icon
+========================================================= */
+
+.xeoo-icon-success {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-xeoo-success-soft);
+  color: var(--color-xeoo-success);
+
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* =========================================================
+   Error Icon
+========================================================= */
+
+.xeoo-icon-error {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-xeoo-danger-soft);
+  color: var(--color-xeoo-danger);
+
+  font-size: 29px;
+  font-weight: 500;
+  line-height: 1;
+
+  padding-bottom: 3px;
+}
+
+/* =========================================================
+   Warning Icon
+========================================================= */
+
+.xeoo-icon-warning {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-xeoo-warning-soft);
+  color: var(--color-xeoo-warning);
+
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* =========================================================
+   Info Icon
+========================================================= */
+
+.xeoo-icon-info {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-xeoo-info-soft);
+  color: var(--color-xeoo-info);
+
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* =========================================================
+   Danger Icon
+========================================================= */
+
+.xeoo-icon-danger {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-xeoo-danger-soft);
+  color: var(--color-xeoo-danger);
+
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* =========================================================
+   SweetAlert Actions
+========================================================= */
+
+.xeoo-swal-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  gap: 7px !important;
+
+  margin: 14px 0 0 !important;
+}
+
+/* =========================================================
+   SweetAlert Buttons
+========================================================= */
+
+.xeoo-swal-confirm,
+.xeoo-swal-cancel,
+.xeoo-swal-danger-confirm {
+  min-width: 76px !important;
+  min-height: 34px !important;
+
+  margin: 0 !important;
+  padding: 7px 13px !important;
+
+  border: 0 !important;
+  border-radius: 8px !important;
+
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease,
+    box-shadow 0.15s ease !important;
+}
+
+/* =========================================================
+   Confirm Button
+========================================================= */
+
+.xeoo-swal-confirm {
+  background: var(--color-xeoo-primary) !important;
+  color: #ffffff !important;
+
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.16) !important;
+}
+
+.xeoo-swal-confirm:hover {
+  background: var(--color-xeoo-primary-hover) !important;
+
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
+.xeoo-swal-confirm:active {
+  transform: scale(0.97) !important;
+}
+
+/* =========================================================
+   Danger Confirm Button
+========================================================= */
+
+.xeoo-swal-danger-confirm {
+  background: var(--color-xeoo-danger) !important;
+  color: #ffffff !important;
+
+  box-shadow: 0 3px 8px rgba(220, 38, 38, 0.16) !important;
+}
+
+.xeoo-swal-danger-confirm:hover {
+  background: #b91c1c !important;
+
+  box-shadow: 0 5px 12px rgba(220, 38, 38, 0.2) !important;
+}
+
+.xeoo-swal-danger-confirm:active {
+  transform: scale(0.97) !important;
+}
+
+/* =========================================================
+   Cancel Button
+========================================================= */
+
+.xeoo-swal-cancel {
+  background: var(--color-xeoo-surface-soft) !important;
+  color: var(--color-xeoo-text-soft) !important;
+}
+
+.xeoo-swal-cancel:hover {
+  background: var(--color-xeoo-border) !important;
+}
+
+.xeoo-swal-cancel:active {
+  transform: scale(0.97) !important;
+}
+
+/* =========================================================
+   SweetAlert Timer
+========================================================= */
+
+.swal2-timer-progress-bar {
+  background: var(--color-xeoo-primary) !important;
+}
+
+/* =========================================================
+   SweetAlert Reset
+   Prevent default SweetAlert icon elements from
+   interfering with custom iconHtml.
+========================================================= */
+
+.xeoo-swal-icon .swal2-success-circular-line-left,
+.xeoo-swal-icon .swal2-success-circular-line-right,
+.xeoo-swal-icon .swal2-success-fix,
+.xeoo-swal-icon .swal2-success-line-tip,
+.xeoo-swal-icon .swal2-success-line-long,
+.xeoo-swal-icon .swal2-x-mark-line-left,
+.xeoo-swal-icon .swal2-x-mark-line-right {
+  display: none !important;
+}
+
+/* =========================================================
+   SweetAlert Backdrop
+========================================================= */
+
+.swal2-container {
+  padding: 14px !important;
+}
+
+.swal2-backdrop-show {
+  background: rgba(15, 23, 42, 0.36) !important;
+}
+
+/* =========================================================
+   SweetAlert Input
+========================================================= */
+
+.xeoo-swal-input {
+  display: block !important;
+  width: 90% !important;
+  height: 36px !important;
+  margin: 12px auto 4px !important;
+  padding: 6px 12px !important;
+  border: 1px solid var(--color-xeoo-border) !important;
+  border-radius: 8px !important;
+  background: var(--color-xeoo-bg) !important;
+  color: var(--color-xeoo-text) !important;
+  font-size: 0.82rem !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.xeoo-swal-input:focus {
+  border-color: var(--color-xeoo-primary) !important;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .xeoo-swal-popup {
+    width: calc(100vw - 24px) !important;
+    padding: 16px !important;
+
+    border-radius: 12px !important;
+  }
+
+  .xeoo-swal-icon {
+    width: 36px !important;
+    height: 36px !important;
+
+    margin-bottom: 7px !important;
+  }
+
+  .xeoo-icon-success,
+  .xeoo-icon-error,
+  .xeoo-icon-warning,
+  .xeoo-icon-info,
+  .xeoo-icon-danger {
+    width: 36px;
+    height: 36px;
+  }
+
+  .xeoo-icon-success {
+    font-size: 20px;
+  }
+
+  .xeoo-icon-error {
+    font-size: 26px;
+    padding-bottom: 2px;
+  }
+
+  .xeoo-icon-warning {
+    font-size: 20px;
+  }
+
+  .xeoo-icon-info {
+    font-size: 19px;
+  }
+
+  .xeoo-icon-danger {
+    font-size: 19px;
+  }
+
+  .xeoo-swal-title {
+    font-size: 0.95rem !important;
+  }
+
+  .xeoo-swal-text {
+    max-width: 260px !important;
+
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .xeoo-swal-actions {
+    gap: 6px !important;
+    margin-top: 12px !important;
+  }
+
+  .xeoo-swal-confirm,
+  .xeoo-swal-cancel,
+  .xeoo-swal-danger-confirm {
+    min-width: 70px !important;
+    min-height: 32px !important;
+
+    padding: 6px 11px !important;
+
+    font-size: 0.76rem !important;
+  }
+}
+
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
+
+@media (max-width: 360px) {
+  .xeoo-swal-popup {
+    width: calc(100vw - 18px) !important;
+    padding: 14px !important;
+
+    border-radius: 11px !important;
+  }
+
+  .xeoo-swal-icon {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .xeoo-icon-success,
+  .xeoo-icon-error,
+  .xeoo-icon-warning,
+  .xeoo-icon-info,
+  .xeoo-icon-danger {
+    width: 34px;
+    height: 34px;
+  }
+
+  .xeoo-icon-success {
+    font-size: 18px;
+  }
+
+  .xeoo-icon-error {
+    font-size: 24px;
+  }
+
+  .xeoo-icon-warning {
+    font-size: 18px;
+  }
+
+  .xeoo-icon-info {
+    font-size: 18px;
+  }
+
+  .xeoo-icon-danger {
+    font-size: 18px;
+  }
+
+  .xeoo-swal-title {
+    font-size: 0.92rem !important;
+  }
+
+  .xeoo-swal-text {
+    font-size: 0.77rem !important;
+  }
+
+  .xeoo-swal-actions {
+    margin-top: 11px !important;
+  }
+
+  .xeoo-swal-confirm,
+  .xeoo-swal-cancel,
+  .xeoo-swal-danger-confirm {
+    min-width: 66px !important;
+    min-height: 31px !important;
+
+    padding: 6px 9px !important;
+
+    font-size: 0.73rem !important;
+  }
+}
+
+
+

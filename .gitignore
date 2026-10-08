@@ -1,0 +1,164 @@
+# ==============================================================================
+# XeooTools - Comprehensive .gitignore
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Environment & Secret Files
+# ------------------------------------------------------------------------------
+.env
+.env.*
+*.env
+*.local
+!.env.example
+!frontend/.env.example
+!backend/.env.example
+!.env.*.example
+
+# Private Keys & Certificates
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+
+# ------------------------------------------------------------------------------
+# Dependencies & Package Managers
+# ------------------------------------------------------------------------------
+# Node.js
+node_modules/
+*/node_modules/
+.pnpm-store/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# PHP & Composer
+vendor/
+*/vendor/
+composer.phar
+composer.lock.backup
+
+# ------------------------------------------------------------------------------
+# Production Builds & Bundler Outputs
+# ------------------------------------------------------------------------------
+dist/
+*/dist/
+dist-ssr/
+*/dist-ssr/
+build/
+*/build/
+out/
+.output/
+.rollup.cache/
+.vite/
+*/.vite/
+.cache/
+*.tsbuildinfo
+
+# ------------------------------------------------------------------------------
+# Uploads & User Generated Files
+# ------------------------------------------------------------------------------
+# Ignore uploaded files in backend, but keep directory structure and .htaccess/.gitkeep
+backend/uploads/**
+!backend/uploads/
+!backend/uploads/**/
+!backend/uploads/**/.htaccess
+!backend/uploads/**/.gitkeep
+uploads/**
+!uploads/**/.gitkeep
+
+# ------------------------------------------------------------------------------
+# Logs & Process Files
+# ------------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------------------------------------------------------------
+# Databases, Backups & Dumps
+# ------------------------------------------------------------------------------
+# SQLite & local databases
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Database dumps and archives (keep schema definitions like backend/database.sql)
+dump.sql
+backup*.sql
+*_backup.sql
+*.sql.gz
+*.sql.tar.gz
+*.sql.bak
+*.dump
+*.dump.sql
+*.bak
+
+# ------------------------------------------------------------------------------
+# Temporary Files & Scratch
+# ------------------------------------------------------------------------------
+scratch/
+*/scratch/
+tmp/
+temp/
+*.tmp
+*.temp
+.temp/
+
+# ------------------------------------------------------------------------------
+# Operating System Files
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ------------------------------------------------------------------------------
+# IDEs & Code Editors
+# ------------------------------------------------------------------------------
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains (PHPStorm, WebStorm, etc.)
+.idea/
+
+# Sublime Text / Eclipse / Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------------------------------------------------------
+# Testing & Coverage
+# ------------------------------------------------------------------------------
+coverage/
+.nyc_output/

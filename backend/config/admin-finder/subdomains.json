@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "subdomains": [
+    { "prefix": "admin", "category": "admin", "priority": 100, "enabled": true },
+    { "prefix": "auth", "category": "authentication", "priority": 98, "enabled": true },
+    { "prefix": "login", "category": "authentication", "priority": 98, "enabled": true },
+    { "prefix": "portal", "category": "portal", "priority": 95, "enabled": true },
+    { "prefix": "account", "category": "account", "priority": 92, "enabled": true },
+    { "prefix": "accounts", "category": "account", "priority": 90, "enabled": true },
+    { "prefix": "dashboard", "category": "dashboard", "priority": 88, "enabled": true },
+    { "prefix": "panel", "category": "panel", "priority": 86, "enabled": true },
+    { "prefix": "console", "category": "console", "priority": 84, "enabled": true },
+    { "prefix": "manage", "category": "management", "priority": 82, "enabled": true },
+    { "prefix": "management", "category": "management", "priority": 80, "enabled": true },
+    { "prefix": "manager", "category": "manager", "priority": 78, "enabled": true },
+    { "prefix": "staff", "category": "staff", "priority": 76, "enabled": true },
+    { "prefix": "member", "category": "member", "priority": 74, "enabled": true },
+    { "prefix": "members", "category": "member", "priority": 72, "enabled": true },
+    { "prefix": "secure", "category": "secure", "priority": 70, "enabled": true },
+    { "prefix": "sso", "category": "sso", "priority": 68, "enabled": true },
+    { "prefix": "app", "category": "application", "priority": 66, "enabled": true },
+    { "prefix": "control", "category": "control", "priority": 64, "enabled": true },
+    { "prefix": "cp", "category": "control", "priority": 62, "enabled": true },
+    { "prefix": "cpanel", "category": "control", "priority": 60, "enabled": true },
+    { "prefix": "webmail", "category": "portal", "priority": 58, "enabled": true },
+    { "prefix": "backend", "category": "backend", "priority": 56, "enabled": true },
+    { "prefix": "internal", "category": "backend", "priority": 54, "enabled": true },
+    { "prefix": "dev", "category": "application", "priority": 52, "enabled": true },
+    { "prefix": "stage", "category": "application", "priority": 50, "enabled": true },
+    { "prefix": "staging", "category": "application", "priority": 48, "enabled": true }
+  ]
+}
+

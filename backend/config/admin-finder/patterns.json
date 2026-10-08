@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "patterns": [
+    { "template": "/{alias}", "category": "generic", "priority": 50, "enabled": true },
+    { "template": "/{alias}/", "category": "generic", "priority": 50, "enabled": true },
+    { "template": "/{alias}/login", "category": "authentication", "priority": 70, "enabled": true },
+    { "template": "/{alias}/signin", "category": "authentication", "priority": 65, "enabled": true },
+    { "template": "/{alias}/admin", "category": "admin", "priority": 60, "enabled": true },
+    { "template": "/{alias}.php", "category": "legacy", "priority": 45, "enabled": true }
+  ]
+}
+
