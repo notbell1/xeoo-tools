@@ -118,7 +118,7 @@ export const CtfAuthProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       const res = await ctfApi.register(payload);
       if (res.success) {
-        showSuccess("Pendaftaran Berhasil", "Akun berhasil dibuat. Silakan login untuk melanjutkan.");
+        showSuccess("Registration Successful", "Account successfully created. Please log in to continue.");
         return true;
       }
       return false;

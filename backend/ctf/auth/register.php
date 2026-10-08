@@ -97,7 +97,7 @@ try {
             'email' => $email,
             'country_code' => $countryCode,
         ],
-    ], "Pendaftaran akun berhasil! Silakan login untuk memulai investigasi.", 201);
+    ], "Account registration successful! Please log in to start the investigation.", 201);
 } catch (Throwable $e) {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
@@ -105,4 +105,3 @@ try {
     error_log("[CTF_REGISTER_ERROR] " . $e->getMessage());
     jsonError("An error occurred during registration. Please try again later.", 500);
 }
-

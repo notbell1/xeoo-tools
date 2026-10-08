@@ -21,7 +21,12 @@ import { COUNTRIES, COUNTRIES_MAP } from "./ctfConstants";
 import { showError, showSuccess } from "../../alert";
 
 export const CtfProfile: React.FC = () => {
-  const { user, isAuthenticated, loading: authLoading, refreshSession } = useCtfAuth();
+  const {
+    user,
+    isAuthenticated,
+    loading: authLoading,
+    refreshSession,
+  } = useCtfAuth();
   const [profile, setProfile] = useState<PlayerProfileResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<"dossier" | "settings">("dossier");
@@ -81,7 +86,7 @@ export const CtfProfile: React.FC = () => {
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editUsername.trim() || !editEmail.trim()) {
-      showError("Username dan Email wajib diisi.");
+      showError("Username and email are required.");
       return;
     }
 
@@ -94,13 +99,14 @@ export const CtfProfile: React.FC = () => {
       });
 
       if (res.success) {
-        showSuccess("Profil berhasil diperbarui.");
+        showSuccess("Profile successfully updated.");
         await refreshSession();
       } else {
-        showError(res.error || "Gagal memperbarui profil.");
+        showError(res.error || "Failed to update profile.");
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Terjadi kesalahan koneksi.";
+      const msg =
+        err instanceof Error ? err.message : "A connection error occurred.";
       showError(msg);
     } finally {
       setSavingProfile(false);
@@ -110,15 +116,15 @@ export const CtfProfile: React.FC = () => {
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!currentPassword) {
-      showError("Password saat ini wajib diisi.");
+      showError("The current password is required.");
       return;
     }
     if (newPassword.length < 8) {
-      showError("Password baru minimal 8 karakter.");
+      showError("The new password must be at least 8 characters long.");
       return;
     }
     if (newPassword !== confirmPassword) {
-      showError("Konfirmasi password baru tidak cocok.");
+      showError("The new password confirmation does not match.");
       return;
     }
 
@@ -131,15 +137,15 @@ export const CtfProfile: React.FC = () => {
       });
 
       if (res.success) {
-        showSuccess("Password berhasil diubah.");
+        showSuccess("Password successfully changed.");
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
       } else {
-        showError(res.error || "Gagal mengubah password.");
+        showError(res.error || "Failed to change password.");
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Terjadi kesalahan.";
+      const msg = err instanceof Error ? err.message : "There is an error.";
       showError(msg);
     } finally {
       setChangingPassword(false);
@@ -150,7 +156,9 @@ export const CtfProfile: React.FC = () => {
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center gap-2.5">
         <Loader2 className="h-6 w-6 animate-spin text-xeoo-primary" />
-        <p className="text-xs font-mono text-xeoo-muted">Memuat data akun...</p>
+        <p className="text-xs font-mono text-xeoo-muted">
+          Loading account data...
+        </p>
       </div>
     );
   }
@@ -162,9 +170,10 @@ export const CtfProfile: React.FC = () => {
           <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-xeoo-primary/10 text-xeoo-primary">
             <User className="h-5 w-5" />
           </div>
-          <h2 className="text-base font-bold text-xeoo-text">Login Diperlukan</h2>
+          <h2 className="text-base font-bold text-xeoo-text">Login Required</h2>
           <p className="text-xs text-xeoo-muted">
-            Silakan login untuk melihat data profil, riwayat tantangan, dan pengaturan akun Anda.
+            Please log in to view your profile data, challenge history, and
+            account settings.
           </p>
           <div className="flex justify-center pt-2">
             <Link
@@ -172,7 +181,7 @@ export const CtfProfile: React.FC = () => {
               className="inline-flex items-center gap-1.5 rounded-lg bg-xeoo-primary px-4 py-2 text-xs font-semibold text-white hover:bg-xeoo-primary-hover transition-colors"
             >
               <LogIn className="h-4 w-4" />
-              Login Operator
+              Login Akun
             </Link>
           </div>
         </div>
@@ -180,7 +189,10 @@ export const CtfProfile: React.FC = () => {
     );
   }
 
-  const country = COUNTRIES_MAP[user.country_code] || { name: "Global", flag: "🌐" };
+  const country = COUNTRIES_MAP[user.country_code] || {
+    name: "Global",
+    flag: "🌐",
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-3 py-5 sm:px-6 lg:px-8 space-y-5">
@@ -193,17 +205,23 @@ export const CtfProfile: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold text-xeoo-text font-mono">{user.username}</h1>
+                <h1 className="text-lg font-bold text-xeoo-text font-mono">
+                  {user.username}
+                </h1>
                 <span className="text-base leading-none" title={country.name}>
                   {country.flag}
                 </span>
-                <span className="text-xs text-xeoo-muted font-mono">({country.name})</span>
+                <span className="text-xs text-xeoo-muted font-mono">
+                  ({country.name})
+                </span>
               </div>
               <p className="text-xs text-xeoo-muted font-mono">{user.email}</p>
               {user.created_at && (
                 <div className="flex items-center gap-1 mt-1 text-[11px] text-xeoo-muted font-mono">
                   <Calendar className="h-3 w-3" />
-                  <span>Terdaftar: {new Date(user.created_at).toLocaleDateString()}</span>
+                  <span>
+                    Registered: {new Date(user.created_at).toLocaleDateString()}
+                  </span>
                 </div>
               )}
             </div>
@@ -212,13 +230,17 @@ export const CtfProfile: React.FC = () => {
           {/* Quick Metrics */}
           <div className="flex items-center gap-5 border-t sm:border-t-0 sm:border-l border-xeoo-border pt-3 sm:pt-0 sm:pl-5">
             <div className="text-left sm:text-right">
-              <p className="text-[10px] uppercase font-mono text-xeoo-muted">Total Score</p>
+              <p className="text-[10px] uppercase font-mono text-xeoo-muted">
+                Total Score
+              </p>
               <p className="text-xl font-bold font-mono text-xeoo-primary">
                 {profile?.stats?.score ?? 0} PTS
               </p>
             </div>
             <div className="text-left sm:text-right">
-              <p className="text-[10px] uppercase font-mono text-xeoo-muted">Solved Cases</p>
+              <p className="text-[10px] uppercase font-mono text-xeoo-muted">
+                Solved Cases
+              </p>
               <p className="text-xl font-bold font-mono text-xeoo-text">
                 {profile?.stats?.solved_count ?? 0}
               </p>
@@ -239,7 +261,7 @@ export const CtfProfile: React.FC = () => {
           }`}
         >
           <CheckCircle2 className="h-3.5 w-3.5" />
-          Riwayat Solved ({profile?.solves?.length ?? 0})
+          Solved History ({profile?.solves?.length ?? 0})
         </button>
         <button
           type="button"
@@ -251,7 +273,7 @@ export const CtfProfile: React.FC = () => {
           }`}
         >
           <Settings className="h-3.5 w-3.5" />
-          Pengaturan Akun
+          Account Settings
         </button>
       </div>
 
@@ -262,7 +284,7 @@ export const CtfProfile: React.FC = () => {
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-xeoo-success" />
               <h2 className="text-xs font-bold uppercase tracking-wider text-xeoo-text">
-                Daftar Kasus Terverifikasi
+                List of Verified Cases
               </h2>
             </div>
             <span className="text-xs font-mono text-xeoo-muted">
@@ -274,17 +296,27 @@ export const CtfProfile: React.FC = () => {
             <table className="w-full text-left text-xs border-collapse">
               <thead className="border-b border-xeoo-border bg-xeoo-surface-soft font-mono uppercase text-xeoo-text font-bold">
                 <tr>
-                  <th className="py-2.5 px-3.5 border-r border-xeoo-border">Case File</th>
-                  <th className="py-2.5 px-3 text-center border-r border-xeoo-border">Tier</th>
-                  <th className="py-2.5 px-3 text-center border-r border-xeoo-border">Poin</th>
+                  <th className="py-2.5 px-3.5 border-r border-xeoo-border">
+                    Case File
+                  </th>
+                  <th className="py-2.5 px-3 text-center border-r border-xeoo-border">
+                    Tier
+                  </th>
+                  <th className="py-2.5 px-3 text-center border-r border-xeoo-border">
+                    Poin
+                  </th>
                   <th className="py-2.5 px-3.5 text-right">Waktu Solve</th>
                 </tr>
               </thead>
               <tbody>
                 {!profile?.solves || profile.solves.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="py-8 text-center text-xeoo-muted font-mono">
-                      Belum ada tantangan yang diselesaikan. Selesaikan tantangan untuk mendapatkan poin!
+                    <td
+                      colSpan={4}
+                      className="py-8 text-center text-xeoo-muted font-mono"
+                    >
+                      No challenges completed yet. Complete challenges to earn
+                      points!
                     </td>
                   </tr>
                 ) : (
@@ -292,7 +324,9 @@ export const CtfProfile: React.FC = () => {
                     <tr
                       key={solve.challenge_id}
                       className={`border-b border-xeoo-border last:border-b-0 ${
-                        idx % 2 === 0 ? "bg-xeoo-surface" : "bg-xeoo-surface-soft/60"
+                        idx % 2 === 0
+                          ? "bg-xeoo-surface"
+                          : "bg-xeoo-surface-soft/60"
                       } hover:bg-xeoo-surface-soft transition-colors`}
                     >
                       <td className="py-2.5 px-3.5 border-r border-xeoo-border">
@@ -310,8 +344,8 @@ export const CtfProfile: React.FC = () => {
                             solve.difficulty === "easy"
                               ? "bg-xeoo-success/15 text-xeoo-success"
                               : solve.difficulty === "medium"
-                              ? "bg-xeoo-warning/15 text-xeoo-warning"
-                              : "bg-xeoo-danger/15 text-xeoo-danger"
+                                ? "bg-xeoo-warning/15 text-xeoo-warning"
+                                : "bg-xeoo-danger/15 text-xeoo-danger"
                           }`}
                         >
                           {solve.difficulty}
@@ -339,7 +373,9 @@ export const CtfProfile: React.FC = () => {
           <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-5 shadow-xs space-y-4">
             <div className="flex items-center gap-2 border-b border-xeoo-border pb-3">
               <User className="h-4 w-4 text-xeoo-primary" />
-              <h2 className="text-sm font-bold text-xeoo-text">Ubah Informasi Profil</h2>
+              <h2 className="text-sm font-bold text-xeoo-text">
+                Change Profile Information
+              </h2>
             </div>
 
             <form onSubmit={handleUpdateProfile} className="space-y-3.5">
@@ -371,7 +407,7 @@ export const CtfProfile: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-medium text-xeoo-text mb-1">
-                  Negara (Country)
+                  Region (Country)
                 </label>
                 <div className="relative">
                   <select
@@ -402,7 +438,7 @@ export const CtfProfile: React.FC = () => {
                   ) : (
                     <Save className="h-3.5 w-3.5" />
                   )}
-                  Simpan Perubahan
+                  Save Changes
                 </button>
               </div>
             </form>
@@ -412,13 +448,15 @@ export const CtfProfile: React.FC = () => {
           <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-5 shadow-xs space-y-4">
             <div className="flex items-center gap-2 border-b border-xeoo-border pb-3">
               <Lock className="h-4 w-4 text-xeoo-primary" />
-              <h2 className="text-sm font-bold text-xeoo-text">Ganti Password</h2>
+              <h2 className="text-sm font-bold text-xeoo-text">
+                Change Password
+              </h2>
             </div>
 
             <form onSubmit={handleChangePassword} className="space-y-3.5">
               <div>
                 <label className="block text-xs font-medium text-xeoo-text mb-1">
-                  Password Saat Ini
+                  Current Password
                 </label>
                 <div className="relative">
                   <input
@@ -426,7 +464,7 @@ export const CtfProfile: React.FC = () => {
                     required
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
-                    placeholder="Masukkan password saat ini"
+                    placeholder="Enter current password"
                     className="w-full rounded-lg border border-xeoo-border bg-xeoo-surface-soft px-3 py-2 pr-9 text-xs text-xeoo-text font-mono focus:border-xeoo-primary focus:outline-hidden"
                   />
                   <button
@@ -434,14 +472,18 @@ export const CtfProfile: React.FC = () => {
                     onClick={() => setShowCurrentPass(!showCurrentPass)}
                     className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-xeoo-muted hover:text-xeoo-text cursor-pointer"
                   >
-                    {showCurrentPass ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                    {showCurrentPass ? (
+                      <EyeOff className="h-3.5 w-3.5" />
+                    ) : (
+                      <Eye className="h-3.5 w-3.5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-xeoo-text mb-1">
-                  Password Baru (min. 8 karakter)
+                  New Password (min. 8 karakter)
                 </label>
                 <div className="relative">
                   <input
@@ -450,7 +492,7 @@ export const CtfProfile: React.FC = () => {
                     minLength={8}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="Minimal 8 karakter"
+                    placeholder="Minimum of 8 characters"
                     className="w-full rounded-lg border border-xeoo-border bg-xeoo-surface-soft px-3 py-2 pr-9 text-xs text-xeoo-text font-mono focus:border-xeoo-primary focus:outline-hidden"
                   />
                   <button
@@ -458,14 +500,18 @@ export const CtfProfile: React.FC = () => {
                     onClick={() => setShowNewPass(!showNewPass)}
                     className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-xeoo-muted hover:text-xeoo-text cursor-pointer"
                   >
-                    {showNewPass ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                    {showNewPass ? (
+                      <EyeOff className="h-3.5 w-3.5" />
+                    ) : (
+                      <Eye className="h-3.5 w-3.5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-xeoo-text mb-1">
-                  Konfirmasi Password Baru
+                  Confirm New Password
                 </label>
                 <div className="relative">
                   <input
@@ -474,7 +520,7 @@ export const CtfProfile: React.FC = () => {
                     minLength={8}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Ulangi password baru"
+                    placeholder="Repeat new password"
                     className="w-full rounded-lg border border-xeoo-border bg-xeoo-surface-soft px-3 py-2 pr-9 text-xs text-xeoo-text font-mono focus:border-xeoo-primary focus:outline-hidden"
                   />
                   <button
@@ -482,7 +528,11 @@ export const CtfProfile: React.FC = () => {
                     onClick={() => setShowConfirmPass(!showConfirmPass)}
                     className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-xeoo-muted hover:text-xeoo-text cursor-pointer"
                   >
-                    {showConfirmPass ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                    {showConfirmPass ? (
+                      <EyeOff className="h-3.5 w-3.5" />
+                    ) : (
+                      <Eye className="h-3.5 w-3.5" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -498,7 +548,7 @@ export const CtfProfile: React.FC = () => {
                   ) : (
                     <KeyRound className="h-3.5 w-3.5" />
                   )}
-                  Ubah Password
+                  Change Password
                 </button>
               </div>
             </form>

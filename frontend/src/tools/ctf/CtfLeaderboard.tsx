@@ -48,10 +48,16 @@ export const CtfLeaderboard: React.FC = () => {
     const clean = code?.trim().toLowerCase() ?? "";
     const isIso2 = /^[a-z]{2}$/.test(clean) && clean !== "gl" && clean !== "xx";
     const flagUrl = isIso2 ? `https://flagcdn.com/w40/${clean}.png` : null;
-    const info = COUNTRIES_MAP[code?.toUpperCase()] || { name: code || "Global", flag: "🌐" };
+    const info = COUNTRIES_MAP[code?.toUpperCase()] || {
+      name: code || "Global",
+      flag: "🌐",
+    };
 
     return (
-      <span title={info.name} className="inline-flex items-center gap-1.5 font-mono text-xs">
+      <span
+        title={info.name}
+        className="inline-flex items-center gap-1.5 font-mono text-xs"
+      >
         {flagUrl ? (
           <img
             src={flagUrl}
@@ -64,7 +70,9 @@ export const CtfLeaderboard: React.FC = () => {
         ) : (
           <span className="text-sm leading-none">🌐</span>
         )}
-        <span className="text-xeoo-text truncate max-w-[100px]">{info.name}</span>
+        <span className="text-xeoo-text truncate max-w-[100px]">
+          {info.name}
+        </span>
       </span>
     );
   };
@@ -77,9 +85,13 @@ export const CtfLeaderboard: React.FC = () => {
         <div className="flex items-center gap-2.5 rounded-xl border border-xeoo-warning/40 bg-xeoo-warning/10 p-3 text-xs text-xeoo-text">
           <AlertCircle className="h-5 w-5 text-xeoo-warning shrink-0" />
           <div>
-            <p className="font-bold text-xeoo-warning">Leaderboard Dinonaktifkan oleh Admin</p>
+            <p className="font-bold text-xeoo-warning">
+              Leaderboard disabled by admin
+            </p>
             <p className="text-[11px] text-xeoo-muted mt-0.5 leading-relaxed">
-              Papan peringkat global sementara dibekukan oleh administrator CTF Command. Data yang ditampilkan saat ini adalah status arsip terakhir.
+              The global leaderboard has been temporarily frozen by the CTF
+              Command administrators. The data currently displayed represents
+              the final archived state.
             </p>
           </div>
         </div>
@@ -95,14 +107,14 @@ export const CtfLeaderboard: React.FC = () => {
           Leaderboard
         </h1>
         <p className="text-xs text-xeoo-muted">
-          Peringkat operator CTF berdasarkan perolehan skor dan kecepatan penyelesaian kasus.
+          CTF operator ranking based on score and case resolution speed.
         </p>
       </div>
 
       {loading ? (
         <div className="py-16 flex flex-col items-center justify-center gap-2.5 text-xeoo-muted">
           <Loader2 className="h-6 w-6 animate-spin text-xeoo-primary" />
-          <p className="text-xs font-mono">Memuat peringkat global...</p>
+          <p className="text-xs font-mono">Loading global rankings...</p>
         </div>
       ) : (
         <>
@@ -122,15 +134,23 @@ export const CtfLeaderboard: React.FC = () => {
                     <h3 className="font-bold text-sm text-xeoo-text truncate">
                       {top3[1].username}
                     </h3>
-                    <div className="flex justify-center">{renderCountry(top3[1].country_code)}</div>
+                    <div className="flex justify-center">
+                      {renderCountry(top3[1].country_code)}
+                    </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-xeoo-border w-full flex justify-around text-xs font-mono">
                     <div>
-                      <p className="text-[10px] text-xeoo-muted uppercase">Score</p>
-                      <p className="font-bold text-xeoo-primary">{top3[1].score}p</p>
+                      <p className="text-[10px] text-xeoo-muted uppercase">
+                        Score
+                      </p>
+                      <p className="font-bold text-xeoo-primary">
+                        {top3[1].score}p
+                      </p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-xeoo-muted uppercase">Solved</p>
+                      <p className="text-[10px] text-xeoo-muted uppercase">
+                        Solved
+                      </p>
                       <p className="font-bold text-xeoo-text">
                         {top3[1].solved}/{totalChallenges}
                       </p>
@@ -152,15 +172,23 @@ export const CtfLeaderboard: React.FC = () => {
                     <h3 className="font-bold text-sm text-xeoo-text truncate">
                       {top3[0].username}
                     </h3>
-                    <div className="flex justify-center">{renderCountry(top3[0].country_code)}</div>
+                    <div className="flex justify-center">
+                      {renderCountry(top3[0].country_code)}
+                    </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-xeoo-border w-full flex justify-around text-xs font-mono">
                     <div>
-                      <p className="text-[10px] text-xeoo-muted uppercase">Score</p>
-                      <p className="font-bold text-xeoo-primary text-sm">{top3[0].score}p</p>
+                      <p className="text-[10px] text-xeoo-muted uppercase">
+                        Score
+                      </p>
+                      <p className="font-bold text-xeoo-primary text-sm">
+                        {top3[0].score}p
+                      </p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-xeoo-muted uppercase">Solved</p>
+                      <p className="text-[10px] text-xeoo-muted uppercase">
+                        Solved
+                      </p>
                       <p className="font-bold text-xeoo-text text-sm">
                         {top3[0].solved}/{totalChallenges}
                       </p>
@@ -182,15 +210,23 @@ export const CtfLeaderboard: React.FC = () => {
                     <h3 className="font-bold text-sm text-xeoo-text truncate">
                       {top3[2].username}
                     </h3>
-                    <div className="flex justify-center">{renderCountry(top3[2].country_code)}</div>
+                    <div className="flex justify-center">
+                      {renderCountry(top3[2].country_code)}
+                    </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-xeoo-border w-full flex justify-around text-xs font-mono">
                     <div>
-                      <p className="text-[10px] text-xeoo-muted uppercase">Score</p>
-                      <p className="font-bold text-xeoo-primary">{top3[2].score}p</p>
+                      <p className="text-[10px] text-xeoo-muted uppercase">
+                        Score
+                      </p>
+                      <p className="font-bold text-xeoo-primary">
+                        {top3[2].score}p
+                      </p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-xeoo-muted uppercase">Solved</p>
+                      <p className="text-[10px] text-xeoo-muted uppercase">
+                        Solved
+                      </p>
                       <p className="font-bold text-xeoo-text">
                         {top3[2].solved}/{totalChallenges}
                       </p>
@@ -207,24 +243,40 @@ export const CtfLeaderboard: React.FC = () => {
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
                 <thead className="border-b border-xeoo-border bg-xeoo-surface-soft font-mono uppercase text-xeoo-text font-bold">
                   <tr>
-                    <th className="py-2.5 px-3 w-16 text-center border-r border-xeoo-border">Rank</th>
-                    <th className="py-2.5 px-3.5 border-r border-xeoo-border">Operator</th>
-                    <th className="py-2.5 px-3.5 border-r border-xeoo-border">Country</th>
-                    <th className="py-2.5 px-3.5 text-center border-r border-xeoo-border">Cases Solved</th>
-                    <th className="py-2.5 px-3.5 text-right font-mono">Score</th>
+                    <th className="py-2.5 px-3 w-16 text-center border-r border-xeoo-border">
+                      Rank
+                    </th>
+                    <th className="py-2.5 px-3.5 border-r border-xeoo-border">
+                      Name
+                    </th>
+                    <th className="py-2.5 px-3.5 border-r border-xeoo-border">
+                      Country
+                    </th>
+                    <th className="py-2.5 px-3.5 text-center border-r border-xeoo-border">
+                      Cases Solved
+                    </th>
+                    <th className="py-2.5 px-3.5 text-right font-mono">
+                      Score
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {displayedList.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="py-8 text-center text-xeoo-muted font-mono">
-                        Belum ada data penyelesaian tantangan.
+                      <td
+                        colSpan={5}
+                        className="py-8 text-center text-xeoo-muted font-mono"
+                      >
+                        There is no data yet on challenge completion.
                       </td>
                     </tr>
                   ) : (
                     displayedList.map((entry, idx) => {
                       const isMe = user && user.id === entry.user_id;
-                      const zebraClass = idx % 2 === 0 ? "bg-xeoo-surface" : "bg-xeoo-surface-soft/60";
+                      const zebraClass =
+                        idx % 2 === 0
+                          ? "bg-xeoo-surface"
+                          : "bg-xeoo-surface-soft/60";
 
                       return (
                         <tr
@@ -244,7 +296,9 @@ export const CtfLeaderboard: React.FC = () => {
                             ) : entry.rank === 3 ? (
                               <span className="text-amber-700">🥉 3</span>
                             ) : (
-                              <span className="text-xeoo-muted">#{entry.rank}</span>
+                              <span className="text-xeoo-muted">
+                                #{entry.rank}
+                              </span>
                             )}
                           </td>
 
