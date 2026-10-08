@@ -1,3 +1,5 @@
+import { BACKEND_URL } from "../../config/backend";
+
 export type IPType = "IPv4" | "IPv6";
 
 export type IPLookupData = {
@@ -84,7 +86,7 @@ export type IPLookupResponse = {
   };
 };
 
-const API_BASE = import.meta.env.VITE_API_URL || "/php/api";
+const API_BASE = `${BACKEND_URL}/api`;
 
 /**
  * Normalize user input.
