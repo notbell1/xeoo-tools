@@ -58,7 +58,8 @@ if ($user) {
     $insertStmt->execute([(int)$user['id'], $tokenHash, $expiresAt]);
 
     // Note: In local/demo environment without SMTP configured, we return reset_token_preview in development for seamless testing
-    $isDev = in_array($_SERVER['SERVER_NAME'] ?? '', ['localhost', '127.0.0.1', 'xeootools.test'], true);
+    require_once __DIR__ . '/../../config/app.php';
+    $isDev = isDevEnvironment();
     $devData = $isDev ? ['debug_reset_token' => $rawToken] : null;
 
     jsonResponse(true, $devData, $genericResponse);

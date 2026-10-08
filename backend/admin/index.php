@@ -2,5 +2,7 @@
 
 declare(strict_types=1);
 
-header('Location: http://localhost:5173/not-found', true, 302);
+require_once __DIR__ . '/../config/app.php';
+
+header('Location: ' . getAppUrl('/not-found'), true, 302);
 exit;
