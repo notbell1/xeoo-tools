@@ -12,7 +12,7 @@ export const SOCIAL_LINKS: SocialItem[] = [
     name: "GitHub",
     href: "https://github.com/notbell1",
     hoverColorClass:
-      "hover:text-[#24292e] dark:hover:text-white hover:border-[#24292e]/40 dark:hover:border-white/40 hover:bg-[#24292e]/5 dark:hover:bg-white/10",
+      "hover:text-xeoo-text hover:border-xeoo-text/40 hover:bg-xeoo-text/5",
     icon: (cls = "h-4.5 w-4.5") => (
       <svg
         viewBox="0 0 24 24"
