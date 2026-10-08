@@ -21,7 +21,9 @@ import {
   TypingTestPanel,
 } from "./TypingTestPanels";
 
-const API_URL = "/php/api/typing-test.php";
+import { BACKEND_URL } from "../../config/backend";
+
+const API_URL = `${BACKEND_URL}/api/typing-test.php`;
 
 interface ApiResponse<T = unknown> {
   success?: boolean;

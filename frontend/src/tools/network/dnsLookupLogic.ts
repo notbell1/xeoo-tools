@@ -1,3 +1,5 @@
+import { BACKEND_URL } from "../../config/backend";
+
 export type RecordType =
   | "A"
   | "AAAA"
@@ -77,8 +79,7 @@ export interface DnsApiResponse {
   data?: DnsData;
 }
 
-export const API_BASE =
-  import.meta.env.VITE_API_URL || "/php/api";
+export const API_BASE = `${BACKEND_URL}/api`;
 
 export const RECORD_TYPES: Array<{
   value: RecordType;
