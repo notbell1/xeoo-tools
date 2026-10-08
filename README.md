@@ -38,61 +38,16 @@ XeooTools provides specialized tools categorized into modular sections:
 
 ---
 
-## 📂 Project Structure
-
-```text
-xeoo_tools/
-├── backend/                  # PHP API & Administrative backend
-│   ├── admin/                # Admin portal logic
-│   ├── api/                  # RESTful API endpoints for tools
-│   ├── config/               # Database and environment configurations
-│   ├── ctf/                  # CTF engine, challenges, auth, & migrations
-│   ├── uploads/              # Upload storage (avatars, attachments)
-│   ├── database.sql          # Initial MySQL database schema
-│   └── .htaccess             # Apache routing & security rules
-│
-├── frontend/                 # React + TypeScript single page application
-│   ├── src/
-│   │   ├── components/       # Shared UI components & layouts
-│   │   ├── data/             # Static configurations & categories
-│   │   ├── hooks/            # Custom React hooks
-│   │   ├── pages/            # Main application pages
-│   │   ├── tools/            # Category-specific tool components & logic
-│   │   │   ├── ctf/
-│   │   │   ├── defacement/
-│   │   │   ├── file/
-│   │   │   ├── health/
-│   │   │   ├── image/
-│   │   │   ├── math/
-│   │   │   ├── network/
-│   │   │   ├── productive/
-│   │   │   ├── psychology/
-│   │   │   ├── security/
-│   │   │   └── seo/
-│   │   ├── theme.css         # Authoritative theme design tokens
-│   │   └── main.tsx          # Application entry point
-│   ├── package.json
-│   └── vite.config.ts
-│
-├── .env.example              # Sample environment configuration
-├── .gitignore                # Production-ready git ignore configuration
-├── LICENSE                   # MIT License
-└── README.md
-```
-
----
-
 ## 🛠️ Getting Started
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18.0 or higher)
-- [PHP](https://www.php.net/) (v8.1 or higher with `pdo_mysql`, `curl`, and `mbstring` extensions enabled)
+- [PHP](https://www.php.net/) (v8.1 or higher)
 - [MySQL](https://www.mysql.com/) / MariaDB
-- Local web server (e.g. Laragon or Apache)
 
 ---
 
-### Backend Setup
+### Quick Start
 
 1. **Clone the repository:**
    ```bash
@@ -100,50 +55,14 @@ xeoo_tools/
    cd xeoo-tools
    ```
 
-2. **Configure Environment Variables:**
-   Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-   Update `.env` with your database credentials:
-   ```env
-   APP_ENV=local
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_NAME=xeoo_tools_db
-   DB_USER=root
-   DB_PASSWORD=
-
-   ADMIN_USERNAME=admin
-   ADMIN_PASSWORD=your_secure_password
-   ```
-
-3. **Import Database Schema:**
-   Import `backend/database.sql` into your MySQL server:
-   ```bash
-   mysql -u root -p xeoo_tools_db < backend/database.sql
-   ```
-
----
-
-### Frontend Setup
-
-1. **Navigate to the frontend directory:**
+2. **Setup Frontend:**
    ```bash
    cd frontend
-   ```
-
-2. **Install dependencies:**
-   ```bash
    npm install
-   ```
-
-3. **Start the development server:**
-   ```bash
    npm run dev
    ```
 
-4. **Build for production:**
+3. **Build for Production:**
    ```bash
    npm run build
    ```
@@ -160,4 +79,3 @@ xeoo_tools/
 ## 📄 License
 
 This project is open-source and licensed under the [MIT License](LICENSE).
-
