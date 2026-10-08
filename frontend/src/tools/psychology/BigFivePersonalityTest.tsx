@@ -2,9 +2,9 @@ import { useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
-  Brain,
   CheckCircle2,
-  Globe,
+  ChevronLeft,
+  ChevronRight,
   HelpCircle,
   Info,
   RotateCcw,
@@ -84,38 +84,21 @@ export default function BigFivePersonalityTest() {
 
   return (
     <div className="flex min-h-screen flex-col bg-xeoo-bg text-xeoo-text">
-      <main className="mx-auto w-full max-w-3xl flex-1 px-3 py-4 sm:px-5 sm:py-6">
-        {/* COMPACT TOOL HEADER WITH LANGUAGE TOGGLE */}
-        <div className="mb-4 flex flex-col gap-2.5 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-xeoo-primary">
-              <Brain className="h-4 w-4" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">
-                {t.selfAssessmentBadge}
-              </span>
-            </div>
-            <h1 className="text-xl font-bold tracking-tight text-xeoo-text sm:text-2xl">
-              {lang === "id"
-                ? "Tes Kepribadian Big Five"
-                : "Big Five Personality Test"}
-            </h1>
-            <p className="text-xs text-xeoo-muted leading-relaxed">
-              {lang === "id"
-                ? "Eksplorasi profil 5 dimensi kepribadian: Keterbukaan, Ketelitian, Ekstraversi, Keramahan, dan Sensitivitas Emosional."
-                : "Explore your Five-Factor dimensional profile: Openness, Conscientiousness, Extraversion, Agreeableness, and Emotional Sensitivity."}
-            </p>
-          </div>
+      <main className="mx-auto w-full max-w-3xl flex-1 px-3 py-3 sm:px-5 sm:py-5">
+        {/* COMPACT TOOLBAR */}
+        <div className="mb-3 flex items-center justify-between gap-2 border-b border-xeoo-border pb-2.5">
+          <h1 className="text-sm font-bold tracking-tight text-xeoo-text">
+            {lang === "id"
+              ? "Tes Kepribadian Big Five"
+              : "Big Five Personality Test"}
+          </h1>
 
           {/* LANGUAGE SWITCHER */}
-          <div className="flex shrink-0 items-center gap-1 self-start rounded-lg border border-xeoo-border bg-xeoo-surface p-1 shadow-xs">
-            <div className="flex items-center gap-1 pl-1.5 pr-1 text-xeoo-muted">
-              <Globe className="h-3.5 w-3.5" />
-              <span className="text-[10px] font-bold uppercase">Lang</span>
-            </div>
+          <div className="flex shrink-0 items-center gap-0.5 rounded-lg border border-xeoo-border bg-xeoo-surface p-0.5 shadow-xs">
             <button
               type="button"
               onClick={() => handleLanguageChange("en")}
-              className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${
+              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
                 lang === "en"
                   ? "bg-xeoo-text text-xeoo-surface shadow-xs"
                   : "text-xeoo-muted hover:text-xeoo-text"
@@ -126,7 +109,7 @@ export default function BigFivePersonalityTest() {
             <button
               type="button"
               onClick={() => handleLanguageChange("id")}
-              className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${
+              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
                 lang === "id"
                   ? "bg-xeoo-text text-xeoo-surface shadow-xs"
                   : "text-xeoo-muted hover:text-xeoo-text"
@@ -273,7 +256,7 @@ export default function BigFivePersonalityTest() {
 
             {/* Question Card */}
             <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-4 sm:p-5 shadow-xs">
-              <span className="inline-block rounded bg-xeoo-primary-soft px-2 py-0.5 text-[10px] font-bold text-xeoo-primary uppercase">
+              <span className="inline-block rounded bg-xeoo-primary-soft px-2 py-0.5 text-[11px] font-bold text-xeoo-primary uppercase">
                 #{currentIndex + 1}
               </span>
 
@@ -307,7 +290,7 @@ export default function BigFivePersonalityTest() {
                     >
                       <span>{option.label}</span>
                       <span
-                        className={`flex h-4 w-4 items-center justify-center rounded-full border text-[10px] ${
+                        className={`flex h-4 w-4 items-center justify-center rounded-full border text-[11px] ${
                           isSelected
                             ? "border-xeoo-primary bg-xeoo-primary text-white"
                             : "border-xeoo-border text-transparent"
@@ -358,29 +341,62 @@ export default function BigFivePersonalityTest() {
               </div>
             </div>
 
-            {/* Jump pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1">
-              {BIG_FIVE_QUESTIONS.map((q, idx) => {
-                const isAnswered = answers[q.id] !== undefined;
-                const isCurrent = idx === currentIndex;
-                return (
-                  <button
-                    key={q.id}
-                    type="button"
-                    onClick={() => setCurrentIndex(idx)}
-                    aria-label={`Question ${idx + 1}`}
-                    className={`flex h-6 w-6 items-center justify-center rounded text-[11px] font-semibold transition ${
-                      isCurrent
-                        ? "border border-xeoo-primary bg-xeoo-primary text-white"
-                        : isAnswered
-                          ? "border border-xeoo-border bg-xeoo-surface-soft text-xeoo-text"
-                          : "border border-xeoo-border bg-xeoo-surface text-xeoo-muted hover:border-xeoo-border-dark"
-                    }`}
-                  >
-                    {idx + 1}
-                  </button>
-                );
-              })}
+            {/* 5-Question Windowed Jumper */}
+            <div className="flex items-center justify-center gap-1.5 pt-1">
+              <button
+                type="button"
+                onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
+                disabled={currentIndex === 0}
+                aria-label="Previous question"
+                className="flex h-7 w-7 items-center justify-center rounded-lg border border-xeoo-border bg-xeoo-surface text-xeoo-muted transition hover:border-xeoo-border-dark hover:bg-xeoo-surface-soft hover:text-xeoo-text disabled:cursor-not-allowed disabled:opacity-40 shadow-xs"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+
+              {(() => {
+                const total = totalQuestions;
+                const windowSize = 5;
+                let start = Math.max(0, currentIndex - Math.floor(windowSize / 2));
+                let end = start + windowSize;
+                if (end > total) {
+                  end = total;
+                  start = Math.max(0, end - windowSize);
+                }
+                const visibleIndices = Array.from({ length: end - start }, (_, i) => start + i);
+
+                return visibleIndices.map((idx) => {
+                  const q = BIG_FIVE_QUESTIONS[idx];
+                  const isAnswered = answers[q.id] !== undefined;
+                  const isCurrent = idx === currentIndex;
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => setCurrentIndex(idx)}
+                      aria-label={`Question ${idx + 1}`}
+                      className={`flex h-7 min-w-7 px-2 items-center justify-center rounded-lg text-xs font-semibold transition ${
+                        isCurrent
+                          ? "border border-xeoo-primary bg-xeoo-primary text-white shadow-xs"
+                          : isAnswered
+                            ? "border border-xeoo-border bg-xeoo-surface-soft text-xeoo-text"
+                            : "border border-xeoo-border bg-xeoo-surface text-xeoo-muted hover:border-xeoo-border-dark hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                      }`}
+                    >
+                      {idx + 1}
+                    </button>
+                  );
+                });
+              })()}
+
+              <button
+                type="button"
+                onClick={() => setCurrentIndex((prev) => Math.min(totalQuestions - 1, prev + 1))}
+                disabled={currentIndex === totalQuestions - 1}
+                aria-label="Next question"
+                className="flex h-7 w-7 items-center justify-center rounded-lg border border-xeoo-border bg-xeoo-surface text-xeoo-muted transition hover:border-xeoo-border-dark hover:bg-xeoo-surface-soft hover:text-xeoo-text disabled:cursor-not-allowed disabled:opacity-40 shadow-xs"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         )}
@@ -390,7 +406,7 @@ export default function BigFivePersonalityTest() {
           <div className="space-y-4">
             {/* Overview card */}
             <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-4 sm:p-5 shadow-xs">
-              <span className="text-[10px] font-bold text-xeoo-primary uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-xeoo-primary uppercase tracking-wider">
                 {lang === "id" ? "Hasil Profil Anda" : "Your Personality Profile"}
               </span>
 
@@ -408,7 +424,7 @@ export default function BigFivePersonalityTest() {
                 <div className="flex items-center gap-2.5 rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3">
                   <TrendingUp className="h-4 w-4 text-xeoo-success shrink-0" />
                   <div>
-                    <span className="text-[10px] font-bold text-xeoo-success uppercase">
+                    <span className="text-[11px] font-bold text-xeoo-success uppercase">
                       {t.strongest}
                     </span>
                     <p className="text-xs font-bold text-xeoo-text">
@@ -420,7 +436,7 @@ export default function BigFivePersonalityTest() {
                 <div className="flex items-center gap-2.5 rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3">
                   <TrendingDown className="h-4 w-4 text-xeoo-info shrink-0" />
                   <div>
-                    <span className="text-[10px] font-bold text-xeoo-info uppercase">
+                    <span className="text-[11px] font-bold text-xeoo-info uppercase">
                       {t.lowest}
                     </span>
                     <p className="text-xs font-bold text-xeoo-text">
@@ -445,7 +461,7 @@ export default function BigFivePersonalityTest() {
                         {trait.label}
                       </span>
                       <div className="flex items-center gap-1.5">
-                        <span className="rounded bg-xeoo-surface-soft border border-xeoo-border px-1.5 py-0.5 text-[10px] font-semibold text-xeoo-muted uppercase">
+                        <span className="rounded bg-xeoo-surface-soft border border-xeoo-border px-1.5 py-0.5 text-[11px] font-semibold text-xeoo-muted uppercase">
                           {trait.level}
                         </span>
                         <span className="font-mono font-bold text-xeoo-text">

@@ -1,13 +1,10 @@
 import { useState } from "react";
 import {
-  Brain,
-  Globe,
   HelpCircle,
   Lightbulb,
   MessageSquareQuote,
   RotateCcw,
   Search,
-  Zap,
 } from "lucide-react";
 
 import Footer from "../../components/Footer";
@@ -62,40 +59,21 @@ export default function CognitiveDistortionChecker() {
 
   return (
     <div className="flex min-h-screen flex-col bg-xeoo-bg text-xeoo-text">
-      <main className="mx-auto w-full max-w-3xl flex-1 px-3 py-4 sm:px-5 sm:py-6">
-        {/* COMPACT TOOL HEADER WITH LANGUAGE TOGGLE */}
-        <div className="mb-4 flex flex-col gap-2.5 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-xeoo-primary">
-              <Brain className="h-4 w-4" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">
-                {lang === "id"
-                  ? "Wawasan Kognitif CBT"
-                  : "Cognitive Behavioral Insight"}
-              </span>
-            </div>
-            <h1 className="text-xl font-bold tracking-tight text-xeoo-text sm:text-2xl">
-              {lang === "id"
-                ? "Pemeriksa Distorsi Kognitif"
-                : "Cognitive Distortion Checker"}
-            </h1>
-            <p className="text-xs text-xeoo-muted leading-relaxed">
-              {lang === "id"
-                ? "Analisis pola pikiran otomatis untuk mendeteksi bias kognitif dan alternatif reframing yang konstruktif."
-                : "Analyze automatic thoughts to identify possible cognitive patterns and explore constructive reframing alternatives."}
-            </p>
-          </div>
+      <main className="mx-auto w-full max-w-3xl flex-1 px-3 py-3 sm:px-5 sm:py-5">
+        {/* COMPACT TOOLBAR */}
+        <div className="mb-3 flex items-center justify-between gap-2 border-b border-xeoo-border pb-2.5">
+          <h1 className="text-sm font-bold tracking-tight text-xeoo-text">
+            {lang === "id"
+              ? "Pemeriksa Distorsi Kognitif"
+              : "Cognitive Distortion Checker"}
+          </h1>
 
           {/* LANGUAGE SWITCHER */}
-          <div className="flex shrink-0 items-center gap-1 self-start rounded-lg border border-xeoo-border bg-xeoo-surface p-1 shadow-xs">
-            <div className="flex items-center gap-1 pl-1.5 pr-1 text-xeoo-muted">
-              <Globe className="h-3.5 w-3.5" />
-              <span className="text-[10px] font-bold uppercase">Lang</span>
-            </div>
+          <div className="flex shrink-0 items-center gap-0.5 rounded-lg border border-xeoo-border bg-xeoo-surface p-0.5 shadow-xs">
             <button
               type="button"
               onClick={() => handleLanguageChange("en")}
-              className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${
+              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
                 lang === "en"
                   ? "bg-xeoo-text text-xeoo-surface shadow-xs"
                   : "text-xeoo-muted hover:text-xeoo-text"
@@ -106,7 +84,7 @@ export default function CognitiveDistortionChecker() {
             <button
               type="button"
               onClick={() => handleLanguageChange("id")}
-              className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${
+              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
                 lang === "id"
                   ? "bg-xeoo-text text-xeoo-surface shadow-xs"
                   : "text-xeoo-muted hover:text-xeoo-text"
@@ -152,7 +130,7 @@ export default function CognitiveDistortionChecker() {
 
             {/* Quick Sample Thought Pills */}
             <div className="mt-3 space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-xeoo-muted">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-xeoo-muted">
                 {lang === "id" ? "Coba Contoh Cepat:" : "Try a Quick Example:"}
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -161,9 +139,8 @@ export default function CognitiveDistortionChecker() {
                     key={idx}
                     type="button"
                     onClick={() => handleSelectSample(sample.text)}
-                    className="inline-flex items-center gap-1 rounded-full border border-xeoo-border bg-xeoo-surface-soft px-2.5 py-0.5 text-[11px] font-medium text-xeoo-text transition hover:border-xeoo-border-dark hover:bg-xeoo-surface"
+                    className="inline-flex items-center rounded-full border border-xeoo-border bg-xeoo-surface-soft px-2.5 py-0.5 text-[11px] font-medium text-xeoo-text transition hover:border-xeoo-border-dark hover:bg-xeoo-surface"
                   >
-                    <Zap className="h-3 w-3 text-xeoo-primary" />
                     <span>{sample.label}</span>
                   </button>
                 ))}
@@ -210,7 +187,7 @@ export default function CognitiveDistortionChecker() {
                   <h2 className="text-base font-bold text-xeoo-text sm:text-lg">
                     {result.primaryPattern.name}
                   </h2>
-                  <span className="rounded bg-xeoo-primary-soft border border-xeoo-primary/20 px-2 py-0.5 text-[10px] font-bold text-xeoo-primary">
+                  <span className="rounded bg-xeoo-primary-soft border border-xeoo-primary/20 px-2 py-0.5 text-[11px] font-bold text-xeoo-primary">
                     Match: {result.primaryPattern.score}%
                   </span>
                 </div>
@@ -227,7 +204,7 @@ export default function CognitiveDistortionChecker() {
                     {result.primaryPattern.matchedKeywords.map((kw, i) => (
                       <span
                         key={i}
-                        className="rounded border border-xeoo-border bg-xeoo-surface-soft px-1.5 py-0.5 text-[10px] font-mono text-xeoo-primary"
+                        className="rounded border border-xeoo-border bg-xeoo-surface-soft px-1.5 py-0.5 text-[11px] font-mono text-xeoo-primary"
                       >
                         "{kw}"
                       </span>
