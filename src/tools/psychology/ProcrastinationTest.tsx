@@ -3,9 +3,8 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  Clock,
-  Compass,
-  Globe,
+  ChevronLeft,
+  ChevronRight,
   HelpCircle,
   Info,
   RotateCcw,
@@ -84,38 +83,21 @@ export default function ProcrastinationTest() {
 
   return (
     <div className="flex min-h-screen flex-col bg-xeoo-bg text-xeoo-text">
-      <main className="mx-auto w-full max-w-3xl flex-1 px-3 py-4 sm:px-5 sm:py-6">
-        {/* COMPACT TOOL HEADER WITH LANGUAGE TOGGLE */}
-        <div className="mb-4 flex flex-col gap-2.5 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-xeoo-primary">
-              <Clock className="h-4 w-4" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">
-                {t.selfAssessmentBadge}
-              </span>
-            </div>
-            <h1 className="text-xl font-bold tracking-tight text-xeoo-text sm:text-2xl">
-              {lang === "id"
-                ? "Tes Kecenderungan Prokrastinasi"
-                : "Procrastination Tendency Test"}
-            </h1>
-            <p className="text-xs text-xeoo-muted leading-relaxed">
-              {lang === "id"
-                ? "Identifikasi kebiasaan menunda tugas dan faktor pendorong perilaku seperti perfeksionisme dan kejelasan tugas."
-                : "Identify your task postponement habits and uncover the underlying behavioral drivers."}
-            </p>
-          </div>
+      <main className="mx-auto w-full max-w-3xl flex-1 px-3 py-3 sm:px-5 sm:py-5">
+        {/* COMPACT TOOLBAR */}
+        <div className="mb-3 flex items-center justify-between gap-2 border-b border-xeoo-border pb-2.5">
+          <h1 className="text-sm font-bold tracking-tight text-xeoo-text">
+            {lang === "id"
+              ? "Tes Kecenderungan Prokrastinasi"
+              : "Procrastination Tendency Test"}
+          </h1>
 
           {/* LANGUAGE SWITCHER */}
-          <div className="flex shrink-0 items-center gap-1 self-start rounded-lg border border-xeoo-border bg-xeoo-surface p-1 shadow-xs">
-            <div className="flex items-center gap-1 pl-1.5 pr-1 text-xeoo-muted">
-              <Globe className="h-3.5 w-3.5" />
-              <span className="text-[10px] font-bold uppercase">Lang</span>
-            </div>
+          <div className="flex shrink-0 items-center gap-0.5 rounded-lg border border-xeoo-border bg-xeoo-surface p-0.5 shadow-xs">
             <button
               type="button"
               onClick={() => handleLanguageChange("en")}
-              className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${
+              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
                 lang === "en"
                   ? "bg-xeoo-text text-xeoo-surface shadow-xs"
                   : "text-xeoo-muted hover:text-xeoo-text"
@@ -126,7 +108,7 @@ export default function ProcrastinationTest() {
             <button
               type="button"
               onClick={() => handleLanguageChange("id")}
-              className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${
+              className={`rounded px-2 py-0.5 text-xs font-semibold transition ${
                 lang === "id"
                   ? "bg-xeoo-text text-xeoo-surface shadow-xs"
                   : "text-xeoo-muted hover:text-xeoo-text"
@@ -273,7 +255,7 @@ export default function ProcrastinationTest() {
 
             {/* Question Card */}
             <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-4 sm:p-5 shadow-xs">
-              <span className="inline-block rounded bg-xeoo-primary-soft px-2 py-0.5 text-[10px] font-bold text-xeoo-primary uppercase">
+              <span className="inline-block rounded bg-xeoo-primary-soft px-2 py-0.5 text-[11px] font-bold text-xeoo-primary uppercase">
                 #{currentIndex + 1}
               </span>
 
@@ -307,7 +289,7 @@ export default function ProcrastinationTest() {
                     >
                       <span>{option.label}</span>
                       <span
-                        className={`flex h-4 w-4 items-center justify-center rounded-full border text-[10px] ${
+                        className={`flex h-4 w-4 items-center justify-center rounded-full border text-[11px] ${
                           isSelected
                             ? "border-xeoo-primary bg-xeoo-primary text-white"
                             : "border-xeoo-border text-transparent"
@@ -358,29 +340,62 @@ export default function ProcrastinationTest() {
               </div>
             </div>
 
-            {/* Jump pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1">
-              {PROCRASTINATION_QUESTIONS.map((q, idx) => {
-                const isAnswered = answers[q.id] !== undefined;
-                const isCurrent = idx === currentIndex;
-                return (
-                  <button
-                    key={q.id}
-                    type="button"
-                    onClick={() => setCurrentIndex(idx)}
-                    aria-label={`Question ${idx + 1}`}
-                    className={`flex h-6 w-6 items-center justify-center rounded text-[11px] font-semibold transition ${
-                      isCurrent
-                        ? "border border-xeoo-primary bg-xeoo-primary text-white"
-                        : isAnswered
-                          ? "border border-xeoo-border bg-xeoo-surface-soft text-xeoo-text"
-                          : "border border-xeoo-border bg-xeoo-surface text-xeoo-muted hover:border-xeoo-border-dark"
-                    }`}
-                  >
-                    {idx + 1}
-                  </button>
-                );
-              })}
+            {/* 5-Question Windowed Jumper */}
+            <div className="flex items-center justify-center gap-1.5 pt-1">
+              <button
+                type="button"
+                onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
+                disabled={currentIndex === 0}
+                aria-label="Previous question"
+                className="flex h-7 w-7 items-center justify-center rounded-lg border border-xeoo-border bg-xeoo-surface text-xeoo-muted transition hover:border-xeoo-border-dark hover:bg-xeoo-surface-soft hover:text-xeoo-text disabled:cursor-not-allowed disabled:opacity-40 shadow-xs"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+
+              {(() => {
+                const total = totalQuestions;
+                const windowSize = 5;
+                let start = Math.max(0, currentIndex - Math.floor(windowSize / 2));
+                let end = start + windowSize;
+                if (end > total) {
+                  end = total;
+                  start = Math.max(0, end - windowSize);
+                }
+                const visibleIndices = Array.from({ length: end - start }, (_, i) => start + i);
+
+                return visibleIndices.map((idx) => {
+                  const q = PROCRASTINATION_QUESTIONS[idx];
+                  const isAnswered = answers[q.id] !== undefined;
+                  const isCurrent = idx === currentIndex;
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      onClick={() => setCurrentIndex(idx)}
+                      aria-label={`Question ${idx + 1}`}
+                      className={`flex h-7 min-w-7 px-2 items-center justify-center rounded-lg text-xs font-semibold transition ${
+                        isCurrent
+                          ? "border border-xeoo-primary bg-xeoo-primary text-white shadow-xs"
+                          : isAnswered
+                            ? "border border-xeoo-border bg-xeoo-surface-soft text-xeoo-text"
+                            : "border border-xeoo-border bg-xeoo-surface text-xeoo-muted hover:border-xeoo-border-dark hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                      }`}
+                    >
+                      {idx + 1}
+                    </button>
+                  );
+                });
+              })()}
+
+              <button
+                type="button"
+                onClick={() => setCurrentIndex((prev) => Math.min(totalQuestions - 1, prev + 1))}
+                disabled={currentIndex === totalQuestions - 1}
+                aria-label="Next question"
+                className="flex h-7 w-7 items-center justify-center rounded-lg border border-xeoo-border bg-xeoo-surface text-xeoo-muted transition hover:border-xeoo-border-dark hover:bg-xeoo-surface-soft hover:text-xeoo-text disabled:cursor-not-allowed disabled:opacity-40 shadow-xs"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         )}
@@ -390,7 +405,7 @@ export default function ProcrastinationTest() {
           <div className="space-y-4">
             {/* Top Score Card */}
             <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-4 sm:p-5 shadow-xs">
-              <span className="text-[10px] font-bold text-xeoo-primary uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-xeoo-primary uppercase tracking-wider">
                 {lang === "id" ? "Hasil Pengukuran" : "Assessment Outcome"}
               </span>
 
@@ -405,13 +420,13 @@ export default function ProcrastinationTest() {
                 </div>
 
                 <div className="flex shrink-0 flex-col items-center justify-center rounded-lg border border-xeoo-border bg-xeoo-surface-soft px-6 py-3 text-center">
-                  <span className="text-[10px] uppercase font-bold text-xeoo-muted">
+                  <span className="text-[11px] uppercase font-bold text-xeoo-muted">
                     {lang === "id" ? "Indeks Prokrastinasi" : "Procrastination Score"}
                   </span>
                   <span className="text-2xl font-extrabold text-xeoo-text sm:text-3xl mt-0.5">
                     {result.overallScore}
                   </span>
-                  <span className="text-[10px] text-xeoo-muted">/ 100</span>
+                  <span className="text-[11px] text-xeoo-muted">/ 100</span>
                 </div>
               </div>
             </div>
@@ -479,7 +494,7 @@ export default function ProcrastinationTest() {
             {/* Strategies */}
             <div className="rounded-xl border border-xeoo-border bg-xeoo-surface p-4 sm:p-5 shadow-xs">
               <div className="flex items-center gap-1.5 text-xs font-bold text-xeoo-primary uppercase">
-                <Compass className="h-3.5 w-3.5" />
+                <Target className="h-3.5 w-3.5" />
                 <span>{t.recommendedFocus}</span>
               </div>
 
@@ -489,7 +504,7 @@ export default function ProcrastinationTest() {
                     key={idx}
                     className="flex items-start gap-2 rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-2.5 text-xs text-xeoo-text leading-relaxed"
                   >
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-xeoo-primary-soft text-[10px] font-bold text-xeoo-primary">
+                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-xeoo-primary-soft text-[11px] font-bold text-xeoo-primary">
                       {idx + 1}
                     </span>
                     <span>{str}</span>
