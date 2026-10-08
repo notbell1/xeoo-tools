@@ -357,3 +357,93 @@ SELECT
     1
 FROM categories
 WHERE slug = 'health';
+
+
+INSERT INTO tools
+    (category_id, name, slug, description, icon, status, sort_order)
+
+SELECT
+    id,
+    'Meta Tag Analyzer',
+    'meta-tag-analyzer',
+    'Analyze HTML meta tags, headings, Open Graph, and page SEO health.',
+    'search',
+    'ready',
+    2
+FROM categories
+WHERE slug = 'seo';
+
+
+INSERT INTO tools
+    (category_id, name, slug, description, icon, status, sort_order)
+
+SELECT
+    id,
+    'SERP Snippet Preview',
+    'serp-snippet-preview',
+    'Live desktop and mobile search engine result snippet preview simulation.',
+    'search',
+    'ready',
+    3
+FROM categories
+WHERE slug = 'seo';
+
+
+INSERT INTO tools
+    (category_id, name, slug, description, icon, status, sort_order)
+
+SELECT
+    id,
+    'Robots.txt Generator',
+    'robots-txt-generator',
+    'Build and validate robots.txt crawler directives with presets.',
+    'file',
+    'ready',
+    4
+FROM categories
+WHERE slug = 'seo';
+
+
+INSERT INTO tools
+    (category_id, name, slug, description, icon, status, sort_order)
+
+SELECT
+    id,
+    'Sitemap Generator',
+    'sitemap-generator',
+    'Generate standard XML sitemaps with frequency and priority tags.',
+    'file',
+    'ready',
+    5
+FROM categories
+WHERE slug = 'seo';
+
+
+INSERT INTO tools
+    (category_id, name, slug, description, icon, status, sort_order)
+
+SELECT
+    id,
+    'Open Graph Checker',
+    'open-graph-checker',
+    'Validate Open Graph and Twitter Card tags with social share preview.',
+    'globe',
+    'ready',
+    6
+FROM categories
+WHERE slug = 'seo';
+
+
+INSERT INTO tools
+    (category_id, name, slug, description, icon, status, sort_order)
+
+SELECT
+    id,
+    'Schema Markup Generator',
+    'schema-markup-generator',
+    'Create JSON-LD structured data for Articles, FAQs, Local Business, and more.',
+    'code',
+    'ready',
+    7
+FROM categories
+WHERE slug = 'seo';

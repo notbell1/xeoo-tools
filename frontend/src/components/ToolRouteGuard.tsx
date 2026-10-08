@@ -66,6 +66,12 @@ import MetadataRemover from "../tools/file/MetadataRemover";
 
 // SEO Tools
 import DaPaChecker from "../tools/seo/DaPaChecker";
+import MetaTagAnalyzer from "../tools/seo/MetaTagAnalyzer";
+import SerpSnippetPreview from "../tools/seo/SerpSnippetPreview";
+import RobotsTxtGenerator from "../tools/seo/RobotsTxtGenerator";
+import SitemapGenerator from "../tools/seo/SitemapGenerator";
+import OpenGraphChecker from "../tools/seo/OpenGraphChecker";
+import SchemaMarkupGenerator from "../tools/seo/SchemaMarkupGenerator";
 
 interface ToolDefinition {
   name: string;
@@ -317,6 +323,36 @@ const TOOL_REGISTRY: Record<string, ToolDefinition> = {
   "da-pa-checker": {
     name: "DA / PA Checker",
     component: <DaPaChecker />,
+    defaultStatus: "ready",
+  },
+  "meta-tag-analyzer": {
+    name: "Meta Tag Analyzer",
+    component: <MetaTagAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "serp-snippet-preview": {
+    name: "SERP Snippet Preview",
+    component: <SerpSnippetPreview />,
+    defaultStatus: "ready",
+  },
+  "robots-txt-generator": {
+    name: "Robots.txt Generator",
+    component: <RobotsTxtGenerator />,
+    defaultStatus: "ready",
+  },
+  "sitemap-generator": {
+    name: "Sitemap Generator",
+    component: <SitemapGenerator />,
+    defaultStatus: "ready",
+  },
+  "open-graph-checker": {
+    name: "Open Graph Checker",
+    component: <OpenGraphChecker />,
+    defaultStatus: "ready",
+  },
+  "schema-markup-generator": {
+    name: "Schema Markup Generator",
+    component: <SchemaMarkupGenerator />,
     defaultStatus: "ready",
   },
 };
