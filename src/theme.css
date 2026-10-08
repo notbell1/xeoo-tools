@@ -1,0 +1,152 @@
+/**
+ * XeooTools — Theme Tokens
+ * Tailwind CSS v4
+ *
+ * File ini hanya berisi design tokens.
+ * Global rules (body, scrollbar, SweetAlert, dsb.) tetap di stylesheet global.
+ */
+
+@theme {
+  /* =========================================================
+   * BASE / LIGHT THEME
+   * ======================================================= */
+
+  --color-xeoo-bg: #f3f4f6;
+  --color-xeoo-surface: #ffffff;
+  --color-xeoo-surface-soft: #e9ebef;
+
+  --color-xeoo-border: #dfe3e8;
+  --color-xeoo-border-dark: #cbd1d8;
+
+  --color-xeoo-text: #17191c;
+  --color-xeoo-text-soft: #343940;
+  --color-xeoo-muted: #69707a;
+
+  /* Dark / black surfaces */
+  --color-xeoo-black: #0b0d10;
+  --color-xeoo-dark: #14171b;
+  --color-xeoo-dark-soft: #20242a;
+
+  /* Brand */
+  --color-xeoo-primary: #2563eb;
+  --color-xeoo-primary-hover: #1d4ed8;
+  --color-xeoo-primary-soft: #dbeafe;
+
+  --color-xeoo-accent: #7c3aed;
+  --color-xeoo-accent-hover: #6d28d9;
+  --color-xeoo-accent-soft: #ede9fe;
+
+  /* Semantic */
+  --color-xeoo-success: #16a34a;
+  --color-xeoo-success-hover: #15803d;
+  --color-xeoo-success-soft: #dcfce7;
+
+  --color-xeoo-warning: #d97706;
+  --color-xeoo-warning-hover: #b45309;
+  --color-xeoo-warning-soft: #fef3c7;
+
+  --color-xeoo-danger: #dc2626;
+  --color-xeoo-danger-hover: #b91c1c;
+  --color-xeoo-danger-soft: #fee2e2;
+
+  --color-xeoo-info: #0891b2;
+  --color-xeoo-info-hover: #0e7490;
+  --color-xeoo-info-soft: #cffafe;
+
+  /* =========================================================
+   * ACCESSIBILITY / CONTENT TOKENS
+   * ======================================================= */
+
+  --color-xeoo-on-primary: #ffffff;
+  --color-xeoo-on-accent: #ffffff;
+  --color-xeoo-on-success: #ffffff;
+  --color-xeoo-on-warning: #ffffff;
+  --color-xeoo-on-danger: #ffffff;
+  --color-xeoo-on-info: #ffffff;
+
+  /* =========================================================
+   * INTERACTION
+   * ======================================================= */
+
+  --color-xeoo-focus: #2563eb;
+  --color-xeoo-focus-soft: rgba(37, 99, 235, 0.18);
+
+  /* =========================================================
+   * OVERLAY / SHADOW HELPERS
+   * ======================================================= */
+
+  --color-xeoo-overlay: rgba(15, 23, 42, 0.36);
+  --color-xeoo-overlay-strong: rgba(15, 23, 42, 0.52);
+}
+
+/* =========================================================
+ * DARK THEME
+ *
+ * Semua komponen yang memakai token xeoo-* akan otomatis
+ * mengikuti dark mode ketika <html class="dark"> aktif.
+ * ======================================================= */
+
+html.dark {
+  color-scheme: dark;
+
+  /* Base */
+  --color-xeoo-bg: #0b0d10;
+  --color-xeoo-surface: #14171b;
+  --color-xeoo-surface-soft: #1d2229;
+
+  /* Borders */
+  --color-xeoo-border: #2a3038;
+  --color-xeoo-border-dark: #3a424d;
+
+  /* Text */
+  --color-xeoo-text: #f3f4f6;
+  --color-xeoo-text-soft: #d6dbe3;
+  --color-xeoo-muted: #9aa3af;
+
+  /* Dark / black surfaces */
+  --color-xeoo-black: #050608;
+  --color-xeoo-dark: #0b0d10;
+  --color-xeoo-dark-soft: #171b21;
+
+  /* Brand */
+  --color-xeoo-primary: #3b82f6;
+  --color-xeoo-primary-hover: #60a5fa;
+  --color-xeoo-primary-soft: rgba(59, 130, 246, 0.16);
+
+  --color-xeoo-accent: #8b5cf6;
+  --color-xeoo-accent-hover: #a78bfa;
+  --color-xeoo-accent-soft: rgba(139, 92, 246, 0.16);
+
+  /* Semantic */
+  --color-xeoo-success: #22c55e;
+  --color-xeoo-success-hover: #4ade80;
+  --color-xeoo-success-soft: rgba(34, 197, 94, 0.16);
+
+  --color-xeoo-warning: #f59e0b;
+  --color-xeoo-warning-hover: #fbbf24;
+  --color-xeoo-warning-soft: rgba(245, 158, 11, 0.16);
+
+  --color-xeoo-danger: #ef4444;
+  --color-xeoo-danger-hover: #f87171;
+  --color-xeoo-danger-soft: rgba(239, 68, 68, 0.16);
+
+  --color-xeoo-info: #22d3ee;
+  --color-xeoo-info-hover: #67e8f9;
+  --color-xeoo-info-soft: rgba(34, 211, 238, 0.16);
+
+  /* Accessibility / content */
+  --color-xeoo-on-primary: #ffffff;
+  --color-xeoo-on-accent: #ffffff;
+  --color-xeoo-on-success: #04130a;
+  --color-xeoo-on-warning: #1a1203;
+  --color-xeoo-on-danger: #ffffff;
+  --color-xeoo-on-info: #03252b;
+
+  /* Focus */
+  --color-xeoo-focus: #60a5fa;
+  --color-xeoo-focus-soft: rgba(96, 165, 250, 0.24);
+
+  /* Overlay */
+  --color-xeoo-overlay: rgba(0, 0, 0, 0.48);
+  --color-xeoo-overlay-strong: rgba(0, 0, 0, 0.68);
+}
