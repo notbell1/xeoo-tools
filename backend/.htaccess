@@ -1,9 +1,9 @@
-Options -Indexes
-
 <FilesMatch "^\.env">
-    Require all denied
+    Order allow,deny
+    Deny from all
 </FilesMatch>
 
 <FilesMatch "\.(sql)$">
-    Require all denied
+    Order allow,deny
+    Deny from all
 </FilesMatch>
