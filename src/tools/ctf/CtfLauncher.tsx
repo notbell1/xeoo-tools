@@ -18,15 +18,16 @@ export default function CtfLauncher() {
 
         <p className="mt-2 text-xs text-xeoo-muted leading-relaxed">
           Standalone browser-first cybersecurity & defacement forensics arena.
-          Selesaikan investigasi, temukan artefak, dan buktikan kemampuan analisis digital forensic Anda.
+          Complete the investigation, discover artifacts, and prove your digital
+          forensic analysis skills.
         </p>
 
         <div className="mt-4 rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3 text-left space-y-1.5 text-xs text-xeoo-muted">
           <div className="flex items-center gap-2 text-xeoo-text font-semibold">
             <Flag className="h-3.5 w-3.5 text-xeoo-primary" />
-            <span>Fitur Platform:</span>
+            <span>Platform Features:</span>
           </div>
-          <p>• 15 Kasus Investigasi (Easy, Medium, Hard)</p>
+          <p>• 15 Investigation Cases (Easy, Medium, Hard)</p>
           <p>• Live Sandboxed Preview & DOM Inspector</p>
           <p>• Forensic Workbench (Decoders, Ciphers, Notes)</p>
           <p>• Global Leaderboard Hall of Fame</p>

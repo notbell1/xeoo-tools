@@ -70,9 +70,9 @@ export const CtfRegister: React.FC = () => {
           <div className="mx-auto mb-2.5 flex h-10 w-10 items-center justify-center rounded-lg bg-xeoo-surface-soft border border-xeoo-border text-xeoo-primary">
             <UserPlus className="h-5 w-5" />
           </div>
-          <h1 className="text-lg font-bold tracking-tight text-xeoo-text">Daftar Operator CTF</h1>
+          <h1 className="text-lg font-bold tracking-tight text-xeoo-text">Register Account</h1>
           <p className="mt-1 text-xs text-xeoo-muted">
-            Buat badge akun untuk mencatat skor dan peringkat kasus
+            Create an account to record your CTF scores.
           </p>
         </div>
 
@@ -80,10 +80,10 @@ export const CtfRegister: React.FC = () => {
           <div className="mb-4 rounded-lg border border-xeoo-warning/40 bg-xeoo-warning/10 p-3 text-xs text-xeoo-text space-y-1">
             <div className="flex items-center gap-2 font-bold text-xeoo-warning">
               <AlertCircle className="h-4 w-4 shrink-0" />
-              <span>Registrasi Dinonaktifkan oleh Admin</span>
+              <span>Registration disabled by admin</span>
             </div>
             <p className="text-[11px] text-xeoo-muted leading-relaxed">
-              Pendaftaran badge operator baru sementara ditutup oleh administrator CTF Command.
+              Account registration has been temporarily closed by the admin
             </p>
             {settings.login_enabled ? (
               <div className="pt-1">
@@ -91,7 +91,7 @@ export const CtfRegister: React.FC = () => {
                   to="/ctf/login"
                   className="inline-flex items-center gap-1 font-semibold text-xeoo-primary hover:underline text-[11px]"
                 >
-                  Masuk Menggunakan Akun Existing &rarr;
+                  MLog in using an existing account &rarr;
                 </Link>
               </div>
             ) : settings.leaderboard_enabled ? (
@@ -130,7 +130,7 @@ export const CtfRegister: React.FC = () => {
                 disabled={!settings.registration_enabled || submitting}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="analyst_01"
+                placeholder="xeootools"
                 className="w-full rounded-lg border border-xeoo-border bg-xeoo-surface-soft py-2 pl-9 pr-3 text-xs text-xeoo-text placeholder-xeoo-muted focus:border-xeoo-primary focus:outline-none focus:ring-1 focus:ring-xeoo-primary font-mono disabled:opacity-60 disabled:cursor-not-allowed"
               />
             </div>
@@ -151,7 +151,7 @@ export const CtfRegister: React.FC = () => {
                 disabled={!settings.registration_enabled || submitting}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="operator@domain.com"
+                placeholder="xeoo@tools.com"
                 className="w-full rounded-lg border border-xeoo-border bg-xeoo-surface-soft py-2 pl-9 pr-3 text-xs text-xeoo-text placeholder-xeoo-muted focus:border-xeoo-primary focus:outline-none focus:ring-1 focus:ring-xeoo-primary font-mono disabled:opacity-60 disabled:cursor-not-allowed"
               />
             </div>
@@ -181,7 +181,7 @@ export const CtfRegister: React.FC = () => {
                 disabled={!settings.registration_enabled}
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute inset-y-0 right-0 flex items-center pr-3 text-xeoo-muted hover:text-xeoo-text cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
-                title={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                title={showPassword ? "Hide" : "Show"}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -190,7 +190,7 @@ export const CtfRegister: React.FC = () => {
 
           <div>
             <label className="mb-1 block text-xs font-semibold text-xeoo-text" htmlFor="reg-confirm-password">
-              Konfirmasi Password
+              Confirm Password
             </label>
             <div className="relative">
               <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-xeoo-muted">
@@ -212,7 +212,7 @@ export const CtfRegister: React.FC = () => {
                 disabled={!settings.registration_enabled}
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="absolute inset-y-0 right-0 flex items-center pr-3 text-xeoo-muted hover:text-xeoo-text cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
-                title={showConfirmPassword ? "Sembunyikan password" : "Tampilkan password"}
+                title={showConfirmPassword ? "Hide" : "Show"}
               >
                 {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -221,7 +221,7 @@ export const CtfRegister: React.FC = () => {
 
           <div>
             <label className="mb-1 block text-xs font-semibold text-xeoo-text" htmlFor="reg-country">
-              Afiliasi Negara / Wilayah
+              Region
             </label>
             <div className="relative">
               <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-xeoo-muted">
@@ -251,16 +251,16 @@ export const CtfRegister: React.FC = () => {
             {!settings.registration_enabled ? (
               <>
                 <Lock className="h-4 w-4" />
-                <span>Registrasi Dinonaktifkan oleh Admin</span>
+                <span>RRegistration Deactivated by Admin</span>
               </>
             ) : submitting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Mendaftarkan...
+                Register...
               </>
             ) : (
               <>
-                <span>Daftar Badge Baru</span>
+                <span>Register</span>
                 <ArrowRight className="h-4 w-4" />
               </>
             )}
@@ -269,9 +269,9 @@ export const CtfRegister: React.FC = () => {
 
         <div className="mt-5 border-t border-xeoo-border pt-3 text-center">
           <p className="text-xs text-xeoo-muted">
-            Sudah punya badge?{" "}
+            Already have an account?{" "}
             <Link to="/ctf/login" className="font-semibold text-xeoo-primary hover:underline">
-              Operator Login
+              Login
             </Link>
           </p>
         </div>

@@ -98,7 +98,9 @@ export const CtfChallengeList: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <FileText className="h-4 w-4 text-xeoo-primary" />
-            <h1 className="text-xl font-bold tracking-tight text-xeoo-text">Active Case Files</h1>
+            <h1 className="text-xl font-bold tracking-tight text-xeoo-text">
+              Active Case Files
+            </h1>
           </div>
           <p className="text-xs text-xeoo-muted">
             15 authentic web defacement & forensic investigation cases.
@@ -124,7 +126,10 @@ export const CtfChallengeList: React.FC = () => {
         <div className="flex items-center gap-2.5 rounded-xl border border-xeoo-warning/40 bg-xeoo-warning/10 p-3 text-xs text-xeoo-text">
           <AlertTriangle className="h-4 w-4 text-xeoo-warning shrink-0" />
           <p>
-            <span className="font-bold text-xeoo-warning">Notice:</span> Pengiriman flag sedang dinonaktifkan sementara oleh administrator CTF. Anda tetap dapat meneliti berkas kasus, tetapi verifikasi flag tidak dapat dikirim saat ini.
+            <span className="font-bold text-xeoo-warning">Notice:</span> Flag
+            submission has been temporarily disabled by the CTF administrator.
+            You can still examine the case files, but flag verification cannot
+            be submitted at this time.
           </p>
         </div>
       )}
@@ -152,7 +157,9 @@ export const CtfChallengeList: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-1.5 p-1 rounded-xl border border-xeoo-border bg-xeoo-surface">
-          <span className="text-[11px] font-mono font-semibold text-xeoo-muted px-2">Status:</span>
+          <span className="text-[11px] font-mono font-semibold text-xeoo-muted px-2">
+            Status:
+          </span>
           {[
             { id: "all", label: "All" },
             { id: "unsolved", label: "Unsolved" },
@@ -185,7 +192,9 @@ export const CtfChallengeList: React.FC = () => {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-xeoo-surface-soft text-xeoo-muted">
             <Layers className="h-6 w-6" />
           </div>
-          <p className="text-sm font-semibold text-xeoo-text">No cases match your filter criteria.</p>
+          <p className="text-sm font-semibold text-xeoo-text">
+            No cases match your filter criteria.
+          </p>
           <button
             type="button"
             onClick={() => {
@@ -201,7 +210,8 @@ export const CtfChallengeList: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredChallenges.map((challenge) => {
-            const isSolved = challenge.solved || solvedChallengeIds.has(challenge.id);
+            const isSolved =
+              challenge.solved || solvedChallengeIds.has(challenge.id);
 
             return (
               <Link
@@ -246,11 +256,13 @@ export const CtfChallengeList: React.FC = () => {
                 {/* Footer metadata */}
                 <div className="mt-5 border-t border-xeoo-border pt-3.5 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3 font-mono text-[11px] text-xeoo-muted">
-                    <span className="font-bold text-xeoo-primary">{challenge.points} PTS</span>
+                    <span className="font-bold text-xeoo-primary">
+                      {challenge.points} PTS
+                    </span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      ~{challenge.estimated_minutes}m
+                      <Clock className="h-3 w-3" />~
+                      {challenge.estimated_minutes}m
                     </span>
                     <span>•</span>
                     <span>{challenge.solves_count} solves</span>
@@ -268,4 +280,3 @@ export const CtfChallengeList: React.FC = () => {
     </div>
   );
 };
-

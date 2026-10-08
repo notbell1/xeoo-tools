@@ -39,9 +39,9 @@ export const CtfLogin: React.FC = () => {
           <div className="mx-auto mb-2.5 flex h-10 w-10 items-center justify-center rounded-lg bg-xeoo-surface-soft border border-xeoo-border text-xeoo-primary">
             <LogIn className="h-5 w-5" />
           </div>
-          <h1 className="text-lg font-bold tracking-tight text-xeoo-text">Operator Login</h1>
+          <h1 className="text-lg font-bold tracking-tight text-xeoo-text">Login CTF</h1>
           <p className="mt-1 text-xs text-xeoo-muted">
-            Masuk untuk mengakses investigasi dan challenge CTF
+            Log in to access the CTF challenge.
           </p>
         </div>
 
@@ -49,10 +49,10 @@ export const CtfLogin: React.FC = () => {
           <div className="mb-4 rounded-lg border border-xeoo-warning/40 bg-xeoo-warning/10 p-3 text-xs text-xeoo-text space-y-1">
             <div className="flex items-center gap-2 font-bold text-xeoo-warning">
               <AlertCircle className="h-4 w-4 shrink-0" />
-              <span>Login Dinonaktifkan oleh Admin</span>
+              <span>Login disabled by admin</span>
             </div>
             <p className="text-[11px] text-xeoo-muted leading-relaxed">
-              Autentikasi operator sementara dinonaktifkan oleh administrator CTF Command.
+              Authentication has been temporarily disabled by the admin
             </p>
             {settings.leaderboard_enabled && (
               <div className="pt-1">
@@ -60,7 +60,7 @@ export const CtfLogin: React.FC = () => {
                   to="/ctf/leaderboard"
                   className="inline-flex items-center gap-1 font-semibold text-xeoo-primary hover:underline text-[11px]"
                 >
-                  Buka Papan Peringkat / Leaderboard &rarr;
+                  Leaderboard &rarr;
                 </Link>
               </div>
             )}
@@ -70,7 +70,7 @@ export const CtfLogin: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
             <label className="mb-1 block text-xs font-semibold text-xeoo-text" htmlFor="login-identity">
-              Username atau Email
+              Username or Email
             </label>
             <div className="relative">
               <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-xeoo-muted">
@@ -83,7 +83,7 @@ export const CtfLogin: React.FC = () => {
                 disabled={!settings.login_enabled || submitting}
                 value={usernameOrEmail}
                 onChange={(e) => setUsernameOrEmail(e.target.value)}
-                placeholder="Username atau email..."
+                placeholder="••••••••••••"
                 className="w-full rounded-lg border border-xeoo-border bg-xeoo-surface-soft py-2 pl-9 pr-3 text-xs text-xeoo-text placeholder-xeoo-muted focus:border-xeoo-primary focus:outline-none focus:ring-1 focus:ring-xeoo-primary font-mono disabled:opacity-60 disabled:cursor-not-allowed"
               />
             </div>
@@ -99,7 +99,7 @@ export const CtfLogin: React.FC = () => {
                   to="/ctf/forgot-password"
                   className="text-[11px] text-xeoo-primary hover:underline"
                 >
-                  Lupa Password?
+                  Forgot password?
                 </Link>
               )}
             </div>
@@ -122,7 +122,7 @@ export const CtfLogin: React.FC = () => {
                 disabled={!settings.login_enabled}
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute inset-y-0 right-0 flex items-center pr-3 text-xeoo-muted hover:text-xeoo-text cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
-                title={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                title={showPassword ? "Hidden" : "Show"}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -137,16 +137,16 @@ export const CtfLogin: React.FC = () => {
             {!settings.login_enabled ? (
               <>
                 <Lock className="h-4 w-4" />
-                <span>Login Dinonaktifkan oleh Admin</span>
+                <span>Login disabled by admin</span>
               </>
             ) : submitting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memverifikasi...
+                Verifying...
               </>
             ) : (
               <>
-                <span>Masuk CTF Platform</span>
+                <span>Login</span>
                 <ArrowRight className="h-4 w-4" />
               </>
             )}
@@ -155,9 +155,9 @@ export const CtfLogin: React.FC = () => {
 
         <div className="mt-5 border-t border-xeoo-border pt-3 text-center">
           <p className="text-xs text-xeoo-muted">
-            Belum punya akun?{" "}
+            Don't have an account?{" "}
             <Link to="/ctf/register" className="font-semibold text-xeoo-primary hover:underline">
-              Daftar Badge Baru
+              Register
             </Link>
           </p>
         </div>

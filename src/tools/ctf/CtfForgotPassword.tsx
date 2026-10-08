@@ -131,7 +131,7 @@ export const CtfForgotPassword: React.FC = () => {
             className="inline-flex items-center gap-1.5 text-xs font-medium text-xeoo-muted hover:text-xeoo-text"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Return to Operator Login
+            Return to Login
           </Link>
         </div>
       </div>

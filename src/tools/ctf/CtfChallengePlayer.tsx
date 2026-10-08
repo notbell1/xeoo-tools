@@ -189,7 +189,7 @@ export const CtfChallengePlayer: React.FC = () => {
     }
 
     if (!settings.submissions_enabled) {
-      showWarning("Fitur Dinonaktifkan", "Membuka hint dinonaktifkan sementara karena pengiriman flag sedang dijeda.");
+      showWarning("Feature Disabled", "Revealing hints is temporarily disabled because flag submission is paused.");
       return;
     }
 
