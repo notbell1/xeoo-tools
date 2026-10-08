@@ -224,6 +224,11 @@ const TOOL_REGISTRY: Record<string, ToolDefinition> = {
     component: <DefacementTemplateBuilder />,
     defaultStatus: "ready",
   },
+  "defacement-challenge-generator": {
+    name: "Defacement Challenge Generator",
+    component: <CtfLauncher />,
+    defaultStatus: "ready",
+  },
   "defacement-ctf": {
     name: "Defacement Challenge",
     component: <CtfLauncher />,
@@ -324,6 +329,11 @@ export default function ToolRouteGuard() {
   const hasEqualDelimiter = toolParam.includes("=");
   const [slug, ...statusParts] = toolParam.split("=");
   const requestedStatus = hasEqualDelimiter ? statusParts.join("=") : null;
+
+  // Standalone redirect: Defacement CTF / Challenge generator goes to /ctf
+  if (slug === "defacement-challenge-generator" || slug === "defacement-ctf") {
+    return <Navigate to="/ctf" replace />;
+  }
 
   // Find tool in database or registry
   const dbTool = tools.find((t) => t.slug === slug);

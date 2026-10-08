@@ -1353,9 +1353,14 @@ export default function FrontendSidebar({
                         {!isCollapsed && (
                           <div className="mt-1 space-y-0.5 pl-1.5 pr-0.5">
                             {group.tools.map((tool) => {
+                              const isCtf =
+                                tool.slug === "defacement-challenge-generator" ||
+                                tool.slug === "defacement-ctf";
+
                               const active =
                                 currentPath === `/tools/${tool.slug}` ||
-                                currentPath.startsWith(`/tools/${tool.slug}`);
+                                currentPath.startsWith(`/tools/${tool.slug}`) ||
+                                (isCtf && currentPath.startsWith("/ctf"));
 
                               const ToolIcon: LucideIcon = getToolIcon(
                                 tool.icon || tool.slug,
@@ -1417,7 +1422,7 @@ export default function FrontendSidebar({
                               return (
                                 <Link
                                   key={tool.id || tool.slug}
-                                  to={`/tools/${tool.slug}`}
+                                  to={isCtf ? "/ctf" : `/tools/${tool.slug}`}
                                   onClick={isMobile ? onCloseMobile : undefined}
                                   className={[
                                     "group flex items-center justify-between rounded-md px-2 py-1.5 text-[11.5px] transition-[background-color,color,transform] duration-150",
