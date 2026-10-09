@@ -1,0 +1,20 @@
+/* TEAM */
+Site Maintainer: XeooTools Team
+Contact: abbelkadafi@gmail.com
+GitHub: https://github.com/notbell1
+From: Indonesia
+
+/* SITE */
+Site Name: XeooTools
+Site URL: https://xeootools.site.je/
+Last update: 2026-10-09
+Standards: HTML5, CSS3, ES2022, TypeScript
+Frontend Framework: React 18, Vite, Tailwind CSS v4, Lucide React
+Backend: PHP 8, MySQL
+Hosting: Wuaze Free Hosting Plan
+
+/* THANKS */
+Open Source Community
+Lucide Icons
+Tailwind CSS
+React Community

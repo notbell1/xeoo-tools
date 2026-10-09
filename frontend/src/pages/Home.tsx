@@ -24,6 +24,7 @@ import SocialLinks from "../components/SocialLinks";
 import ToolStatus from "../components/ToolStatus";
 
 import { BACKEND_URL } from "../config/backend";
+import { categories as defaultCategoryList } from "../data/categories";
 
 import { getCategoryIcon, getToolIcon } from "../lib/toolIcons";
 
@@ -208,14 +209,44 @@ export default function Home() {
           throw new Error(result.message || "Gagal memuat kategori.");
         }
 
+        const rawCategories = result.data ?? [];
+        const liveSlugs = new Set(rawCategories.map((c) => c.slug));
+        const missingFromDefaults: DatabaseCategory[] = defaultCategoryList
+          .filter(
+            (c) =>
+              !liveSlugs.has(c.slug) &&
+              !liveSlugs.has(`${c.slug}-tools`) &&
+              !liveSlugs.has(c.slug.replace(/-tools$/, "")),
+          )
+          .map((c, index) => ({
+            id: 500 + index,
+            name: c.name,
+            slug: c.slug,
+            description: c.description,
+            icon: c.slug === "ai" ? "sparkles" : "wrench",
+            color: c.slug === "ai" ? "sky" : "slate",
+            tool_count: c.count,
+          }));
+
         if (active) {
-          setCategories(result.data ?? []);
+          setCategories([...rawCategories, ...missingFromDefaults]);
         }
       } catch (error) {
         console.error("Home categories error:", error);
 
         if (active) {
-          setCategories([]);
+          const fallbackList: DatabaseCategory[] = defaultCategoryList.map(
+            (c, index) => ({
+              id: 500 + index,
+              name: c.name,
+              slug: c.slug,
+              description: c.description,
+              icon: c.slug === "ai" ? "sparkles" : "wrench",
+              color: c.slug === "ai" ? "sky" : "slate",
+              tool_count: c.count,
+            }),
+          );
+          setCategories(fallbackList);
         }
       } finally {
         if (active) {

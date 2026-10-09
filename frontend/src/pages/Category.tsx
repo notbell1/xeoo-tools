@@ -18,6 +18,7 @@ import Footer from "../components/Footer";
 import ToolStatus from "../components/ToolStatus";
 
 import { BACKEND_URL } from "../config/backend";
+import { categories as fallbackCategories } from "../data/categories";
 import { getCategoryStyle } from "../lib/categoryStyles";
 import { getToolIcon } from "../lib/toolIcons";
 
@@ -147,11 +148,89 @@ export default function Category() {
   }, []);
 
   const category = useMemo(() => {
-    return categories.find((item) => item.slug === slug);
+    const found =
+      categories.find((item) => item.slug === slug) ||
+      (slug === "psychology-tools"
+        ? categories.find((item) => item.slug === "psychology")
+        : undefined) ||
+      (slug === "psychology"
+        ? categories.find((item) => item.slug === "psychology-tools")
+        : undefined) ||
+      (slug === "ai-tools"
+        ? categories.find((item) => item.slug === "ai")
+        : undefined) ||
+      (slug === "ai"
+        ? categories.find((item) => item.slug === "ai-tools")
+        : undefined) ||
+      (slug === "design-tools"
+        ? categories.find((item) => item.slug === "design")
+        : undefined) ||
+      (slug === "design"
+        ? categories.find((item) => item.slug === "design-tools")
+        : undefined);
+
+    if (found) return found;
+
+    const fallback =
+      fallbackCategories.find((item) => item.slug === slug) ||
+      (slug === "ai-tools"
+        ? fallbackCategories.find((item) => item.slug === "ai")
+        : undefined) ||
+      (slug === "ai"
+        ? fallbackCategories.find((item) => item.slug === "ai-tools")
+        : undefined) ||
+      (slug === "design-tools"
+        ? fallbackCategories.find((item) => item.slug === "design")
+        : undefined) ||
+      (slug === "design"
+        ? fallbackCategories.find((item) => item.slug === "design-tools")
+        : undefined) ||
+      (slug === "psychology-tools"
+        ? fallbackCategories.find((item) => item.slug === "psychology")
+        : undefined) ||
+      (slug === "psychology"
+        ? fallbackCategories.find((item) => item.slug === "psychology-tools")
+        : undefined);
+
+    if (fallback) {
+      return {
+        id: fallback.slug === "design" ? 17 : 16,
+        name: fallback.name,
+        slug: fallback.slug,
+        description: fallback.description,
+        icon: fallback.slug === "design" ? "palette" : "sparkles",
+        color: fallback.slug === "design" ? "fuchsia" : "sky",
+        tool_count: fallback.count,
+      };
+    }
+
+    return undefined;
   }, [categories, slug]);
 
   const categoryTools = useMemo(() => {
-    return tools.filter((tool) => tool.category_slug === slug);
+    return tools.filter((tool) => {
+      if (tool.category_slug === slug) return true;
+      if (
+        (slug === "psychology-tools" || slug === "psychology") &&
+        (tool.category_slug === "psychology-tools" ||
+          tool.category_slug === "psychology")
+      ) {
+        return true;
+      }
+      if (
+        (slug === "ai" || slug === "ai-tools") &&
+        (tool.category_slug === "ai" || tool.category_slug === "ai-tools")
+      ) {
+        return true;
+      }
+      if (
+        (slug === "design" || slug === "design-tools") &&
+        (tool.category_slug === "design" || tool.category_slug === "design-tools")
+      ) {
+        return true;
+      }
+      return false;
+    });
   }, [tools, slug]);
 
   const totalPages = Math.max(

@@ -24,6 +24,12 @@ export const PSYCH_COMMON = {
     selfAssessmentBadge: "Self-Assessment",
     educationalBadge: "Educational Only",
     ready: "Ready",
+    strengths: "Strengths",
+    potentialChallenges: "Growth & Challenges",
+    reflectionPrompts: "Self-Reflection Prompts",
+    actionableInsights: "Actionable Insights",
+    retakeTest: "Retake Assessment",
+    finish: "Finish Assessment",
   },
   id: {
     start: "Mulai Asesmen",
@@ -48,6 +54,12 @@ export const PSYCH_COMMON = {
     selfAssessmentBadge: "Asesmen Mandiri",
     educationalBadge: "Edukasi Saja",
     ready: "Siap Digunakan",
+    strengths: "Kekuatan",
+    potentialChallenges: "Tantangan & Area Berkembang",
+    reflectionPrompts: "Panduan Refleksi Diri",
+    actionableInsights: "Wawasan & Langkah Aksi",
+    retakeTest: "Ulangi Tes",
+    finish: "Selesaikan Asesmen",
   },
 } as const;
 

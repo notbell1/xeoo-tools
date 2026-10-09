@@ -18,6 +18,9 @@ import Contact from "./pages/Contact";
 import LoginMimin from "./pages/LoginMimin";
 import DashboardMimin from "./pages/DashboardMimin";
 
+// Traffic Tracking Subsystem
+import { TrafficTracker } from "./components/TrafficTracker";
+
 // CTF Subsystem (Standalone Layout)
 import DefacementCTF from "./tools/ctf/DefacementCTF";
 
@@ -27,6 +30,9 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <BrowserRouter>
+      {/* Client-side Traffic Analytics Tracking */}
+      <TrafficTracker />
+
       <Routes>
         {/* ======================================================
             ERROR PAGES (STANDALONE FULL SCREEN VIEW)
@@ -43,6 +49,10 @@ export default function App() {
         ====================================================== */}
         <Route path="/login/mimin" element={<LoginMimin />} />
         <Route path="/mimin/dashboard" element={<DashboardMimin />} />
+        <Route
+          path="/mimin/traffic"
+          element={<DashboardMimin initialView="traffic" />}
+        />
 
         {/* ======================================================
             FRONTEND SIDEBAR LAYOUT (DIRECTORY, TOOLS & INFO PAGES)

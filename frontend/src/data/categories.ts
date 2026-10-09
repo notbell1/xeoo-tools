@@ -14,10 +14,26 @@ import {
   Scale,
   ShieldCheck,
   Brain,
+  Palette,
   Skull,
+  Sparkles,
 } from "lucide-react";
 
 export const categories: Category[] = [
+  {
+    name: "Design Tools",
+    slug: "design",
+    description: "Color palettes, CSS generators, contrast analysis, and design system utilities.",
+    count: 10,
+    icon: Palette,
+  },
+  {
+    name: "AI Tools",
+    slug: "ai",
+    description: "AI utilities for prompts, token usage, model configuration, structured outputs, and AI workflow planning.",
+    count: 10,
+    icon: Sparkles,
+  },
   {
     name: "Math Tools",
     slug: "math",
@@ -26,10 +42,10 @@ export const categories: Category[] = [
     icon: Calculator,
   },
   {
-    name: "Psikologi Tools",
-    slug: "psychology",
-    description: "Simple psychology and self-assessment tools.",
-    count: 6,
+    name: "Psychology Tools",
+    slug: "psychology-tools",
+    description: "Psychological self-assessments, relational patterns, and mindset tools.",
+    count: 15,
     icon: Brain,
   },
   {

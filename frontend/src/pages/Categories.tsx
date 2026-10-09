@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import { BACKEND_URL } from "../config/backend";
+import { categories as defaultCategoryList } from "../data/categories";
 import { getCategoryIcon } from "../lib/toolIcons";
 
 type DatabaseCategory = {
@@ -260,8 +261,27 @@ export default function Categories() {
           throw new Error(result.message || "Failed to load categories.");
         }
 
+        const rawCategories = result.data ?? [];
+        const liveSlugs = new Set(rawCategories.map((c) => c.slug));
+        const missingFromDefaults: DatabaseCategory[] = defaultCategoryList
+          .filter(
+            (c) =>
+              !liveSlugs.has(c.slug) &&
+              !liveSlugs.has(`${c.slug}-tools`) &&
+              !liveSlugs.has(c.slug.replace(/-tools$/, "")),
+          )
+          .map((c, index) => ({
+            id: 500 + index,
+            name: c.name,
+            slug: c.slug,
+            description: c.description,
+            icon: c.slug === "ai" ? "sparkles" : "wrench",
+            color: c.slug === "ai" ? "sky" : "slate",
+            tool_count: c.count,
+          }));
+
         if (active) {
-          setCategories(result.data ?? []);
+          setCategories([...rawCategories, ...missingFromDefaults]);
           setCurrentPage(1);
         }
       } catch (err) {
@@ -269,9 +289,19 @@ export default function Categories() {
           return;
         }
 
-        setError(
-          err instanceof Error ? err.message : "Failed to load categories.",
+        const fallbackList: DatabaseCategory[] = defaultCategoryList.map(
+          (c, index) => ({
+            id: 500 + index,
+            name: c.name,
+            slug: c.slug,
+            description: c.description,
+            icon: c.slug === "ai" ? "sparkles" : "wrench",
+            color: c.slug === "ai" ? "sky" : "slate",
+            tool_count: c.count,
+          }),
         );
+        setCategories(fallbackList);
+        setError("");
       } finally {
         if (active) {
           setLoading(false);

@@ -155,3 +155,10 @@ export async function showPrompt(
   }
   return null;
 }
+
+// Backward-compatibility aliases
+export const showSuccessAlert = showSuccess;
+export const showErrorAlert = showError;
+export const showWarningAlert = showWarning;
+export const showInfoAlert = showInfo;
+

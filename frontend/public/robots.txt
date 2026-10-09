@@ -1,4 +1,28 @@
+# robots.txt for XeooTools
+# Canonical website: https://xeootools.site.je/
+
 User-agent: *
 Allow: /
 
+# Private and administrative routes
+Disallow: /mimin/
+Disallow: /login/
+Disallow: /backend/
+Disallow: /api/
+
+# Optional: avoid crawling legacy or error routes
+Disallow: /404
+Disallow: /tools/defacement-challenge-generator
+
+# AI model-training crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Sitemap
 Sitemap: https://xeootools.site.je/sitemap.xml
