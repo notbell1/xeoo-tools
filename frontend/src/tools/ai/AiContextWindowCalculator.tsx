@@ -131,17 +131,17 @@ export default function AiContextWindowCalculator() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             </div>
 
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-sky-500/5 px-3.5 py-2 text-[11px] text-sky-800 dark:text-sky-300">
-              <Info size={14} className="shrink-0 text-sky-500" />
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>Context Headroom Planning:</strong> An LLM's context window contains BOTH prompt inputs and the generated completion tokens. Always reserve sufficient room for output!
+                <strong className="font-semibold text-xeoo-text">Context Headroom Planning:</strong> An LLM's context window contains BOTH prompt inputs and the generated completion tokens. Always reserve sufficient room for output!
               </span>
             </div>
 
@@ -154,10 +154,10 @@ export default function AiContextWindowCalculator() {
                   <select
                     value={selectedModelId}
                     onChange={(e) => handleModelChange(e.target.value)}
-                    className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 py-1.5 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                    className="mt-1 h-9 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-3 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {CONTEXT_WINDOW_MODELS.map((m) => (
-                      <option key={m.id} value={m.id}>
+                      <option key={m.id} value={m.id} className="bg-xeoo-surface text-xeoo-text">
                         {m.name} ({m.maxContext.toLocaleString()} tokens)
                       </option>
                     ))}
@@ -252,7 +252,7 @@ export default function AiContextWindowCalculator() {
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2.5 py-1 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
                     {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
                     <span>{copied ? "Copied" : "Copy Budget"}</span>

@@ -172,17 +172,17 @@ export default function AiOutputEvaluator() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             </div>
 
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-sky-500/5 px-3.5 py-2 text-[11px] text-sky-800 dark:text-sky-300">
-              <Info size={14} className="shrink-0 text-sky-500" />
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>Transparent Rule-Based Evaluation:</strong> Evaluates syntax, keywords, format adherence, and constraints locally in browser. No AI API, plagiarism checker, or detector used.
+                <strong className="font-semibold text-xeoo-text">Transparent Rule-Based Evaluation:</strong> Evaluates syntax, keywords, format adherence, and constraints locally in browser. No AI API, plagiarism checker, or detector used.
               </span>
             </div>
 
@@ -221,7 +221,7 @@ export default function AiOutputEvaluator() {
                     <button
                       type="button"
                       onClick={handleAddCriterion}
-                      className="inline-flex items-center gap-1 rounded bg-xeoo-text px-2 py-0.5 text-[10px] font-semibold text-xeoo-surface hover:opacity-90"
+                      className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                     >
                       <Plus size={11} />
                       <span>Add Check</span>
@@ -242,15 +242,15 @@ export default function AiOutputEvaluator() {
                           <select
                             value={c.type}
                             onChange={(e) => handleUpdateCriterion(c.id, "type", e.target.value)}
-                            className="w-1/2 rounded border border-xeoo-border bg-xeoo-bg px-1.5 py-0.5 text-[11px] text-xeoo-text"
+                            className="h-7.5 w-1/2 rounded-md border border-xeoo-border bg-xeoo-bg px-2 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                           >
-                            <option value="required_words">Required Keywords</option>
-                            <option value="forbidden_words">Forbidden Words</option>
-                            <option value="min_length">Min Word Count</option>
-                            <option value="max_length">Max Word Count</option>
-                            <option value="contains_code">Must Contain Code Block</option>
-                            <option value="contains_list">Must Contain List</option>
-                            <option value="valid_json">Must Be Valid JSON</option>
+                            <option value="required_words" className="bg-xeoo-surface text-xeoo-text">Required Keywords</option>
+                            <option value="forbidden_words" className="bg-xeoo-surface text-xeoo-text">Forbidden Words</option>
+                            <option value="min_length" className="bg-xeoo-surface text-xeoo-text">Min Word Count</option>
+                            <option value="max_length" className="bg-xeoo-surface text-xeoo-text">Max Word Count</option>
+                            <option value="contains_code" className="bg-xeoo-surface text-xeoo-text">Must Contain Code Block</option>
+                            <option value="contains_list" className="bg-xeoo-surface text-xeoo-text">Must Contain List</option>
+                            <option value="valid_json" className="bg-xeoo-surface text-xeoo-text">Must Be Valid JSON</option>
                           </select>
 
                           <button
@@ -287,7 +287,7 @@ export default function AiOutputEvaluator() {
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2.5 py-1 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
                     {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
                     <span>{copied ? "Copied" : "Copy Report"}</span>

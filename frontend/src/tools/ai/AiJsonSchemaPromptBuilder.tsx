@@ -167,17 +167,17 @@ export default function AiJsonSchemaPromptBuilder() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             </div>
 
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-sky-500/5 px-3.5 py-2 text-[11px] text-sky-800 dark:text-sky-300">
-              <Info size={14} className="shrink-0 text-sky-500" />
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>Structured Outputs:</strong> Instructs frontier AI models (OpenAI Structured Outputs, Anthropic Tool Use, Gemini JSON mode) to respond strictly within a validated JSON format.
+                <strong className="font-semibold text-xeoo-text">Structured Outputs:</strong> Instructs frontier AI models (OpenAI Structured Outputs, Anthropic Tool Use, Gemini JSON mode) to respond strictly within a validated JSON format.
               </span>
             </div>
 
@@ -233,7 +233,7 @@ export default function AiJsonSchemaPromptBuilder() {
                     <button
                       type="button"
                       onClick={handleAddField}
-                      className="inline-flex items-center gap-1 rounded bg-xeoo-text px-2 py-0.5 text-[10px] font-semibold text-xeoo-surface hover:opacity-90"
+                      className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                     >
                       <Plus size={11} />
                       <span>Add Property</span>
@@ -258,13 +258,13 @@ export default function AiJsonSchemaPromptBuilder() {
                             <select
                               value={f.type}
                               onChange={(e) => handleUpdateField(f.id, "type", e.target.value as JsonFieldType)}
-                              className="w-1/3 rounded border border-xeoo-border bg-xeoo-surface px-1.5 py-1 text-xs text-xeoo-text"
+                              className="h-8 w-1/3 rounded-md border border-xeoo-border bg-xeoo-bg px-2 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                             >
-                              <option value="string">string</option>
-                              <option value="number">number</option>
-                              <option value="boolean">boolean</option>
-                              <option value="array">array</option>
-                              <option value="object">object</option>
+                              <option value="string" className="bg-xeoo-surface text-xeoo-text">string</option>
+                              <option value="number" className="bg-xeoo-surface text-xeoo-text">number</option>
+                              <option value="boolean" className="bg-xeoo-surface text-xeoo-text">boolean</option>
+                              <option value="array" className="bg-xeoo-surface text-xeoo-text">array</option>
+                              <option value="object" className="bg-xeoo-surface text-xeoo-text">object</option>
                             </select>
 
                             <label className="flex items-center gap-1 text-[11px] text-xeoo-muted cursor-pointer shrink-0">
@@ -363,9 +363,9 @@ export default function AiJsonSchemaPromptBuilder() {
                             : result.sampleJsonText
                       )
                     }
-                    className="inline-flex items-center gap-1 rounded-md bg-xeoo-primary px-3 py-1 text-xs font-semibold text-white shadow-xs transition hover:opacity-90"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md bg-xeoo-primary px-3 text-[11px] font-medium text-white shadow-xs transition hover:opacity-90"
                   >
-                    {copied ? <Check size={13} /> : <Copy size={13} />}
+                    {copied ? <Check size={12} /> : <Copy size={12} />}
                     <span>{copied ? "Copied!" : "Copy Output"}</span>
                   </button>
                 </div>

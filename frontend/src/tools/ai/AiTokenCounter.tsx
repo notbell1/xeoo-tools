@@ -88,18 +88,18 @@ export default function AiTokenCounter() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             </div>
 
-            {/* MANDATORY DISCLAIMER (Rule 21) */}
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-amber-500/5 px-3.5 py-2 text-[11px] text-amber-800 dark:text-amber-300">
-              <Info size={14} className="shrink-0 text-amber-500" />
+            {/* MANDATORY DISCLAIMER */}
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>Heuristic Estimation Notice:</strong> Token counts are estimates calculated locally in browser. Exact token counts may vary slightly by tokenizer vocabulary (Byte-Pair Encoding).
+                <strong className="font-semibold text-xeoo-text">Heuristic Estimation Notice:</strong> Token counts are estimates calculated locally in browser. Exact token counts may vary slightly by tokenizer vocabulary (Byte-Pair Encoding).
               </span>
             </div>
 
@@ -107,7 +107,7 @@ export default function AiTokenCounter() {
             <div className="grid grid-cols-1 gap-4 p-3.5 sm:p-5 lg:grid-cols-12">
               {/* LEFT: TEXTAREA & PROFILE */}
               <div className="space-y-3.5 lg:col-span-7">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <label htmlFor="token-text" className="text-xs font-bold text-xeoo-text">
                     Input Prompt or Document
                   </label>
@@ -116,12 +116,12 @@ export default function AiTokenCounter() {
                     <select
                       value={profile}
                       onChange={(e) => setProfile(e.target.value as TokenizerProfile)}
-                      className="rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 text-xs text-xeoo-text focus:outline-none"
+                      className="h-8 rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                     >
-                      <option value="gpt_o200k">GPT-4o / o1 (o200k_base)</option>
-                      <option value="gpt_cl100k">GPT-4 / GPT-3.5 (cl100k_base)</option>
-                      <option value="claude">Claude 3.5 / 3 (Anthropic)</option>
-                      <option value="llama3">Llama 3 / 3.1 (128k BPE)</option>
+                      <option value="gpt_o200k" className="bg-xeoo-surface text-xeoo-text">GPT-4o / o1 (o200k_base)</option>
+                      <option value="gpt_cl100k" className="bg-xeoo-surface text-xeoo-text">GPT-4 / GPT-3.5 (cl100k_base)</option>
+                      <option value="claude" className="bg-xeoo-surface text-xeoo-text">Claude 3.5 / 3 (Anthropic)</option>
+                      <option value="llama3" className="bg-xeoo-surface text-xeoo-text">Llama 3 / 3.1 (128k BPE)</option>
                     </select>
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export default function AiTokenCounter() {
                   <button
                     type="button"
                     onClick={handleCopyStats}
-                    className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-1 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
                     {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
                     <span>{copied ? "Copied" : "Copy Stats"}</span>

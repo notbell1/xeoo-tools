@@ -100,17 +100,17 @@ export default function SystemPromptBuilder() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             </div>
 
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-sky-500/5 px-3.5 py-2 text-[11px] text-sky-800 dark:text-sky-300">
-              <Info size={14} className="shrink-0 text-sky-500" />
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>System Prompt vs User Prompt:</strong> System instructions define the persistent persona, boundaries, and rule hierarchy that govern all subsequent user interactions.
+                <strong className="font-semibold text-xeoo-text">System Prompt vs User Prompt:</strong> System instructions define the persistent persona, boundaries, and rule hierarchy that govern all subsequent user interactions.
               </span>
             </div>
 
@@ -226,9 +226,9 @@ export default function SystemPromptBuilder() {
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="inline-flex items-center gap-1 rounded-md bg-xeoo-primary px-3 py-1 text-xs font-semibold text-white shadow-xs transition hover:opacity-90"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md bg-xeoo-primary px-3 text-[11px] font-medium text-white shadow-xs transition hover:opacity-90"
                   >
-                    {copied ? <Check size={13} /> : <Copy size={13} />}
+                    {copied ? <Check size={12} /> : <Copy size={12} />}
                     <span>{copied ? "Copied!" : "Copy System Prompt"}</span>
                   </button>
                 </div>

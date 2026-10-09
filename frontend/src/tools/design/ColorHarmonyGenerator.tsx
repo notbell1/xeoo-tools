@@ -74,7 +74,7 @@ export default function ColorHarmonyGenerator() {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
             >
               <RotateCcw size={12} />
               <span>Reset</span>
@@ -83,10 +83,10 @@ export default function ColorHarmonyGenerator() {
         </div>
 
         {/* NOTICE BANNER */}
-        <div className="flex items-center gap-2 border-b border-xeoo-border bg-fuchsia-500/5 px-3.5 py-2 text-[11px] text-fuchsia-800 dark:text-fuchsia-300">
-          <Info size={14} className="shrink-0 text-fuchsia-500" />
+        <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+          <Info size={14} className="shrink-0 text-xeoo-primary" />
           <span>
-            <strong>Harmonic Relationships:</strong> Computed using angular intervals on the 360° color wheel. Click any swatch to copy its individual HEX value.
+            <strong className="font-semibold text-xeoo-text">Harmonic Relationships:</strong> Computed using angular intervals on the 360° color wheel. Click any swatch to copy its individual HEX value.
           </span>
         </div>
 
@@ -103,17 +103,20 @@ export default function ColorHarmonyGenerator() {
               </div>
 
               <div className="flex items-center gap-2">
-                <input
-                  type="color"
-                  value={baseColor}
-                  onChange={(e) => setBaseColor(e.target.value)}
-                  className="h-8 w-10 cursor-pointer rounded border border-xeoo-border bg-transparent p-0.5"
-                />
+                <div className="relative h-9 w-11 shrink-0 overflow-hidden rounded-md border border-xeoo-border bg-xeoo-bg">
+                  <input
+                    type="color"
+                    value={baseColor}
+                    onChange={(e) => setBaseColor(e.target.value)}
+                    className="absolute -inset-2 h-14 w-16 cursor-pointer opacity-100"
+                  />
+                </div>
                 <input
                   type="text"
                   value={baseColor}
                   onChange={(e) => setBaseColor(e.target.value)}
-                  className="w-24 rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                  placeholder="#3B82F6"
+                  className="h-9 w-28 rounded-md border border-xeoo-border bg-xeoo-surface px-3 font-mono text-xs uppercase font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20"
                 />
               </div>
             </div>
@@ -141,17 +144,17 @@ export default function ColorHarmonyGenerator() {
                 key={group.title}
                 className="rounded-lg border border-xeoo-border bg-xeoo-surface p-3.5 space-y-2.5 shadow-xs"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xs font-bold text-xeoo-text">{group.title}</h3>
-                    <p className="text-[10px] text-xeoo-muted">{group.description}</p>
+                <div className="flex items-center justify-between gap-2.5">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-xs font-bold text-xeoo-text truncate">{group.title}</h3>
+                    <p className="text-[10px] text-xeoo-muted truncate">{group.description}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => void copyPalette(group.colors, group.title)}
-                    className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-0.5 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface transition"
+                    className="inline-flex h-6.5 shrink-0 whitespace-nowrap items-center gap-1 rounded-md bg-xeoo-surface-soft border border-xeoo-border px-2 text-[10px] font-semibold text-xeoo-text hover:bg-xeoo-surface transition"
                   >
-                    <Copy size={10} />
+                    <Copy size={10} className="shrink-0 text-xeoo-muted" />
                     <span>Copy All</span>
                   </button>
                 </div>

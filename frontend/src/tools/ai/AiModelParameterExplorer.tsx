@@ -87,7 +87,7 @@ export default function AiModelParameterExplorer() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
@@ -104,18 +104,18 @@ export default function AiModelParameterExplorer() {
                   key={p.id}
                   type="button"
                   onClick={() => handleApplyPreset(p.id)}
-                  className="rounded border border-xeoo-border bg-xeoo-surface px-2 py-0.5 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface-soft"
+                  className="inline-flex h-6.5 items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text transition hover:bg-xeoo-surface-soft"
                 >
                   {p.name}
                 </button>
               ))}
             </div>
 
-            {/* MANDATORY DISCLAIMER (Rule 23) */}
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-amber-500/5 px-3.5 py-2 text-[11px] text-amber-800 dark:text-amber-300">
-              <Info size={14} className="shrink-0 text-amber-500" />
+            {/* MANDATORY DISCLAIMER */}
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>Educational Simulation:</strong> Parameters influence probabilistic token sampling distributions. Individual model architectures (e.g. Anthropic vs OpenAI vs open-weights) may scale sampling temperatures slightly differently.
+                <strong className="font-semibold text-xeoo-text">Educational Simulation:</strong> Parameters influence probabilistic token sampling distributions. Individual model architectures (e.g. Anthropic vs OpenAI vs open-weights) may scale sampling temperatures slightly differently.
               </span>
             </div>
 
@@ -243,7 +243,7 @@ export default function AiModelParameterExplorer() {
                   <button
                     type="button"
                     onClick={handleCopyJson}
-                    className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-1 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
                     {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
                     <span>{copied ? "Copied" : "Copy JSON"}</span>

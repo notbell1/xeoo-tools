@@ -106,7 +106,7 @@ export const CssBorderRadiusGenerator: React.FC = () => {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
             >
               <RotateCcw size={12} />
               <span>Reset</span>
@@ -115,10 +115,10 @@ export const CssBorderRadiusGenerator: React.FC = () => {
         </div>
 
         {/* PRESETS BAR */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-xeoo-border bg-fuchsia-500/5 px-3.5 py-2 text-[11px] text-fuchsia-800 dark:text-fuchsia-300">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2 text-[11px] text-xeoo-text-soft">
           <div className="flex items-center gap-1.5">
-            <Sparkles size={14} className="shrink-0 text-fuchsia-500" />
-            <span className="font-semibold">Presets:</span>
+            <Sparkles size={14} className="shrink-0 text-xeoo-primary" />
+            <span className="font-semibold text-xeoo-text">Presets:</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             {RADIUS_PRESETS.map((p) => (
@@ -126,7 +126,7 @@ export const CssBorderRadiusGenerator: React.FC = () => {
                 key={p.name}
                 type="button"
                 onClick={() => handleApplyPreset(p.values)}
-                className="rounded border border-xeoo-border bg-xeoo-surface px-2 py-0.5 text-[10px] font-medium text-xeoo-text hover:border-xeoo-primary transition"
+                className="inline-flex h-6.5 items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text transition hover:bg-xeoo-surface-soft"
               >
                 {p.name}
               </button>
@@ -376,7 +376,7 @@ export const CssBorderRadiusGenerator: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-0.5 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface transition"
+                  className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                 >
                   {copied ? <Check size={11} className="text-emerald-500" /> : <Copy size={11} />}
                   <span>{copied ? "Copied" : "Copy CSS"}</span>
