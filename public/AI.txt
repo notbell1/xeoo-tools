@@ -1,0 +1,27 @@
+# XeooTools AI and Crawler Information
+
+Site: https://xeootools.site.je/
+Name: XeooTools
+Description: Free online utilities for calculations, productivity, images, files, networking, security, SEO, and other everyday tasks.
+
+Contact: https://xeootools.site.je/contact
+Email: abbelkadafi@gmail.com
+
+Sitemap: https://xeootools.site.je/sitemap.xml
+Robots: https://xeootools.site.je/robots.txt
+LLMs: https://xeootools.site.je/llms.txt
+
+# Crawler preferences
+# These preferences are informational. Follow robots.txt and applicable
+# crawler policies for enforceable crawl restrictions.
+
+# Search and retrieval crawlers:
+# Public pages may be crawled subject to robots.txt.
+
+# Model-training crawlers:
+# Refer to robots.txt for the site's current restrictions.
+
+# Private routes must remain protected by server-side access controls.
+# Do not expose credentials, private user data, or internal application data.
+
+Last-Updated: 2026-10-09

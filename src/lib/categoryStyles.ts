@@ -24,6 +24,14 @@ const CATEGORY_STYLES: Record<string, CategoryStyle> = {
     surface: "bg-purple-50",
   },
 
+  "psychology-tools": {
+    icon: "border-purple-200 bg-purple-100 text-purple-700",
+    badge: "border-purple-200 bg-purple-50 text-purple-700",
+    text: "text-purple-700",
+    border: "border-purple-200",
+    surface: "bg-purple-50",
+  },
+
   law: {
     icon: "border-slate-200 bg-slate-100 text-slate-700",
     badge: "border-slate-200 bg-slate-50 text-slate-700",
@@ -103,6 +111,38 @@ const CATEGORY_STYLES: Record<string, CategoryStyle> = {
     border: "border-indigo-200",
     surface: "bg-indigo-50",
   },
+
+  ai: {
+    icon: "border-sky-200 bg-sky-100 text-sky-700",
+    badge: "border-sky-200 bg-sky-50 text-sky-700",
+    text: "text-sky-700",
+    border: "border-sky-200",
+    surface: "bg-sky-50",
+  },
+
+  "ai-tools": {
+    icon: "border-sky-200 bg-sky-100 text-sky-700",
+    badge: "border-sky-200 bg-sky-50 text-sky-700",
+    text: "text-sky-700",
+    border: "border-sky-200",
+    surface: "bg-sky-50",
+  },
+
+  design: {
+    icon: "border-fuchsia-200 bg-fuchsia-100 text-fuchsia-700",
+    badge: "border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700",
+    text: "text-fuchsia-700",
+    border: "border-fuchsia-200",
+    surface: "bg-fuchsia-50",
+  },
+
+  "design-tools": {
+    icon: "border-fuchsia-200 bg-fuchsia-100 text-fuchsia-700",
+    badge: "border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700",
+    text: "text-fuchsia-700",
+    border: "border-fuchsia-200",
+    surface: "bg-fuchsia-50",
+  },
 };
 
 const FALLBACK_CATEGORY_STYLE: CategoryStyle = {
@@ -114,6 +154,10 @@ const FALLBACK_CATEGORY_STYLE: CategoryStyle = {
 };
 
 export function getCategoryStyle(slug: string): CategoryStyle {
-  return CATEGORY_STYLES[slug] ?? FALLBACK_CATEGORY_STYLE;
+  return (
+    CATEGORY_STYLES[slug] ??
+    CATEGORY_STYLES[slug.replace(/-tools$/, "")] ??
+    FALLBACK_CATEGORY_STYLE
+  );
 }
 

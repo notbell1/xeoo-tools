@@ -188,9 +188,13 @@ export interface MessagesResponse {
 
 export type AdminView =
   | "overview"
+  | "traffic"
   | "categories"
   | "all"
   | "ctf"
   | "reports"
   | "messages"
   | "account";
+
+export * from "./traffic";
+

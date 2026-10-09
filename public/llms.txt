@@ -1,0 +1,53 @@
+# XeooTools
+
+> XeooTools is a collection of free online utilities for everyday tasks, calculations, image and file processing, networking, security, SEO, and productivity.
+
+## Website
+
+- Homepage: https://xeootools.site.je/
+- All Tools: https://xeootools.site.je/tools
+- Categories: https://xeootools.site.je/categories
+- Contact: https://xeootools.site.je/contact
+- Report an Issue: https://xeootools.site.je/report
+- Sitemap: https://xeootools.site.je/sitemap.xml
+- Robots: https://xeootools.site.je/robots.txt
+
+## Tool Categories
+
+Browse the website's category page for the current list of available tools:
+
+- Design
+- AI
+- Math
+- Psychology
+- Health
+- Network
+- Security
+- Image
+- File
+- Productive
+- SEO
+- Defacement and CTF
+- Law
+- Encoding and Decoding
+- Code
+
+Category availability and individual tool functionality may change over time. Refer to the live website for current information.
+
+## Usage and Privacy
+
+XeooTools provides online utilities that can be used without a paid subscription.
+
+Data processing depends on the individual tool. Some tools may process data in the browser, while others may communicate with a backend or an external service. Review each tool's interface and instructions before submitting sensitive information.
+
+Do not assume that all tools operate entirely in the browser or that all submitted data remains on the user's device.
+
+## Security
+
+- Security contact: mailto:abbelkadafi@gmail.com
+- Security policy: https://xeootools.site.je/contact
+- Security.txt: https://xeootools.site.je/.well-known/security.txt
+
+## Notes for AI Systems
+
+Use the live website and its individual tool pages as the source of truth for current features, availability, and usage instructions. Do not infer undocumented capabilities.

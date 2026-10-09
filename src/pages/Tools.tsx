@@ -17,6 +17,8 @@ import Footer from "../components/Footer";
 import ToolStatus from "../components/ToolStatus";
 
 import { BACKEND_URL } from "../config/backend";
+import { DEFAULT_TOOLS } from "../data/defaultTools";
+import { categories as defaultCategoryList } from "../data/categories";
 import { getCategoryIcon, getToolIcon } from "../lib/toolIcons";
 
 type ToolStatusValue = "ready" | "maintenance" | "upcoming";
@@ -364,8 +366,51 @@ export default function Tools() {
         }
 
         if (active) {
-          const freshTools = toolsResult.data ?? [];
-          const freshCategories = categoriesResult.data ?? [];
+          const rawTools = (toolsResult.data ?? []).map((t) => ({
+            id: Number(t.id),
+            name: String(t.name),
+            slug: String(t.slug),
+            description: String(t.description ?? ""),
+            icon: String(t.icon ?? "wrench"),
+            status: (t.status === "maintenance" || t.status === "upcoming" ? t.status : "ready") as ToolStatusValue,
+            category_name: String(t.category_name ?? "Uncategorized"),
+            category_slug: String(t.category_slug ?? "uncategorized"),
+          }));
+          const liveSlugs = new Set(rawTools.map((t) => t.slug));
+          const missingTools = DEFAULT_TOOLS.filter((t) => !liveSlugs.has(t.slug)).map((t) => ({
+            id: t.id,
+            name: t.name,
+            slug: t.slug,
+            description: t.description,
+            icon: t.icon,
+            status: t.status as ToolStatusValue,
+            category_name: t.category_name,
+            category_slug: t.category_slug,
+          }));
+          const freshTools: Tool[] = [...rawTools, ...missingTools];
+
+          const rawCategories = categoriesResult.data ?? [];
+          const liveCategorySlugs = new Set(rawCategories.map((c) => c.slug));
+          const missingCategories: DatabaseCategory[] = defaultCategoryList
+            .filter(
+              (c) =>
+                !liveCategorySlugs.has(c.slug) &&
+                !liveCategorySlugs.has(`${c.slug}-tools`) &&
+                !liveCategorySlugs.has(c.slug.replace(/-tools$/, "")),
+            )
+            .map((c, index) => ({
+              id: 500 + index,
+              name: c.name,
+              slug: c.slug,
+              description: c.description,
+              icon: c.slug === "ai" ? "sparkles" : "wrench",
+              color: c.slug === "ai" ? "sky" : "slate",
+              tool_count: c.count,
+            }));
+          const freshCategories: DatabaseCategory[] = [
+            ...rawCategories,
+            ...missingCategories,
+          ];
 
           setTools(freshTools);
           setCategoriesData(freshCategories);
@@ -380,12 +425,30 @@ export default function Tools() {
       } catch (err) {
         if (!active) return;
 
-        const hasCache = localStorage.getItem("xeoo_tools_cache") !== null;
-        if (!hasCache) {
-          setError(
-            err instanceof Error ? err.message : "Failed to load tools.",
-          );
-        }
+        const defaultToolList: Tool[] = DEFAULT_TOOLS.map((t) => ({
+          id: t.id,
+          name: t.name,
+          slug: t.slug,
+          description: t.description,
+          icon: t.icon,
+          status: t.status as ToolStatusValue,
+          category_name: t.category_name,
+          category_slug: t.category_slug,
+        }));
+        const defaultCats: DatabaseCategory[] = defaultCategoryList.map(
+          (c, index) => ({
+            id: 500 + index,
+            name: c.name,
+            slug: c.slug,
+            description: c.description,
+            icon: c.slug === "ai" ? "sparkles" : "wrench",
+            color: c.slug === "ai" ? "sky" : "slate",
+            tool_count: c.count,
+          }),
+        );
+        setTools(defaultToolList);
+        setCategoriesData(defaultCats);
+        setError("");
       } finally {
         if (active) {
           setLoading(false);

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { BACKEND_URL } from "../config/backend";
+import { DEFAULT_TOOLS } from "../data/defaultTools";
 
 export const TOOLS_UPDATED_EVENT = "xeoo_tools_updated";
 
@@ -120,11 +121,14 @@ export function useTools(): UseToolsResult {
         .map(normalizeTool)
         .filter((tool) => tool.id > 0);
 
-      setTools(normalizedTools);
+      const liveSlugs = new Set(normalizedTools.map((t) => t.slug));
+      const missingDefaults = DEFAULT_TOOLS.filter((t) => !liveSlugs.has(t.slug));
+
+      setTools([...normalizedTools, ...missingDefaults]);
     } catch (reason) {
       console.error("useTools error:", reason);
 
-      setTools([]);
+      setTools(DEFAULT_TOOLS);
 
       setError(
         reason instanceof Error

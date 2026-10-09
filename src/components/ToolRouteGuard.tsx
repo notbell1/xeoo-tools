@@ -10,6 +10,21 @@ import NotFound from "../pages/NotFound";
 // Tools
 import Calculator from "../tools/math/Calculator";
 import PercentageCalculator from "../tools/math/PercentageCalculator";
+import FractionCalculator from "../tools/math/FractionCalculator";
+import RatioCalculator from "../tools/math/RatioCalculator";
+import AverageCalculator from "../tools/math/AverageCalculator";
+import GcdLcmCalculator from "../tools/math/GcdLcmCalculator";
+import PrimeNumberChecker from "../tools/math/PrimeNumberChecker";
+import PrimeFactorization from "../tools/math/PrimeFactorization";
+import FactorialCalculator from "../tools/math/FactorialCalculator";
+import ExponentCalculator from "../tools/math/ExponentCalculator";
+import SquareRootCalculator from "../tools/math/SquareRootCalculator";
+import LinearEquationSolver from "../tools/math/LinearEquationSolver";
+import QuadraticEquationSolver from "../tools/math/QuadraticEquationSolver";
+import PythagoreanCalculator from "../tools/math/PythagoreanCalculator";
+import AreaCalculator from "../tools/math/AreaCalculator";
+import PerimeterCalculator from "../tools/math/PerimeterCalculator";
+import VolumeCalculator from "../tools/math/VolumeCalculator";
 import ImageCompressor from "../tools/image/ImageCompressor";
 import ImageResizer from "../tools/image/ImageResizer";
 import ImageConverter from "../tools/image/ImageConverter";
@@ -37,6 +52,16 @@ import StressLevelTest from "../tools/psychology/StressLevelTest";
 import ProcrastinationTest from "../tools/psychology/ProcrastinationTest";
 import CognitiveDistortionChecker from "../tools/psychology/CognitiveDistortionChecker";
 import AttachmentStyleTest from "../tools/psychology/AttachmentStyleTest";
+import RelationshipPatternAnalyzer from "../tools/psychology/RelationshipPatternAnalyzer";
+import EmotionalRegulationAnalyzer from "../tools/psychology/EmotionalRegulationAnalyzer";
+import ConflictStyleAnalyzer from "../tools/psychology/ConflictStyleAnalyzer";
+import DecisionMakingStyleTest from "../tools/psychology/DecisionMakingStyleTest";
+import BoundaryAwarenessTest from "../tools/psychology/BoundaryAwarenessTest";
+import SelfTalkAnalyzer from "../tools/psychology/SelfTalkAnalyzer";
+import CopingStyleAnalyzer from "../tools/psychology/CopingStyleAnalyzer";
+import EmotionalAwarenessTest from "../tools/psychology/EmotionalAwarenessTest";
+import InterpersonalCommunicationAnalyzer from "../tools/psychology/InterpersonalCommunicationAnalyzer";
+import PersonalValuesExplorer from "../tools/psychology/PersonalValuesExplorer";
 
 // Defacement Simulation Tools
 import DefacePageGenerator from "../tools/defacement/DefacePageGenerator";
@@ -73,6 +98,28 @@ import SitemapGenerator from "../tools/seo/SitemapGenerator";
 import OpenGraphChecker from "../tools/seo/OpenGraphChecker";
 import SchemaMarkupGenerator from "../tools/seo/SchemaMarkupGenerator";
 
+// AI Tools
+import PromptOptimizer from "../tools/ai/PromptOptimizer";
+import PromptTemplateBuilder from "../tools/ai/PromptTemplateBuilder";
+import PromptFormatter from "../tools/ai/PromptFormatter";
+import AiTokenCounter from "../tools/ai/AiTokenCounter";
+import AiCostCalculator from "../tools/ai/AiCostCalculator";
+import SystemPromptBuilder from "../tools/ai/SystemPromptBuilder";
+import AiModelParameterExplorer from "../tools/ai/AiModelParameterExplorer";
+import AiOutputEvaluator from "../tools/ai/AiOutputEvaluator";
+import AiContextWindowCalculator from "../tools/ai/AiContextWindowCalculator";
+import AiJsonSchemaPromptBuilder from "../tools/ai/AiJsonSchemaPromptBuilder";
+import PaletteInspect from "../tools/design/PaletteInspect";
+import ColorConverter from "../tools/design/ColorConverter";
+import ColorHarmonyGenerator from "../tools/design/ColorHarmonyGenerator";
+import GradientGenerator from "../tools/design/GradientGenerator";
+import ContrastChecker from "../tools/design/ContrastChecker";
+import CssShadowGenerator from "../tools/design/CssShadowGenerator";
+import CssBorderRadiusGenerator from "../tools/design/CssBorderRadiusGenerator";
+import GlassmorphismGenerator from "../tools/design/GlassmorphismGenerator";
+import CssFilterGenerator from "../tools/design/CssFilterGenerator";
+import TypographyScaleGenerator from "../tools/design/TypographyScaleGenerator";
+
 interface ToolDefinition {
   name: string;
   component: ReactNode;
@@ -88,6 +135,81 @@ const TOOL_REGISTRY: Record<string, ToolDefinition> = {
   "percentage-calculator": {
     name: "Percentage Calculator",
     component: <PercentageCalculator />,
+    defaultStatus: "ready",
+  },
+  "fraction-calculator": {
+    name: "Fraction Calculator",
+    component: <FractionCalculator />,
+    defaultStatus: "ready",
+  },
+  "ratio-calculator": {
+    name: "Ratio Calculator",
+    component: <RatioCalculator />,
+    defaultStatus: "ready",
+  },
+  "average-calculator": {
+    name: "Average Calculator",
+    component: <AverageCalculator />,
+    defaultStatus: "ready",
+  },
+  "gcd-lcm-calculator": {
+    name: "GCD & LCM Calculator",
+    component: <GcdLcmCalculator />,
+    defaultStatus: "ready",
+  },
+  "prime-number-checker": {
+    name: "Prime Number Checker",
+    component: <PrimeNumberChecker />,
+    defaultStatus: "ready",
+  },
+  "prime-factorization": {
+    name: "Prime Factorization",
+    component: <PrimeFactorization />,
+    defaultStatus: "ready",
+  },
+  "factorial-calculator": {
+    name: "Factorial Calculator",
+    component: <FactorialCalculator />,
+    defaultStatus: "ready",
+  },
+  "exponent-calculator": {
+    name: "Exponent Calculator",
+    component: <ExponentCalculator />,
+    defaultStatus: "ready",
+  },
+  "square-root-calculator": {
+    name: "Square Root Calculator",
+    component: <SquareRootCalculator />,
+    defaultStatus: "ready",
+  },
+  "linear-equation-solver": {
+    name: "Linear Equation Solver",
+    component: <LinearEquationSolver />,
+    defaultStatus: "ready",
+  },
+  "quadratic-equation-solver": {
+    name: "Quadratic Equation Solver",
+    component: <QuadraticEquationSolver />,
+    defaultStatus: "ready",
+  },
+  "pythagorean-calculator": {
+    name: "Pythagorean Calculator",
+    component: <PythagoreanCalculator />,
+    defaultStatus: "ready",
+  },
+  "area-calculator": {
+    name: "Area Calculator",
+    component: <AreaCalculator />,
+    defaultStatus: "ready",
+  },
+  "perimeter-calculator": {
+    name: "Perimeter Calculator",
+    component: <PerimeterCalculator />,
+    defaultStatus: "ready",
+  },
+  "volume-calculator": {
+    name: "Volume Calculator",
+    component: <VolumeCalculator />,
     defaultStatus: "ready",
   },
   "image-compressor": {
@@ -218,6 +340,56 @@ const TOOL_REGISTRY: Record<string, ToolDefinition> = {
   "attachment-style-test": {
     name: "Attachment Style Test",
     component: <AttachmentStyleTest />,
+    defaultStatus: "ready",
+  },
+  "relationship-pattern-analyzer": {
+    name: "Relationship Pattern Analyzer",
+    component: <RelationshipPatternAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "emotional-regulation-analyzer": {
+    name: "Emotional Regulation Analyzer",
+    component: <EmotionalRegulationAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "conflict-style-analyzer": {
+    name: "Conflict Style Analyzer",
+    component: <ConflictStyleAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "decision-making-style-test": {
+    name: "Decision-Making Style Test",
+    component: <DecisionMakingStyleTest />,
+    defaultStatus: "ready",
+  },
+  "boundary-awareness-test": {
+    name: "Boundary Awareness Test",
+    component: <BoundaryAwarenessTest />,
+    defaultStatus: "ready",
+  },
+  "self-talk-analyzer": {
+    name: "Self-Talk Analyzer",
+    component: <SelfTalkAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "coping-style-analyzer": {
+    name: "Coping Style Analyzer",
+    component: <CopingStyleAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "emotional-awareness-test": {
+    name: "Emotional Awareness Test",
+    component: <EmotionalAwarenessTest />,
+    defaultStatus: "ready",
+  },
+  "interpersonal-communication-analyzer": {
+    name: "Interpersonal Communication Analyzer",
+    component: <InterpersonalCommunicationAnalyzer />,
+    defaultStatus: "ready",
+  },
+  "personal-values-explorer": {
+    name: "Personal Values Explorer",
+    component: <PersonalValuesExplorer />,
     defaultStatus: "ready",
   },
   "deface-page-generator": {
@@ -353,6 +525,106 @@ const TOOL_REGISTRY: Record<string, ToolDefinition> = {
   "schema-markup-generator": {
     name: "Schema Markup Generator",
     component: <SchemaMarkupGenerator />,
+    defaultStatus: "ready",
+  },
+  "prompt-optimizer": {
+    name: "Prompt Optimizer",
+    component: <PromptOptimizer />,
+    defaultStatus: "ready",
+  },
+  "prompt-template-builder": {
+    name: "Prompt Template Builder",
+    component: <PromptTemplateBuilder />,
+    defaultStatus: "ready",
+  },
+  "prompt-formatter": {
+    name: "Prompt Formatter",
+    component: <PromptFormatter />,
+    defaultStatus: "ready",
+  },
+  "ai-token-counter": {
+    name: "AI Token Counter",
+    component: <AiTokenCounter />,
+    defaultStatus: "ready",
+  },
+  "ai-cost-calculator": {
+    name: "AI Cost Calculator",
+    component: <AiCostCalculator />,
+    defaultStatus: "ready",
+  },
+  "system-prompt-builder": {
+    name: "System Prompt Builder",
+    component: <SystemPromptBuilder />,
+    defaultStatus: "ready",
+  },
+  "ai-model-parameter-explorer": {
+    name: "AI Model Parameter Explorer",
+    component: <AiModelParameterExplorer />,
+    defaultStatus: "ready",
+  },
+  "ai-output-evaluator": {
+    name: "AI Output Evaluator",
+    component: <AiOutputEvaluator />,
+    defaultStatus: "ready",
+  },
+  "ai-context-window-calculator": {
+    name: "AI Context Window Calculator",
+    component: <AiContextWindowCalculator />,
+    defaultStatus: "ready",
+  },
+  "ai-json-schema-prompt-builder": {
+    name: "AI JSON Schema Prompt Builder",
+    component: <AiJsonSchemaPromptBuilder />,
+    defaultStatus: "ready",
+  },
+  "palette-inspect": {
+    name: "Palette Inspect",
+    component: <PaletteInspect />,
+    defaultStatus: "ready",
+  },
+  "color-converter": {
+    name: "Color Converter",
+    component: <ColorConverter />,
+    defaultStatus: "ready",
+  },
+  "color-harmony-generator": {
+    name: "Color Harmony Generator",
+    component: <ColorHarmonyGenerator />,
+    defaultStatus: "ready",
+  },
+  "gradient-generator": {
+    name: "Gradient Generator",
+    component: <GradientGenerator />,
+    defaultStatus: "ready",
+  },
+  "contrast-checker": {
+    name: "Contrast Checker",
+    component: <ContrastChecker />,
+    defaultStatus: "ready",
+  },
+  "css-shadow-generator": {
+    name: "CSS Shadow Generator",
+    component: <CssShadowGenerator />,
+    defaultStatus: "ready",
+  },
+  "css-border-radius-generator": {
+    name: "CSS Border Radius Generator",
+    component: <CssBorderRadiusGenerator />,
+    defaultStatus: "ready",
+  },
+  "glassmorphism-generator": {
+    name: "Glassmorphism Generator",
+    component: <GlassmorphismGenerator />,
+    defaultStatus: "ready",
+  },
+  "css-filter-generator": {
+    name: "CSS Filter Generator",
+    component: <CssFilterGenerator />,
+    defaultStatus: "ready",
+  },
+  "typography-scale-generator": {
+    name: "Typography Scale Generator",
+    component: <TypographyScaleGenerator />,
     defaultStatus: "ready",
   },
 };

@@ -1,14 +1,9 @@
-import {
-  CalendarClock,
-  Check,
-  Construction,
-  Filter,
-  LoaderCircle,
-} from "lucide-react";
+import { CalendarClock, Check, Construction, Filter } from "lucide-react";
 
 import type { LucideIcon } from "lucide-react";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { showConfirm, showError, showSuccess } from "../alert";
 
@@ -23,6 +18,7 @@ import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminStats from "../components/admin/AdminStats";
 import AdminTools from "../components/admin/AdminTools";
 import AdminTopbar from "../components/admin/AdminTopbar";
+import AdminTraffic from "../components/admin/AdminTraffic";
 import CategoryDialog from "../components/admin/CategoryDialog";
 
 import { useAdminCategories } from "../hooks/useAdminCategories";
@@ -95,7 +91,12 @@ function resolveAvatarUrl(avatar: string | null | undefined): string | null {
   return `${BACKEND_URL}/${avatar.replace(/^\/+/, "")}`;
 }
 
-export default function DashboardMimin() {
+export default function DashboardMimin({
+  initialView,
+}: {
+  initialView?: AdminView;
+} = {}) {
+  const [searchParams] = useSearchParams();
   const [authorized, setAuthorized] = useState<boolean | null>(null);
 
   const [username, setUsername] = useState("");
@@ -114,7 +115,23 @@ export default function DashboardMimin() {
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
-  const [activeView, setActiveView] = useState<AdminView>("overview");
+  const [activeView, setActiveView] = useState<AdminView>(() => {
+    const viewParam = searchParams.get("view") as AdminView | null;
+    const validViews: AdminView[] = [
+      "overview",
+      "traffic",
+      "categories",
+      "all",
+      "ctf",
+      "reports",
+      "messages",
+      "account",
+    ];
+    if (viewParam && validViews.includes(viewParam)) {
+      return viewParam;
+    }
+    return initialView || "overview";
+  });
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -528,47 +545,41 @@ export default function DashboardMimin() {
   const pageTitle =
     activeView === "overview"
       ? "Overview"
-      : activeView === "categories"
-        ? "Categories"
-        : activeView === "ctf"
-          ? "Defacement CTF"
-          : activeView === "reports"
-            ? "Reports"
-            : activeView === "messages"
-              ? "Messages"
-              : activeView === "account"
-                ? "Admin Account"
-                : selectedCategory || "All Tools";
+      : activeView === "traffic"
+        ? "Traffic"
+        : activeView === "categories"
+          ? "Categories"
+          : activeView === "ctf"
+            ? "Defacement CTF"
+            : activeView === "reports"
+              ? "Reports"
+              : activeView === "messages"
+                ? "Messages"
+                : activeView === "account"
+                  ? "Admin Account"
+                  : selectedCategory || "All Tools";
 
   const pageSubtitle =
     activeView === "overview"
       ? "XeooTools catalog overview and system health"
-      : activeView === "categories"
-        ? "Manage categories and database configuration"
-        : activeView === "ctf"
-          ? "Manage defacement CTF challenges, operators, settings and security events"
-          : activeView === "reports"
-            ? "Review and handle user-submitted issue reports"
-            : activeView === "messages"
-              ? "Review and manage contact inbox messages"
-              : activeView === "account"
-                ? "Administrator profile and authentication activity"
-                : selectedCategory
-                  ? `Tools in ${selectedCategory} category`
-                  : "Manage and configure the full tools catalog";
+      : activeView === "traffic"
+        ? "Website traffic analytics, unique visitors, popular tools, and activity stream"
+        : activeView === "categories"
+          ? "Manage categories and database configuration"
+          : activeView === "ctf"
+            ? "Manage defacement CTF challenges, operators, settings and security events"
+            : activeView === "reports"
+              ? "Review and handle user-submitted issue reports"
+              : activeView === "messages"
+                ? "Review and manage contact inbox messages"
+                : activeView === "account"
+                  ? "Administrator profile and authentication activity"
+                  : selectedCategory
+                    ? `Tools in ${selectedCategory} category`
+                    : "Manage and configure the full tools catalog";
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-xeoo-bg px-4">
-        <div className="flex items-center gap-2.5 rounded-xl border border-xeoo-border bg-xeoo-surface px-4 py-3 shadow-sm">
-          <LoaderCircle size={18} className="animate-spin text-xeoo-primary" />
-
-          <span className="text-[12px] font-semibold text-xeoo-text">
-            Verifying admin session...
-          </span>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   if (!authorized) {
@@ -630,7 +641,8 @@ export default function DashboardMimin() {
                       </h2>
 
                       <p className="mt-0.5 max-w-2xl text-[11px] leading-4 text-xeoo-muted sm:text-[12px]">
-                        Monitor tool status, categories, and system health in real-time.
+                        Monitor tool status, categories, and system health in
+                        real-time.
                       </p>
                     </div>
                   </div>
@@ -705,6 +717,10 @@ export default function DashboardMimin() {
                   </div>
                 </section>
               </div>
+            )}
+
+            {activeView === "traffic" && (
+              <AdminTraffic onUnauthorized={handleUnauthorized} />
             )}
 
             {activeView === "categories" && (

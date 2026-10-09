@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 
 import {
+  ChartNoAxesCombined,
   ChevronLeft,
   ChevronRight,
   FileWarning,
@@ -206,6 +207,15 @@ export default function AdminSidebar({
                 onClick={() => handleNavigate("overview")}
               />
 
+              {/* TRAFFIC */}
+              <NavigationItem
+                icon={ChartNoAxesCombined}
+                label="Traffic"
+                active={activeView === "traffic"}
+                collapsed={collapsed}
+                onClick={() => handleNavigate("traffic")}
+              />
+
               {/* CATEGORIES */}
               <NavigationItem
                 icon={Folder}
@@ -361,6 +371,15 @@ export default function AdminSidebar({
                   active={activeView === "overview"}
                   collapsed={false}
                   onClick={() => handleNavigate("overview")}
+                />
+
+                {/* TRAFFIC */}
+                <NavigationItem
+                  icon={ChartNoAxesCombined}
+                  label="Traffic"
+                  active={activeView === "traffic"}
+                  collapsed={false}
+                  onClick={() => handleNavigate("traffic")}
                 />
 
                 {/* CATEGORIES */}
