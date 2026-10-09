@@ -151,7 +151,7 @@ export default function PaletteInspect() {
               <span>Quick inspect:</span>
               <button
                 type="button"
-                onClick={() => setUrl("https://xeootools.site.je/")}
+                onClick={() => setUrl("https://xeootools.site.je/?i=1")}
                 className="inline-flex h-6 items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2 text-[10px] font-medium text-xeoo-text transition hover:bg-xeoo-surface-soft"
               >
                 xeootools.site.je

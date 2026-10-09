@@ -226,7 +226,7 @@ export default function PromptFormatter() {
                       className="inline-flex h-7 items-center gap-1.5 rounded-md bg-xeoo-primary px-3 text-[11px] font-medium text-white shadow-xs transition hover:opacity-90"
                     >
                       {copied ? <Check size={12} /> : <Copy size={12} />}
-                      <span>{copied ? "Copied!" : "Copy Output"}</span>
+                      <span>{copied ? "Copied!" : "Copy"}</span>
                     </button>
                   )}
                 </div>

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AlertTriangle,
   Check,
+  ChevronDown,
   Copy,
   Gauge,
   Info,
@@ -18,6 +19,118 @@ import {
   type ContextWindowInput,
 } from "./aiContextWindowCalculatorLogic";
 
+const dropdownTriggerClass =
+  "flex h-9 w-full items-center justify-between gap-2 rounded-md border border-xeoo-border bg-xeoo-bg px-3 text-left text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 disabled:cursor-not-allowed disabled:opacity-60";
+
+const dropdownMenuClass =
+  "absolute left-0 z-30 mt-1 w-full overflow-hidden rounded-md border border-xeoo-border bg-xeoo-surface p-1 shadow-xl";
+
+function ModelPresetDropdown({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  const selectedModel =
+    CONTEXT_WINDOW_MODELS.find((model) => model.id === value) ??
+    CONTEXT_WINDOW_MODELS[0];
+
+  return (
+    <div ref={dropdownRef} className="relative mt-1 w-full min-w-0">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((previous) => !previous)}
+        className={`${dropdownTriggerClass} ${
+          open ? "border-xeoo-primary/60" : ""
+        }`}
+      >
+        <span className="truncate">
+          {selectedModel
+            ? `${selectedModel.name} (${selectedModel.maxContext.toLocaleString()} tokens)`
+            : value}
+        </span>
+
+        <ChevronDown
+          size={12}
+          className={`shrink-0 text-xeoo-muted transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {open && (
+        <div
+          role="listbox"
+          aria-label="Model Architecture Preset"
+          className={dropdownMenuClass}
+        >
+          <div className="max-h-60 overflow-y-auto">
+            {CONTEXT_WINDOW_MODELS.map((model) => {
+              const selected = model.id === value;
+
+              return (
+                <button
+                  key={model.id}
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  onClick={() => {
+                    onChange(model.id);
+                    setOpen(false);
+                  }}
+                  className={`flex min-h-7 w-full items-center justify-between gap-2 rounded px-2 py-1.5 text-left text-[10px] font-semibold transition ${
+                    selected
+                      ? "bg-xeoo-primary text-white"
+                      : "text-xeoo-text hover:bg-xeoo-bg"
+                  }`}
+                >
+                  <span className="min-w-0 truncate">
+                    {model.name} ({model.maxContext.toLocaleString()} tokens)
+                  </span>
+                  {selected && <Check size={11} className="shrink-0" />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function AiContextWindowCalculator() {
   const [selectedModelId, setSelectedModelId] = useState<string>("gpt-4o");
   const [contextSize, setContextSize] = useState<number>(128000);
@@ -25,7 +138,8 @@ export default function AiContextWindowCalculator() {
   const [historyTokens, setHistoryTokens] = useState<number>(4500);
   const [ragTokens, setRagTokens] = useState<number>(6000);
   const [userInputTokens, setUserInputTokens] = useState<number>(850);
-  const [reservedOutputTokens, setReservedOutputTokens] = useState<number>(4096);
+  const [reservedOutputTokens, setReservedOutputTokens] =
+    useState<number>(4096);
 
   const [breakdown, setBreakdown] = useState<ContextWindowBreakdown>(() =>
     calculateContextWindow({
@@ -35,21 +149,26 @@ export default function AiContextWindowCalculator() {
       ragTokens: 6000,
       userInputTokens: 850,
       reservedOutputTokens: 4096,
-    })
+    }),
   );
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     document.title = "AI Context Window Calculator | XeooTools";
     const canonicalId = "canonical-ai-context-window-calculator";
-    let link = document.querySelector<HTMLLinkElement>(`link[rel="canonical"]#${canonicalId}`);
+    let link = document.querySelector<HTMLLinkElement>(
+      `link[rel="canonical"]#${canonicalId}`,
+    );
+
     if (!link) {
       link = document.createElement("link");
       link.id = canonicalId;
       link.rel = "canonical";
-      link.href = "https://xeootools.site.je/tools/ai-context-window-calculator";
+      link.href =
+        "https://xeootools.site.je/tools/ai-context-window-calculator";
       document.head.appendChild(link);
     }
+
     return () => {
       link?.remove();
     };
@@ -58,6 +177,7 @@ export default function AiContextWindowCalculator() {
   const handleModelChange = (id: string) => {
     setSelectedModelId(id);
     const m = CONTEXT_WINDOW_MODELS.find((item) => item.id === id);
+
     if (m && m.id !== "custom") {
       setContextSize(m.maxContext);
       setReservedOutputTokens(m.defaultMaxOutput);
@@ -73,6 +193,7 @@ export default function AiContextWindowCalculator() {
       userInputTokens,
       reservedOutputTokens,
     };
+
     setBreakdown(calculateContextWindow(input));
   }, [
     contextSize,
@@ -84,7 +205,13 @@ export default function AiContextWindowCalculator() {
   ]);
 
   const handleCopy = async () => {
-    const summary = `Context Window Budget\nTotal: ${breakdown.totalContext.toLocaleString()}\nUsed: ${breakdown.usedInputTokens.toLocaleString()}\nReserved Output: ${breakdown.reservedOutputTokens.toLocaleString()}\nRemaining: ${breakdown.remainingTokens.toLocaleString()} (${breakdown.usagePercentage}%)\nStatus: ${breakdown.status.toUpperCase()}`;
+    const summary = `Context Window Budget
+Total: ${breakdown.totalContext.toLocaleString()}
+Used: ${breakdown.usedInputTokens.toLocaleString()}
+Reserved Output: ${breakdown.reservedOutputTokens.toLocaleString()}
+Remaining: ${breakdown.remainingTokens.toLocaleString()} (${breakdown.usagePercentage}%)
+Status: ${breakdown.status.toUpperCase()}`;
+
     try {
       await navigator.clipboard.writeText(summary);
       setCopied(true);
@@ -123,7 +250,8 @@ export default function AiContextWindowCalculator() {
                     AI CONTEXT WINDOW CALCULATOR
                   </h1>
                   <p className="truncate text-[11px] text-xeoo-muted">
-                    Calculate context allocation across system instructions, conversation turns, RAG documents, and reserved output.
+                    Calculate context allocation across system instructions,
+                    conversation turns, RAG documents, and reserved output.
                   </p>
                 </div>
               </div>
@@ -141,7 +269,12 @@ export default function AiContextWindowCalculator() {
             <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
               <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong className="font-semibold text-xeoo-text">Context Headroom Planning:</strong> An LLM's context window contains BOTH prompt inputs and the generated completion tokens. Always reserve sufficient room for output!
+                <strong className="font-semibold text-xeoo-text">
+                  Context Headroom Planning:
+                </strong>{" "}
+                An LLM's context window contains BOTH prompt inputs and the
+                generated completion tokens. Always reserve sufficient room for
+                output!
               </span>
             </div>
 
@@ -150,22 +283,19 @@ export default function AiContextWindowCalculator() {
               {/* LEFT: INPUTS */}
               <div className="space-y-3.5 lg:col-span-6">
                 <div>
-                  <label className="text-xs font-bold text-xeoo-text">Model Architecture Preset</label>
-                  <select
+                  <label className="text-xs font-bold text-xeoo-text">
+                    Model Architecture Preset
+                  </label>
+                  <ModelPresetDropdown
                     value={selectedModelId}
-                    onChange={(e) => handleModelChange(e.target.value)}
-                    className="mt-1 h-9 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-3 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {CONTEXT_WINDOW_MODELS.map((m) => (
-                      <option key={m.id} value={m.id} className="bg-xeoo-surface text-xeoo-text">
-                        {m.name} ({m.maxContext.toLocaleString()} tokens)
-                      </option>
-                    ))}
-                  </select>
+                    onChange={handleModelChange}
+                  />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-xeoo-text">Total Context Window Ceiling</label>
+                  <label className="text-xs font-bold text-xeoo-text">
+                    Total Context Window Ceiling
+                  </label>
                   <input
                     type="number"
                     min={512}
@@ -185,45 +315,67 @@ export default function AiContextWindowCalculator() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <span className="text-[11px] text-xeoo-muted block">System Prompt</span>
+                      <span className="text-[11px] text-xeoo-muted block">
+                        System Prompt
+                      </span>
                       <input
                         type="number"
                         min={0}
                         value={systemTokens}
-                        onChange={(e) => setSystemTokens(Math.max(0, Number(e.target.value) || 0))}
+                        onChange={(e) =>
+                          setSystemTokens(
+                            Math.max(0, Number(e.target.value) || 0),
+                          )
+                        }
                         className="mt-1 w-full rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text"
                       />
                     </div>
 
                     <div>
-                      <span className="text-[11px] text-xeoo-muted block">Conversation History</span>
+                      <span className="text-[11px] text-xeoo-muted block">
+                        Conversation History
+                      </span>
                       <input
                         type="number"
                         min={0}
                         value={historyTokens}
-                        onChange={(e) => setHistoryTokens(Math.max(0, Number(e.target.value) || 0))}
+                        onChange={(e) =>
+                          setHistoryTokens(
+                            Math.max(0, Number(e.target.value) || 0),
+                          )
+                        }
                         className="mt-1 w-full rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text"
                       />
                     </div>
 
                     <div>
-                      <span className="text-[11px] text-xeoo-muted block">RAG / Documents</span>
+                      <span className="text-[11px] text-xeoo-muted block">
+                        RAG / Documents
+                      </span>
                       <input
                         type="number"
                         min={0}
                         value={ragTokens}
-                        onChange={(e) => setRagTokens(Math.max(0, Number(e.target.value) || 0))}
+                        onChange={(e) =>
+                          setRagTokens(Math.max(0, Number(e.target.value) || 0))
+                        }
                         className="mt-1 w-full rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text"
                       />
                     </div>
 
                     <div>
-                      <span className="text-[11px] text-xeoo-muted block">Current User Query</span>
+                      <span className="text-[11px] text-xeoo-muted block">
+                        Current User Query
+                      </span>
                       <input
                         type="number"
                         min={0}
                         value={userInputTokens}
-                        onChange={(e) => setUserInputTokens(Math.max(0, Number(e.target.value) || 0))}
+                        onChange={(e) =>
+                          setUserInputTokens(
+                            Math.max(0, Number(e.target.value) || 0),
+                          )
+                        }
                         className="mt-1 w-full rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text"
                       />
                     </div>
@@ -231,12 +383,18 @@ export default function AiContextWindowCalculator() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-xeoo-text">Reserved Output Tokens (Max Completion)</label>
+                  <label className="text-xs font-bold text-xeoo-text">
+                    Reserved Output Tokens (Max Completion)
+                  </label>
                   <input
                     type="number"
                     min={1}
                     value={reservedOutputTokens}
-                    onChange={(e) => setReservedOutputTokens(Math.max(1, Number(e.target.value) || 1))}
+                    onChange={(e) =>
+                      setReservedOutputTokens(
+                        Math.max(1, Number(e.target.value) || 1),
+                      )
+                    }
                     className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 py-1.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                   />
                   <span className="text-[10px] text-xeoo-muted block mt-0.5">
@@ -248,21 +406,29 @@ export default function AiContextWindowCalculator() {
               {/* RIGHT: LIVE CAPACITY METRICS */}
               <div className="space-y-4 lg:col-span-6">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-xeoo-text">Context Allocation Summary</span>
+                  <span className="text-xs font-bold text-xeoo-text">
+                    Context Allocation Summary
+                  </span>
                   <button
                     type="button"
                     onClick={handleCopy}
                     className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
-                    {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-                    <span>{copied ? "Copied" : "Copy Budget"}</span>
+                    {copied ? (
+                      <Check size={12} className="text-emerald-500" />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                    <span>{copied ? "Copied" : "Copy"}</span>
                   </button>
                 </div>
 
                 {/* CAPACITY HERO CARD */}
                 <div className="rounded-xl border border-xeoo-border bg-xeoo-surface-soft p-4 text-center">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-xeoo-muted">
-                    {breakdown.isOverflow ? "Context Exceeded By" : "Remaining Headroom"}
+                    {breakdown.isOverflow
+                      ? "Context Exceeded By"
+                      : "Remaining Headroom"}
                   </span>
                   <div
                     className={`mt-1 text-3xl font-extrabold font-mono sm:text-4xl ${
@@ -273,10 +439,12 @@ export default function AiContextWindowCalculator() {
                           : "text-emerald-600 dark:text-emerald-400"
                     }`}
                   >
-                    {Math.abs(breakdown.remainingTokens).toLocaleString()} tokens
+                    {Math.abs(breakdown.remainingTokens).toLocaleString()}{" "}
+                    tokens
                   </div>
                   <span className="text-[11px] text-xeoo-muted block mt-1">
-                    {breakdown.usagePercentage}% utilized of {breakdown.totalContext.toLocaleString()} window
+                    {breakdown.usagePercentage}% utilized of{" "}
+                    {breakdown.totalContext.toLocaleString()} window
                   </span>
                 </div>
 
@@ -288,27 +456,37 @@ export default function AiContextWindowCalculator() {
 
                   <div className="h-4 w-full overflow-hidden rounded-full bg-xeoo-surface-soft border border-xeoo-border flex">
                     <div
-                      style={{ width: `${(systemTokens / breakdown.totalContext) * 100}%` }}
+                      style={{
+                        width: `${(systemTokens / breakdown.totalContext) * 100}%`,
+                      }}
                       className="bg-indigo-500"
                       title={`System: ${systemTokens.toLocaleString()} tokens`}
                     />
                     <div
-                      style={{ width: `${(historyTokens / breakdown.totalContext) * 100}%` }}
+                      style={{
+                        width: `${(historyTokens / breakdown.totalContext) * 100}%`,
+                      }}
                       className="bg-sky-500"
                       title={`History: ${historyTokens.toLocaleString()} tokens`}
                     />
                     <div
-                      style={{ width: `${(ragTokens / breakdown.totalContext) * 100}%` }}
+                      style={{
+                        width: `${(ragTokens / breakdown.totalContext) * 100}%`,
+                      }}
                       className="bg-purple-500"
                       title={`RAG: ${ragTokens.toLocaleString()} tokens`}
                     />
                     <div
-                      style={{ width: `${(userInputTokens / breakdown.totalContext) * 100}%` }}
+                      style={{
+                        width: `${(userInputTokens / breakdown.totalContext) * 100}%`,
+                      }}
                       className="bg-blue-500"
                       title={`User Query: ${userInputTokens.toLocaleString()} tokens`}
                     />
                     <div
-                      style={{ width: `${(reservedOutputTokens / breakdown.totalContext) * 100}%` }}
+                      style={{
+                        width: `${(reservedOutputTokens / breakdown.totalContext) * 100}%`,
+                      }}
                       className="bg-amber-500"
                       title={`Reserved Output: ${reservedOutputTokens.toLocaleString()} tokens`}
                     />
@@ -334,7 +512,9 @@ export default function AiContextWindowCalculator() {
                     </div>
                     <div className="flex items-center gap-1.5">
                       <span className="h-2.5 w-2.5 rounded-xs bg-amber-500" />
-                      <span>Output ({reservedOutputTokens.toLocaleString()})</span>
+                      <span>
+                        Output ({reservedOutputTokens.toLocaleString()})
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -362,4 +542,3 @@ export default function AiContextWindowCalculator() {
     </div>
   );
 }
-

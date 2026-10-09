@@ -246,7 +246,7 @@ export default function AiModelParameterExplorer() {
                     className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
                     {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-                    <span>{copied ? "Copied" : "Copy JSON"}</span>
+                    <span>{copied ? "Copied" : "Copy"}</span>
                   </button>
                 </div>
 

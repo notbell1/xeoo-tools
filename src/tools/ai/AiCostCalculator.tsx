@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Check,
+  ChevronDown,
   Copy,
   DollarSign,
   Info,
@@ -17,6 +18,117 @@ import {
   type CostCalculationResult,
 } from "./aiCostCalculatorLogic";
 
+const dropdownTriggerClass =
+  "flex h-9 w-full items-center justify-between gap-2 rounded-md border border-xeoo-border bg-xeoo-bg px-3 text-left text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 disabled:cursor-not-allowed disabled:opacity-60";
+
+const dropdownMenuClass =
+  "absolute left-0 z-30 mt-1 w-full overflow-hidden rounded-md border border-xeoo-border bg-xeoo-surface p-1 shadow-xl";
+
+function ModelPresetDropdown({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (id: string) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const selectedModel = MODEL_PRESETS.find((model) => model.id === value);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen]);
+
+  return (
+    <div ref={dropdownRef} className="relative mt-1 w-full">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((previous) => !previous)}
+        className={dropdownTriggerClass}
+      >
+        <span className="min-w-0 truncate">
+          {selectedModel
+            ? `${selectedModel.name} (${selectedModel.provider})`
+            : value === "custom"
+              ? "Custom Pricing"
+              : "Select a model"}
+        </span>
+
+        <ChevronDown
+          size={14}
+          className={`shrink-0 text-xeoo-muted transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {isOpen && (
+        <div
+          role="listbox"
+          aria-label="Model preset"
+          className={dropdownMenuClass}
+        >
+          <div className="max-h-56 overflow-y-auto">
+            {MODEL_PRESETS.map((model) => {
+              const isSelected = model.id === value;
+
+              return (
+                <button
+                  key={model.id}
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => {
+                    onChange(model.id);
+                    setIsOpen(false);
+                  }}
+                  className={`flex min-h-7 w-full items-center justify-between gap-2 rounded px-2 py-1.5 text-left text-[10px] font-semibold transition ${
+                    isSelected
+                      ? "bg-xeoo-primary text-white"
+                      : "text-xeoo-text hover:bg-xeoo-bg"
+                  }`}
+                >
+                  <span className="min-w-0 truncate">
+                    {model.name} ({model.provider})
+                  </span>
+
+                  {isSelected && <Check size={11} className="shrink-0" />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function AiCostCalculator() {
   const [selectedModelId, setSelectedModelId] = useState<string>("gpt-4o");
   const [inputTokens, setInputTokens] = useState<number>(1500);
@@ -32,14 +144,17 @@ export default function AiCostCalculator() {
       inputPricePerM: 2.5,
       outputPricePerM: 10.0,
       dailyRequests: 100,
-    })
+    }),
   );
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     document.title = "AI Cost Calculator | XeooTools";
     const canonicalId = "canonical-ai-cost-calculator";
-    let link = document.querySelector<HTMLLinkElement>(`link[rel="canonical"]#${canonicalId}`);
+    let link = document.querySelector<HTMLLinkElement>(
+      `link[rel="canonical"]#${canonicalId}`,
+    );
+
     if (!link) {
       link = document.createElement("link");
       link.id = canonicalId;
@@ -47,6 +162,7 @@ export default function AiCostCalculator() {
       link.href = "https://xeootools.site.je/tools/ai-cost-calculator";
       document.head.appendChild(link);
     }
+
     return () => {
       link?.remove();
     };
@@ -54,7 +170,9 @@ export default function AiCostCalculator() {
 
   const handleModelChange = (id: string) => {
     setSelectedModelId(id);
-    const preset = MODEL_PRESETS.find((m) => m.id === id);
+
+    const preset = MODEL_PRESETS.find((model) => model.id === id);
+
     if (preset && preset.id !== "custom") {
       setInputPricePerM(preset.inputPerMillion);
       setOutputPricePerM(preset.outputPerMillion);
@@ -69,12 +187,19 @@ export default function AiCostCalculator() {
         inputPricePerM,
         outputPricePerM,
         dailyRequests,
-      })
+      }),
     );
-  }, [inputTokens, outputTokens, inputPricePerM, outputPricePerM, dailyRequests]);
+  }, [
+    inputTokens,
+    outputTokens,
+    inputPricePerM,
+    outputPricePerM,
+    dailyRequests,
+  ]);
 
   const handleCopy = async () => {
     const summary = `AI Cost Estimate (${selectedModelId})\n- Per Request: $${result.costTotalPerCall.toFixed(6)}\n- Daily (${dailyRequests} calls): $${result.costDaily.toFixed(4)}\n- Monthly: $${result.costMonthly.toFixed(2)}`;
+
     try {
       await navigator.clipboard.writeText(summary);
       setCopied(true);
@@ -107,12 +232,14 @@ export default function AiCostCalculator() {
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
                   <DollarSign size={16} strokeWidth={2.2} />
                 </div>
+
                 <div className="min-w-0">
                   <h1 className="truncate text-xs font-extrabold tracking-tight text-xeoo-text sm:text-sm">
                     AI COST CALCULATOR
                   </h1>
                   <p className="truncate text-[11px] text-xeoo-muted">
-                    Calculate API costs from token usage with preset or custom pricing models.
+                    Calculate API costs from token usage with preset or custom
+                    pricing models.
                   </p>
                 </div>
               </div>
@@ -131,7 +258,12 @@ export default function AiCostCalculator() {
             <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
               <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong className="font-semibold text-xeoo-text">Pricing Reference:</strong> Preset rates reflect official public prices as of <em>{PRICING_LAST_UPDATED}</em>. You can customize the exact rates per 1M tokens below anytime.
+                <strong className="font-semibold text-xeoo-text">
+                  Pricing Reference:
+                </strong>{" "}
+                Preset rates reflect official public prices as of{" "}
+                <em>{PRICING_LAST_UPDATED}</em>. You can customize the exact
+                rates per 1M tokens below anytime.
               </span>
             </div>
 
@@ -140,53 +272,61 @@ export default function AiCostCalculator() {
               {/* LEFT: INPUTS */}
               <div className="space-y-4 lg:col-span-6">
                 <div>
-                  <label className="text-xs font-bold text-xeoo-text">Model Preset</label>
-                  <select
+                  <label className="text-xs font-bold text-xeoo-text">
+                    Model Preset
+                  </label>
+
+                  <ModelPresetDropdown
                     value={selectedModelId}
-                    onChange={(e) => handleModelChange(e.target.value)}
-                    className="mt-1 h-9 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-3 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {MODEL_PRESETS.map((m) => (
-                      <option key={m.id} value={m.id} className="bg-xeoo-surface text-xeoo-text">
-                        {m.name} ({m.provider})
-                      </option>
-                    ))}
-                  </select>
+                    onChange={handleModelChange}
+                  />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-bold text-xeoo-text">Input Tokens / Req</label>
+                    <label className="text-xs font-bold text-xeoo-text">
+                      Input Tokens / Req
+                    </label>
                     <input
                       type="number"
                       min={0}
                       value={inputTokens}
-                      onChange={(e) => setInputTokens(Math.max(0, Number(e.target.value) || 0))}
+                      onChange={(e) =>
+                        setInputTokens(Math.max(0, Number(e.target.value) || 0))
+                      }
                       className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 py-1.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-xeoo-text">Output Tokens / Req</label>
+                    <label className="text-xs font-bold text-xeoo-text">
+                      Output Tokens / Req
+                    </label>
                     <input
                       type="number"
                       min={0}
                       value={outputTokens}
-                      onChange={(e) => setOutputTokens(Math.max(0, Number(e.target.value) || 0))}
+                      onChange={(e) =>
+                        setOutputTokens(
+                          Math.max(0, Number(e.target.value) || 0),
+                        )
+                      }
                       className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 py-1.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                     />
                   </div>
                 </div>
 
                 {/* RATE INPUTS */}
-                <div className="rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3 space-y-2.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-xeoo-muted block">
+                <div className="space-y-2.5 rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3">
+                  <span className="block text-[11px] font-bold uppercase tracking-wider text-xeoo-muted">
                     Pricing Rate Configuration ($ per 1 Million Tokens)
                   </span>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <span className="text-[11px] text-xeoo-muted block">Input Price / 1M</span>
+                      <span className="block text-[11px] text-xeoo-muted">
+                        Input Price / 1M
+                      </span>
                       <div className="mt-1 flex items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2 py-1">
                         <span className="text-xs text-xeoo-muted">$</span>
                         <input
@@ -196,7 +336,9 @@ export default function AiCostCalculator() {
                           value={inputPricePerM}
                           onChange={(e) => {
                             setSelectedModelId("custom");
-                            setInputPricePerM(Math.max(0, Number(e.target.value) || 0));
+                            setInputPricePerM(
+                              Math.max(0, Number(e.target.value) || 0),
+                            );
                           }}
                           className="w-full bg-transparent pl-1 font-mono text-xs text-xeoo-text focus:outline-none"
                         />
@@ -204,7 +346,9 @@ export default function AiCostCalculator() {
                     </div>
 
                     <div>
-                      <span className="text-[11px] text-xeoo-muted block">Output Price / 1M</span>
+                      <span className="block text-[11px] text-xeoo-muted">
+                        Output Price / 1M
+                      </span>
                       <div className="mt-1 flex items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2 py-1">
                         <span className="text-xs text-xeoo-muted">$</span>
                         <input
@@ -214,7 +358,9 @@ export default function AiCostCalculator() {
                           value={outputPricePerM}
                           onChange={(e) => {
                             setSelectedModelId("custom");
-                            setOutputPricePerM(Math.max(0, Number(e.target.value) || 0));
+                            setOutputPricePerM(
+                              Math.max(0, Number(e.target.value) || 0),
+                            );
                           }}
                           className="w-full bg-transparent pl-1 font-mono text-xs text-xeoo-text focus:outline-none"
                         />
@@ -224,16 +370,21 @@ export default function AiCostCalculator() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-xeoo-text">Estimated Volume (Calls / Day)</label>
+                  <label className="text-xs font-bold text-xeoo-text">
+                    Estimated Volume (Calls / Day)
+                  </label>
                   <input
                     type="number"
                     min={1}
                     value={dailyRequests}
-                    onChange={(e) => setDailyRequests(Math.max(1, Number(e.target.value) || 1))}
+                    onChange={(e) =>
+                      setDailyRequests(Math.max(1, Number(e.target.value) || 1))
+                    }
                     className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 py-1.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                   />
-                  <span className="text-[10px] text-xeoo-muted mt-0.5 block">
-                    Total: ~{(dailyRequests * 30).toLocaleString()} requests/month
+                  <span className="mt-0.5 block text-[10px] text-xeoo-muted">
+                    Total: ~{(dailyRequests * 30).toLocaleString()}{" "}
+                    requests/month
                   </span>
                 </div>
               </div>
@@ -241,26 +392,35 @@ export default function AiCostCalculator() {
               {/* RIGHT: PROJECTED COST BREAKDOWN */}
               <div className="space-y-4 lg:col-span-6">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-xeoo-text">Projected Expenses</span>
+                  <span className="text-xs font-bold text-xeoo-text">
+                    Projected Expenses
+                  </span>
                   <button
                     type="button"
                     onClick={handleCopy}
                     className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
-                    {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-                    <span>{copied ? "Copied" : "Copy Projection"}</span>
+                    {copied ? (
+                      <Check size={12} className="text-emerald-500" />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                    <span>{copied ? "Copied" : "Copy"}</span>
                   </button>
                 </div>
 
                 {/* HERO CARD: COST PER REQUEST */}
                 <div className="rounded-xl border border-xeoo-border bg-xeoo-surface-soft p-4 text-center">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-xeoo-muted">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-xeoo-muted">
                     Cost per Single Request
                   </span>
-                  <div className="mt-1 text-3xl font-extrabold text-xeoo-text font-mono sm:text-4xl">
-                    ${result.costTotalPerCall < 0.0001 ? result.costTotalPerCall.toFixed(6) : result.costTotalPerCall.toFixed(4)}
+                  <div className="mt-1 font-mono text-3xl font-extrabold text-xeoo-text sm:text-4xl">
+                    $
+                    {result.costTotalPerCall < 0.0001
+                      ? result.costTotalPerCall.toFixed(6)
+                      : result.costTotalPerCall.toFixed(4)}
                   </div>
-                  <div className="flex justify-center gap-4 mt-2 text-[11px] text-xeoo-muted">
+                  <div className="mt-2 flex justify-center gap-4 text-[11px] text-xeoo-muted">
                     <span>Input: ${result.costInputPerCall.toFixed(6)}</span>
                     <span>•</span>
                     <span>Output: ${result.costOutputPerCall.toFixed(6)}</span>
@@ -271,8 +431,12 @@ export default function AiCostCalculator() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between rounded-lg border border-xeoo-border bg-xeoo-surface p-3">
                     <div>
-                      <span className="text-xs font-bold text-xeoo-text block">Daily Total</span>
-                      <span className="text-[10px] text-xeoo-muted">({dailyRequests.toLocaleString()} calls/day)</span>
+                      <span className="block text-xs font-bold text-xeoo-text">
+                        Daily Total
+                      </span>
+                      <span className="text-[10px] text-xeoo-muted">
+                        ({dailyRequests.toLocaleString()} calls/day)
+                      </span>
                     </div>
                     <span className="font-mono text-base font-extrabold text-xeoo-text">
                       ${result.costDaily.toFixed(4)}
@@ -281,8 +445,12 @@ export default function AiCostCalculator() {
 
                   <div className="flex items-center justify-between rounded-lg border border-xeoo-border bg-xeoo-surface p-3">
                     <div>
-                      <span className="text-xs font-bold text-xeoo-text block">Monthly Estimated Total</span>
-                      <span className="text-[10px] text-xeoo-muted">(30-day projection)</span>
+                      <span className="block text-xs font-bold text-xeoo-text">
+                        Monthly Estimated Total
+                      </span>
+                      <span className="text-[10px] text-xeoo-muted">
+                        (30-day projection)
+                      </span>
                     </div>
                     <span className="font-mono text-lg font-extrabold text-xeoo-primary">
                       ${result.costMonthly.toFixed(2)}
@@ -291,8 +459,12 @@ export default function AiCostCalculator() {
 
                   <div className="flex items-center justify-between rounded-lg border border-xeoo-border bg-xeoo-surface p-3">
                     <div>
-                      <span className="text-xs font-bold text-xeoo-text block">Annual Projected Total</span>
-                      <span className="text-[10px] text-xeoo-muted">(365-day projection)</span>
+                      <span className="block text-xs font-bold text-xeoo-text">
+                        Annual Projected Total
+                      </span>
+                      <span className="text-[10px] text-xeoo-muted">
+                        (365-day projection)
+                      </span>
                     </div>
                     <span className="font-mono text-base font-extrabold text-xeoo-text">
                       ${result.costAnnual.toFixed(2)}
@@ -309,4 +481,3 @@ export default function AiCostCalculator() {
     </div>
   );
 }
-
