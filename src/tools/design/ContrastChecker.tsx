@@ -106,7 +106,7 @@ WCAG 2.1 Compliance:
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
             >
               <RotateCcw size={12} />
               <span>Reset</span>
@@ -115,10 +115,10 @@ WCAG 2.1 Compliance:
         </div>
 
         {/* NOTICE BANNER */}
-        <div className="flex items-center gap-2 border-b border-xeoo-border bg-fuchsia-500/5 px-3.5 py-2 text-[11px] text-fuchsia-800 dark:text-fuchsia-300">
-          <Info size={14} className="shrink-0 text-fuchsia-500" />
+        <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+          <Info size={14} className="shrink-0 text-xeoo-primary" />
           <span>
-            <strong>WCAG 2.1 Standard:</strong> Level AA requires a ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt+ bold).
+            <strong className="font-semibold text-xeoo-text">WCAG 2.1 Standard:</strong> Level AA requires a ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt+ or 14pt+ bold).
           </span>
         </div>
 
@@ -128,54 +128,72 @@ WCAG 2.1 Compliance:
           <div className="space-y-4 lg:col-span-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Foreground Color Card */}
-              <div className="rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3 space-y-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-xeoo-muted block">
-                  Foreground / Text
-                </span>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="color"
-                    value={fgColor}
-                    onChange={(e) => setFgColor(e.target.value)}
-                    className="h-8 w-10 cursor-pointer rounded border border-xeoo-border bg-transparent p-0.5"
+              <div className="rounded-lg border border-xeoo-border bg-xeoo-surface p-3 space-y-2 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-xeoo-muted block">
+                    Foreground / Text
+                  </span>
+                  <span
+                    className="h-3.5 w-3.5 rounded-full border border-xeoo-border"
+                    style={{ backgroundColor: fgColor }}
                   />
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="relative h-9 w-11 shrink-0 overflow-hidden rounded-md border border-xeoo-border bg-xeoo-bg">
+                    <input
+                      type="color"
+                      value={fgColor}
+                      onChange={(e) => setFgColor(e.target.value)}
+                      className="absolute -inset-2 h-14 w-16 cursor-pointer opacity-100"
+                    />
+                  </div>
                   <input
                     type="text"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
-                    className="flex-1 rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                    placeholder="#000000"
+                    className="h-9 min-w-0 flex-1 rounded-md border border-xeoo-border bg-xeoo-bg px-3 font-mono text-xs uppercase font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20"
                   />
                 </div>
               </div>
 
               {/* Background Color Card */}
-              <div className="rounded-lg border border-xeoo-border bg-xeoo-surface-soft p-3 space-y-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-xeoo-muted block">
-                  Background
-                </span>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="color"
-                    value={bgColor}
-                    onChange={(e) => setBgColor(e.target.value)}
-                    className="h-8 w-10 cursor-pointer rounded border border-xeoo-border bg-transparent p-0.5"
+              <div className="rounded-lg border border-xeoo-border bg-xeoo-surface p-3 space-y-2 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-xeoo-muted block">
+                    Background
+                  </span>
+                  <span
+                    className="h-3.5 w-3.5 rounded-full border border-xeoo-border"
+                    style={{ backgroundColor: bgColor }}
                   />
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="relative h-9 w-11 shrink-0 overflow-hidden rounded-md border border-xeoo-border bg-xeoo-bg">
+                    <input
+                      type="color"
+                      value={bgColor}
+                      onChange={(e) => setBgColor(e.target.value)}
+                      className="absolute -inset-2 h-14 w-16 cursor-pointer opacity-100"
+                    />
+                  </div>
                   <input
                     type="text"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                    className="flex-1 rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                    placeholder="#FFFFFF"
+                    className="h-9 min-w-0 flex-1 rounded-md border border-xeoo-border bg-xeoo-bg px-3 font-mono text-xs uppercase font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20"
                   />
                 </div>
               </div>
             </div>
 
             {/* Quick Actions Bar */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2">
               <button
                 type="button"
                 onClick={handleSwap}
-                className="inline-flex items-center gap-1.5 rounded bg-xeoo-surface-soft border border-xeoo-border px-2.5 py-1 text-xs font-medium text-xeoo-text hover:bg-xeoo-surface transition"
+                className="inline-flex h-8 items-center gap-1.5 rounded-md bg-xeoo-surface border border-xeoo-border px-3 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface-soft transition shadow-xs"
               >
                 <ArrowLeftRight size={13} className="text-xeoo-muted" />
                 <span>Swap Colors</span>
@@ -184,9 +202,9 @@ WCAG 2.1 Compliance:
               <button
                 type="button"
                 onClick={handleCopyReport}
-                className="inline-flex items-center gap-1.5 rounded bg-xeoo-surface-soft border border-xeoo-border px-2.5 py-1 text-xs font-medium text-xeoo-text hover:bg-xeoo-surface transition"
+                className="inline-flex h-8 items-center gap-1.5 rounded-md bg-xeoo-surface border border-xeoo-border px-3 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface-soft transition shadow-xs"
               >
-                {copied ? <Check size={13} className="text-emerald-500" /> : <Copy size={13} />}
+                {copied ? <Check size={13} className="text-emerald-500" /> : <Copy size={13} className="text-xeoo-muted" />}
                 <span>{copied ? "Copied" : "Copy Report"}</span>
               </button>
             </div>

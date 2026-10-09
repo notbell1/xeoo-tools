@@ -105,7 +105,7 @@ export default function PromptOptimizer() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
@@ -113,10 +113,10 @@ export default function PromptOptimizer() {
             </div>
 
             {/* NOTICE BANNER */}
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-sky-500/5 px-3.5 py-2 text-[11px] text-sky-800 dark:text-sky-300">
-              <Info size={14} className="shrink-0 text-sky-500" />
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                <strong>100% Private & Rule-Based:</strong> Processed entirely in your browser using structured prompt engineering heuristics. No AI API calls or data transmission.
+                <strong className="font-semibold text-xeoo-text">100% Private & Rule-Based:</strong> Processed entirely in your browser using structured prompt engineering heuristics. No AI API calls or data transmission.
               </span>
             </div>
 
@@ -153,14 +153,14 @@ export default function PromptOptimizer() {
                       <select
                         value={settings.goal}
                         onChange={(e) => setSettings({ ...settings, goal: e.target.value as PromptGoal })}
-                        className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-surface px-2 py-1.5 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                        className="mt-1 h-8.5 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                       >
-                        <option value="general">General Task</option>
-                        <option value="coding">Software Engineering</option>
-                        <option value="writing">Content Writing</option>
-                        <option value="analysis">Data & Systems Analysis</option>
-                        <option value="education">Educational Tutoring</option>
-                        <option value="creative">Creative & Conceptual</option>
+                        <option value="general" className="bg-xeoo-surface text-xeoo-text">General Task</option>
+                        <option value="coding" className="bg-xeoo-surface text-xeoo-text">Software Engineering</option>
+                        <option value="writing" className="bg-xeoo-surface text-xeoo-text">Content Writing</option>
+                        <option value="analysis" className="bg-xeoo-surface text-xeoo-text">Data & Systems Analysis</option>
+                        <option value="education" className="bg-xeoo-surface text-xeoo-text">Educational Tutoring</option>
+                        <option value="creative" className="bg-xeoo-surface text-xeoo-text">Creative & Conceptual</option>
                       </select>
                     </div>
 
@@ -169,12 +169,12 @@ export default function PromptOptimizer() {
                       <select
                         value={settings.tone}
                         onChange={(e) => setSettings({ ...settings, tone: e.target.value as PromptTone })}
-                        className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-surface px-2 py-1.5 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                        className="mt-1 h-8.5 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                       >
-                        <option value="professional">Professional & Crisp</option>
-                        <option value="concise">Concise & Direct (No Fluff)</option>
-                        <option value="educational">Step-by-Step Educational</option>
-                        <option value="engaging">Conversational & Engaging</option>
+                        <option value="professional" className="bg-xeoo-surface text-xeoo-text">Professional & Crisp</option>
+                        <option value="concise" className="bg-xeoo-surface text-xeoo-text">Concise & Direct (No Fluff)</option>
+                        <option value="educational" className="bg-xeoo-surface text-xeoo-text">Step-by-Step Educational</option>
+                        <option value="engaging" className="bg-xeoo-surface text-xeoo-text">Conversational & Engaging</option>
                       </select>
                     </div>
 
@@ -183,13 +183,13 @@ export default function PromptOptimizer() {
                       <select
                         value={settings.outputFormat}
                         onChange={(e) => setSettings({ ...settings, outputFormat: e.target.value as OutputFormat })}
-                        className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-surface px-2 py-1.5 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                        className="mt-1 h-8.5 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                       >
-                        <option value="markdown">Structured Markdown</option>
-                        <option value="step_by_step">Sequential Steps</option>
-                        <option value="bullet_points">Bullet Points</option>
-                        <option value="code_explained">Code + Explanation</option>
-                        <option value="structured_json">Strict JSON Schema</option>
+                        <option value="markdown" className="bg-xeoo-surface text-xeoo-text">Structured Markdown</option>
+                        <option value="step_by_step" className="bg-xeoo-surface text-xeoo-text">Sequential Steps</option>
+                        <option value="bullet_points" className="bg-xeoo-surface text-xeoo-text">Bullet Points</option>
+                        <option value="code_explained" className="bg-xeoo-surface text-xeoo-text">Code + Explanation</option>
+                        <option value="structured_json" className="bg-xeoo-surface text-xeoo-text">Strict JSON Schema</option>
                       </select>
                     </div>
 
@@ -198,11 +198,11 @@ export default function PromptOptimizer() {
                       <select
                         value={settings.targetModel}
                         onChange={(e) => setSettings({ ...settings, targetModel: e.target.value })}
-                        className="mt-1 w-full rounded-md border border-xeoo-border bg-xeoo-surface px-2 py-1.5 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                        className="mt-1 h-8.5 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                       >
-                        <option value="General LLM">General LLM</option>
-                        <option value="GPT-4o / Claude 3.5">Advanced Frontier Model</option>
-                        <option value="Compact / Local Model">Local / Small Model (7B-8B)</option>
+                        <option value="General LLM" className="bg-xeoo-surface text-xeoo-text">General LLM</option>
+                        <option value="GPT-4o / Claude 3.5" className="bg-xeoo-surface text-xeoo-text">Advanced Frontier Model</option>
+                        <option value="Compact / Local Model" className="bg-xeoo-surface text-xeoo-text">Local / Small Model (7B-8B)</option>
                       </select>
                     </div>
                   </div>
@@ -280,9 +280,9 @@ export default function PromptOptimizer() {
                     <button
                       type="button"
                       onClick={handleCopy}
-                      className="inline-flex items-center gap-1 rounded-md bg-xeoo-primary px-3 py-1 text-xs font-semibold text-white shadow-xs transition hover:opacity-90"
+                      className="inline-flex h-7 items-center gap-1.5 rounded-md bg-xeoo-primary px-3 text-[11px] font-medium text-white shadow-xs transition hover:opacity-90"
                     >
-                      {copied ? <Check size={13} /> : <Copy size={13} />}
+                      {copied ? <Check size={12} /> : <Copy size={12} />}
                       <span>{copied ? "Copied!" : "Copy Output"}</span>
                     </button>
                   )}

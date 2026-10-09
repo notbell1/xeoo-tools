@@ -66,7 +66,7 @@ export const TypographyScaleGenerator: React.FC = () => {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
             >
               <RotateCcw size={12} />
               <span>Reset</span>
@@ -75,10 +75,10 @@ export const TypographyScaleGenerator: React.FC = () => {
         </div>
 
         {/* NOTICE BANNER */}
-        <div className="flex items-center gap-2 border-b border-xeoo-border bg-fuchsia-500/5 px-3.5 py-2 text-[11px] text-fuchsia-800 dark:text-fuchsia-300">
-          <Info size={14} className="shrink-0 text-fuchsia-500" />
+        <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+          <Info size={14} className="shrink-0 text-xeoo-primary" />
           <span>
-            <strong>Modular Hierarchy:</strong> Based on musical intervals and design ratios. REM units are computed relative to standard 16px root font size.
+            <strong className="font-semibold text-xeoo-text">Modular Hierarchy:</strong> Based on musical intervals and design ratios. REM units are computed relative to standard 16px root font size.
           </span>
         </div>
 
@@ -104,7 +104,7 @@ export const TypographyScaleGenerator: React.FC = () => {
                       onChange={(e) =>
                         setBaseSize(Math.max(8, parseInt(e.target.value) || 16))
                       }
-                      className="w-full rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                      className="h-8 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                     />
                     <span className="font-mono text-xs text-xeoo-muted">px</span>
                   </div>
@@ -115,10 +115,10 @@ export const TypographyScaleGenerator: React.FC = () => {
                   <select
                     value={selectedRatio}
                     onChange={(e) => setSelectedRatio(parseFloat(e.target.value))}
-                    className="w-full rounded border border-xeoo-border bg-xeoo-surface px-2 py-1 text-xs text-xeoo-text focus:outline-none"
+                    className="h-8 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-[11px] font-medium text-xeoo-text outline-none transition focus:border-xeoo-primary focus:ring-1 focus:ring-xeoo-primary/20 cursor-pointer"
                   >
                     {MODULAR_RATIOS.map((r) => (
-                      <option key={r.name} value={r.value}>
+                      <option key={r.name} value={r.value} className="bg-xeoo-surface text-xeoo-text">
                         {r.name} ({r.value})
                       </option>
                     ))}
@@ -131,7 +131,7 @@ export const TypographyScaleGenerator: React.FC = () => {
                     type="text"
                     value={previewText}
                     onChange={(e) => setPreviewText(e.target.value)}
-                    className="w-full rounded border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                    className="h-8 w-full rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                     placeholder="Custom preview sentence..."
                   />
                 </div>
@@ -186,7 +186,7 @@ export const TypographyScaleGenerator: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-0.5 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface transition"
+                  className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                 >
                   {copied ? <Check size={11} className="text-emerald-500" /> : <Copy size={11} />}
                   <span>{copied ? "Copied" : "Copy Variables"}</span>

@@ -87,7 +87,7 @@ export default function PaletteInspect() {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
             >
               <RotateCcw size={12} />
               <span>Reset</span>
@@ -96,10 +96,10 @@ export default function PaletteInspect() {
         </div>
 
         {/* NOTICE BANNER */}
-        <div className="flex items-center gap-2 border-b border-xeoo-border bg-fuchsia-500/5 px-3.5 py-2 text-[11px] text-fuchsia-800 dark:text-fuchsia-300">
-          <Info size={14} className="shrink-0 text-fuchsia-500" />
+        <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+          <Info size={14} className="shrink-0 text-xeoo-primary" />
           <span>
-            <strong>SSRF Protected:</strong> Safe server-side extraction. Private network addresses, localhost, and non-HTTP protocols are automatically blocked.
+            <strong className="font-semibold text-xeoo-text">SSRF Protected:</strong> Safe server-side extraction. Private network addresses, localhost, and non-HTTP protocols are automatically blocked.
           </span>
         </div>
 
@@ -123,14 +123,14 @@ export default function PaletteInspect() {
                   onKeyDown={(e) => e.key === "Enter" && void handleInspect()}
                   placeholder="https://example.com"
                   disabled={loading}
-                  className="w-full rounded-md border border-xeoo-border bg-xeoo-bg py-2 pl-9 pr-3 text-xs text-xeoo-text placeholder:text-xeoo-muted/60 focus:border-xeoo-primary focus:outline-none"
+                  className="h-9 w-full rounded-md border border-xeoo-border bg-xeoo-bg py-2 pl-9 pr-3 text-xs text-xeoo-text placeholder:text-xeoo-muted/60 focus:border-xeoo-primary focus:outline-none"
                 />
               </div>
               <button
                 type="button"
                 onClick={() => void handleInspect()}
                 disabled={loading}
-                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md bg-xeoo-primary px-4 py-2 text-xs font-semibold text-white shadow-xs transition hover:bg-xeoo-primary-hover disabled:opacity-50"
+                className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-md bg-xeoo-primary px-4 text-xs font-semibold text-white shadow-xs transition hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -152,14 +152,14 @@ export default function PaletteInspect() {
               <button
                 type="button"
                 onClick={() => setUrl("https://xeootools.site.je/")}
-                className="rounded border border-xeoo-border bg-xeoo-surface px-2 py-0.5 font-medium hover:border-xeoo-primary hover:text-xeoo-text"
+                className="inline-flex h-6 items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2 text-[10px] font-medium text-xeoo-text transition hover:bg-xeoo-surface-soft"
               >
                 xeootools.site.je
               </button>
               <button
                 type="button"
                 onClick={() => setUrl("https://github.com")}
-                className="rounded border border-xeoo-border bg-xeoo-surface px-2 py-0.5 font-medium hover:border-xeoo-primary hover:text-xeoo-text"
+                className="inline-flex h-6 items-center rounded-md border border-xeoo-border bg-xeoo-surface px-2 text-[10px] font-medium text-xeoo-text transition hover:bg-xeoo-surface-soft"
               >
                 github.com
               </button>
@@ -236,7 +236,7 @@ export default function PaletteInspect() {
                         "all hex colors",
                       )
                     }
-                    className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-1 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                   >
                     <Copy size={11} />
                     <span>Copy All HEX</span>
@@ -296,7 +296,7 @@ export default function PaletteInspect() {
                           "CSS variables",
                         )
                       }
-                      className="inline-flex items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-1 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface"
+                      className="inline-flex h-7 items-center gap-1.5 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                     >
                       <Copy size={11} />
                       <span>Copy Variables</span>

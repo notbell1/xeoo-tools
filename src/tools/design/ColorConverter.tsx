@@ -101,7 +101,7 @@ export default function ColorConverter() {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
             >
               <RotateCcw size={12} />
               <span>Reset</span>
@@ -110,10 +110,10 @@ export default function ColorConverter() {
         </div>
 
         {/* NOTICE BANNER */}
-        <div className="flex items-center gap-2 border-b border-xeoo-border bg-fuchsia-500/5 px-3.5 py-2 text-[11px] text-fuchsia-800 dark:text-fuchsia-300">
-          <Info size={14} className="shrink-0 text-fuchsia-500" />
+        <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+          <Info size={14} className="shrink-0 text-xeoo-primary" />
           <span>
-            <strong>Bidirectional Sync:</strong> Adjusting HEX, RGB sliders, or HSL automatically converts and synchronizes all color models in real-time.
+            <strong className="font-semibold text-xeoo-text">Bidirectional Sync:</strong> Adjusting HEX, RGB sliders, or HSL automatically converts and synchronizes all color models in real-time.
           </span>
         </div>
 
@@ -139,7 +139,7 @@ export default function ColorConverter() {
                   value={hexInput}
                   onChange={(e) => updateFromHex(e.target.value)}
                   placeholder="#3B82F6"
-                  className="flex-1 rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 py-1.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
+                  className="h-9 flex-1 rounded-md border border-xeoo-border bg-xeoo-bg px-2.5 font-mono text-xs text-xeoo-text focus:border-xeoo-primary focus:outline-none"
                 />
               </div>
             </div>
@@ -295,7 +295,7 @@ export default function ColorConverter() {
                       <button
                         type="button"
                         onClick={() => void copyToClipboard(item.value, item.label)}
-                        className="inline-flex shrink-0 items-center gap-1 rounded bg-xeoo-surface-soft border border-xeoo-border px-2 py-0.5 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface transition"
+                        className="inline-flex h-6.5 shrink-0 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface-soft px-2 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface"
                       >
                         {isCopied ? (
                           <Check size={11} className="text-emerald-500" />

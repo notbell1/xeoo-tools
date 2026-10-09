@@ -160,17 +160,17 @@ export default function PromptTemplateBuilder() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-muted transition hover:bg-xeoo-surface-soft hover:text-xeoo-text"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             </div>
 
-            <div className="flex items-center gap-2 border-b border-xeoo-border bg-sky-500/5 px-3.5 py-2 text-[11px] text-sky-800 dark:text-sky-300">
-              <Info size={14} className="shrink-0 text-sky-500" />
+            <div className="flex items-center gap-2 border-b border-xeoo-border bg-xeoo-surface-soft px-3.5 py-2.5 text-[11px] text-xeoo-text-soft">
+              <Info size={14} className="shrink-0 text-xeoo-primary" />
               <span>
-                Use <code>{"{{variable_name}}"}</code> placeholders to build reusable prompts that team members or workflows can easily fill in.
+                <strong className="font-semibold text-xeoo-text">Dynamic Placeholders:</strong> Use <code className="font-mono text-xeoo-primary">{"{{variable_name}}"}</code> placeholders to build reusable prompts that team members or workflows can easily fill in.
               </span>
             </div>
 
@@ -220,7 +220,7 @@ export default function PromptTemplateBuilder() {
                     <button
                       type="button"
                       onClick={handleAddVariable}
-                      className="inline-flex items-center gap-1 rounded bg-xeoo-text px-2 py-0.5 text-[10px] font-semibold text-xeoo-surface hover:opacity-90"
+                      className="inline-flex h-7 items-center gap-1 rounded-md border border-xeoo-border bg-xeoo-surface px-2.5 text-[11px] font-medium text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft"
                     >
                       <Plus size={11} />
                       <span>Add Variable</span>
@@ -345,9 +345,9 @@ export default function PromptTemplateBuilder() {
                           : result.exampleFilledText
                       )
                     }
-                    className="inline-flex items-center gap-1 rounded-md bg-xeoo-primary px-3 py-1 text-xs font-semibold text-white shadow-xs transition hover:opacity-90"
+                    className="inline-flex h-7 items-center gap-1.5 rounded-md bg-xeoo-primary px-3 text-[11px] font-medium text-white shadow-xs transition hover:opacity-90"
                   >
-                    {copied ? <Check size={13} /> : <Copy size={13} />}
+                    {copied ? <Check size={12} /> : <Copy size={12} />}
                     <span>{copied ? "Copied!" : "Copy"}</span>
                   </button>
                 </div>
