@@ -205,7 +205,7 @@ WCAG 2.1 Compliance:
                 className="inline-flex h-8 items-center gap-1.5 rounded-md bg-xeoo-surface border border-xeoo-border px-3 text-[11px] font-medium text-xeoo-text hover:bg-xeoo-surface-soft transition shadow-xs"
               >
                 {copied ? <Check size={13} className="text-emerald-500" /> : <Copy size={13} className="text-xeoo-muted" />}
-                <span>{copied ? "Copied" : "Copy Report"}</span>
+                <span>{copied ? "Copied" : "Copy"}</span>
               </button>
             </div>
 

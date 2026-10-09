@@ -79,7 +79,9 @@ export interface ContextWindowBreakdown {
   statusMessage: string;
 }
 
-export function calculateContextWindow(input: ContextWindowInput): ContextWindowBreakdown {
+export function calculateContextWindow(
+  input: ContextWindowInput,
+): ContextWindowBreakdown {
   const totalContext = Math.max(1, input.contextWindowSize);
   const system = Math.max(0, input.systemTokens);
   const history = Math.max(0, input.historyTokens);
@@ -92,7 +94,8 @@ export function calculateContextWindow(input: ContextWindowInput): ContextWindow
   const remainingTokens = totalContext - totalCommittedTokens;
   const isOverflow = remainingTokens < 0;
 
-  const usagePercentage = Math.round((totalCommittedTokens / totalContext) * 1000) / 10;
+  const usagePercentage =
+    Math.round((totalCommittedTokens / totalContext) * 1000) / 10;
 
   let status: "safe" | "caution" | "critical" | "overflow" = "safe";
   let statusMessage = "Ample context headroom available.";
@@ -102,10 +105,12 @@ export function calculateContextWindow(input: ContextWindowInput): ContextWindow
     statusMessage = `Context limit exceeded by ${Math.abs(remainingTokens).toLocaleString()} tokens! Model will truncate or throw a 400 error.`;
   } else if (usagePercentage >= 90) {
     status = "critical";
-    statusMessage = "Context window is nearly saturated (> 90%). High risk of history eviction.";
+    statusMessage =
+      "Context window is nearly saturated (> 90%). High risk of history eviction.";
   } else if (usagePercentage >= 70) {
     status = "caution";
-    statusMessage = "Moderate context utilization (70-90%). Consider summarizing conversation history.";
+    statusMessage =
+      "Moderate context utilization (70-90%). Consider summarizing conversation history.";
   }
 
   return {
@@ -120,4 +125,3 @@ export function calculateContextWindow(input: ContextWindowInput): ContextWindow
     statusMessage,
   };
 }
-
