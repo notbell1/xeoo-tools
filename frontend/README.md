@@ -1,75 +1,86 @@
-# React + TypeScript + Vite
+# XeooTools - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **XeooTools** is a modern, lightweight, and versatile all-in-one web utility platform designed for developers, designers, digital marketers, and security enthusiasts. Built with **React 19**, **TypeScript**, **Vite**, and **Tailwind CSS v4**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features & Tool Categories
 
-## React Compiler
+### 🎨 Design & Color Tools
+- **Contrast Checker**: WCAG 2.1 compliant color contrast ratio checker with real-time preview and accessibility ratings.
+- **Color Harmony Generator**: Interactive color palette generator featuring complementary, analogous, triadic, and monochromatic schemes.
+- **Palette Inspector**: Extract and analyze visual color palettes from URLs and UI designs.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🖼️ Image Tools
+- **Image Compressor**: Fast browser-based client-side image compression with configurable quality.
+- **Image Resizer**: Dimension and aspect-ratio scaling for common social media and web dimensions.
+- **Image Converter**: Instant conversion between PNG, JPEG, WEBP, and modern image formats.
+- **Image Metadata Viewer**: Inspect EXIF data, camera metadata, and dimensions without uploading files to third-party servers.
 
-## Expanding the ESLint configuration
+### 🤖 AI & Text Utilities
+- **AI Text Humanizer**: Enhance readability, rhythm, and flow of AI-generated content.
+- **Word & Character Counter**: Real-time reading time analysis, paragraph counter, and keyword density.
+- **Case Converter**: Toggle uppercase, lowercase, title case, camelCase, snake_case, and kebab-case.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🛡️ Security & Network Tools
+- **Admin Finder**: Discover common administrative portals and login endpoints.
+- **DNS & IP Lookup**: Inspect nameservers, MX records, WHOIS data, and IP geolocation details.
+- **Scam Link Checker**: Analyze suspicious URLs for deceptive redirects and security threats.
+- **Subdomain Scanner**: Enumerate subdomains and inspect attack surface exposure.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🔍 SEO Tools
+- **Meta Tag Analyzer**: Inspect title tags, description lengths, canonical tags, and search engine preview.
+- **Open Graph Checker**: Preview social media share cards for Twitter/X, Facebook, and LinkedIn.
+- **Robots.txt Generator**: Quickly configure search crawler rules and sitemap declarations.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### ⚡ Productivity Tools
+- **Typing Speed Test**: Interactive WPM and accuracy typing speed test with real-time stats and leaderboard.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+## Tech Stack
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- **Framework**: [React 19](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
+- **Bundler**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Theme**: Centralized semantic Light/Dark theme system
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
 
-```
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18.0.0 or later recommended)
+- [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/notbell1/xeoo-tools.git
+   cd xeoo-tools
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
