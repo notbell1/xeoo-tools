@@ -31,19 +31,19 @@ export const CtfRegister: React.FC = () => {
     setErrorLocal("");
 
     if (username.length < 3) {
-      setErrorLocal("Username minimal 3 karakter.");
+      setErrorLocal("Username must be at least 3 characters long.");
       return;
     }
     if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-      setErrorLocal("Username hanya boleh huruf, angka, dan underscore (_).");
+      setErrorLocal("Usernames can only be letters, numbers and an underscore (_).");
       return;
     }
     if (password.length < 8) {
-      setErrorLocal("Password minimal 8 karakter.");
+      setErrorLocal("Password must be at least 8 characters long.");
       return;
     }
     if (password !== confirmPassword) {
-      setErrorLocal("Password dan Konfirmasi Password tidak cocok.");
+      setErrorLocal("The password and password confirmation do not match.");
       return;
     }
 
@@ -91,7 +91,7 @@ export const CtfRegister: React.FC = () => {
                   to="/ctf/login"
                   className="inline-flex items-center gap-1 font-semibold text-xeoo-primary hover:underline text-[11px]"
                 >
-                  MLog in using an existing account &rarr;
+                  Log in using an existing account &rarr;
                 </Link>
               </div>
             ) : settings.leaderboard_enabled ? (
@@ -100,7 +100,7 @@ export const CtfRegister: React.FC = () => {
                   to="/ctf/leaderboard"
                   className="inline-flex items-center gap-1 font-semibold text-xeoo-primary hover:underline text-[11px]"
                 >
-                  Buka Papan Peringkat / Leaderboard &rarr;
+                  Open Leaderboard &rarr;
                 </Link>
               </div>
             ) : null}
@@ -251,7 +251,7 @@ export const CtfRegister: React.FC = () => {
             {!settings.registration_enabled ? (
               <>
                 <Lock className="h-4 w-4" />
-                <span>RRegistration Deactivated by Admin</span>
+                <span>Registration Deactivated by Admin</span>
               </>
             ) : submitting ? (
               <>

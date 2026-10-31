@@ -24,13 +24,19 @@ const CtfRoutesInner: React.FC = () => {
     refreshSession();
   }, [location.pathname, refreshSession]);
 
-  if (!loading) {
-    if (settings.maintenance_mode) {
-      return <CtfMaintenance message={settings.maintenance_message} />;
-    }
-    if (!settings.ctf_enabled) {
-      return <CtfSoon message={settings.soon_message} />;
-    }
+  if (loading) {
+    return (
+      <div className="flex min-h-[50vh] w-full items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-xeoo-primary border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (settings.maintenance_mode) {
+    return <CtfMaintenance message={settings.maintenance_message} />;
+  }
+  if (!settings.ctf_enabled) {
+    return <CtfSoon message={settings.soon_message} />;
   }
 
   // Unauthenticated guests only have access to Login, Register, Forgot/Reset Password, and Leaderboard

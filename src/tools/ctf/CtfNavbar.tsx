@@ -18,7 +18,7 @@ import { useCtfAuth } from "./ctfAuth";
 import { COUNTRIES_MAP } from "./ctfConstants";
 
 export const CtfNavbar: React.FC = () => {
-  const { user, isAuthenticated, solvedCount, totalScore, totalChallenges, logout } = useCtfAuth();
+  const { user, isAuthenticated, solvedCount, totalScore, totalChallenges, logout, settings } = useCtfAuth();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -89,7 +89,12 @@ export const CtfNavbar: React.FC = () => {
 
         {/* Right Action / Stats / Auth */}
         <div className="hidden md:flex items-center gap-2.5">
-          {isAuthenticated && user ? (
+          {settings.maintenance_mode ? (
+            <div className="flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-xs font-semibold text-amber-500">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+              <span>Platform Maintenance</span>
+            </div>
+          ) : isAuthenticated && user ? (
             <>
               {/* Solved Badge */}
               <div
@@ -214,7 +219,12 @@ export const CtfNavbar: React.FC = () => {
           })}
 
           <div className="pt-2 border-t border-xeoo-border flex flex-col gap-2">
-            {isAuthenticated && user ? (
+            {settings.maintenance_mode ? (
+              <div className="flex items-center justify-center gap-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-500">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+                <span>Platform Maintenance Active</span>
+              </div>
+            ) : isAuthenticated && user ? (
               <>
                 <Link
                   to="/ctf/profile"

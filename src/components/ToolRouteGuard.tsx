@@ -647,10 +647,10 @@ export default function ToolRouteGuard() {
   const dbTool = tools.find((t) => t.slug === slug);
   const registryTool = TOOL_REGISTRY[slug];
 
-  // If data is still loading and tool is known in registry, use default or wait
-  if (loading && !dbTool && !registryTool) {
+  // If data is still loading, wait before rendering status-dependent views
+  if (loading && !dbTool) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-xeoo-bg text-white">
+      <div className="flex min-h-[60vh] w-full items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-xeoo-primary border-t-transparent" />
       </div>
     );

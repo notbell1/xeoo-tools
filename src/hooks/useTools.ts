@@ -86,54 +86,77 @@ function normalizeTool(tool: ToolApiItem): PublicTool {
   };
 }
 
+let memoryCachedTools: PublicTool[] | null = null;
+let activeFetchPromise: Promise<PublicTool[]> | null = null;
+const subscribers = new Set<(tools: PublicTool[], loading: boolean) => void>();
+
+function notifySubscribers(tools: PublicTool[], loading: boolean) {
+  subscribers.forEach((fn) => fn(tools, loading));
+}
+
+async function executeFetchTools(): Promise<PublicTool[]> {
+  try {
+    const response = await fetch(
+      `${BACKEND_URL}/api/tools.php?_=${Date.now()}`,
+      {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          Accept: "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const result: ToolsResponse = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.message || "Gagal mengambil data tools.");
+    }
+
+    const normalizedTools = (result.data ?? [])
+      .map(normalizeTool)
+      .filter((tool) => tool.id > 0);
+
+    const liveSlugs = new Set(normalizedTools.map((t) => t.slug));
+    const missingDefaults = DEFAULT_TOOLS.filter((t) => !liveSlugs.has(t.slug));
+
+    const finalTools = [...normalizedTools, ...missingDefaults];
+    memoryCachedTools = finalTools;
+    notifySubscribers(finalTools, false);
+    return finalTools;
+  } catch (reason) {
+    console.error("useTools error:", reason);
+    const fallbackTools = DEFAULT_TOOLS;
+    memoryCachedTools = fallbackTools;
+    notifySubscribers(fallbackTools, false);
+    return fallbackTools;
+  } finally {
+    activeFetchPromise = null;
+  }
+}
+
 export function useTools(): UseToolsResult {
-  const [tools, setTools] = useState<PublicTool[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [tools, setTools] = useState<PublicTool[]>(() => memoryCachedTools ?? []);
+  const [loading, setLoading] = useState<boolean>(() => memoryCachedTools === null);
   const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
+    setLoading(true);
+    if (!activeFetchPromise) {
+      activeFetchPromise = executeFetchTools();
+    }
     try {
+      const data = await activeFetchPromise;
+      setTools(data);
       setError(null);
-
-      const response = await fetch(
-        `${BACKEND_URL}/api/tools.php?_=${Date.now()}`,
-        {
-          method: "GET",
-          credentials: "include",
-          cache: "no-store",
-          headers: {
-            Accept: "application/json",
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-
-      const result: ToolsResponse = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.message || "Gagal mengambil data tools.");
-      }
-
-      const normalizedTools = (result.data ?? [])
-        .map(normalizeTool)
-        .filter((tool) => tool.id > 0);
-
-      const liveSlugs = new Set(normalizedTools.map((t) => t.slug));
-      const missingDefaults = DEFAULT_TOOLS.filter((t) => !liveSlugs.has(t.slug));
-
-      setTools([...normalizedTools, ...missingDefaults]);
-    } catch (reason) {
-      console.error("useTools error:", reason);
-
-      setTools(DEFAULT_TOOLS);
-
+    } catch (err) {
       setError(
-        reason instanceof Error
-          ? reason.message
-          : "Data tools tidak dapat dimuat.",
+        err instanceof Error ? err.message : "Data tools tidak dapat dimuat."
       );
     } finally {
       setLoading(false);
@@ -141,19 +164,27 @@ export function useTools(): UseToolsResult {
   }, []);
 
   useEffect(() => {
-    void refresh();
-  }, [refresh]);
+    const onUpdate = (newTools: PublicTool[], newLoading: boolean) => {
+      setTools(newTools);
+      setLoading(newLoading);
+    };
+    subscribers.add(onUpdate);
 
-  useEffect(() => {
+    if (memoryCachedTools === null) {
+      if (!activeFetchPromise) {
+        activeFetchPromise = executeFetchTools();
+      }
+      activeFetchPromise.then((data) => {
+        setTools(data);
+        setLoading(false);
+      });
+    }
+
     const handleStorage = (event: StorageEvent) => {
       if (event.key !== TOOLS_UPDATED_EVENT) {
         return;
       }
-
-      void refresh();
-    };
-
-    const handleFocus = () => {
+      memoryCachedTools = null;
       void refresh();
     };
 
@@ -164,15 +195,11 @@ export function useTools(): UseToolsResult {
     };
 
     window.addEventListener("storage", handleStorage);
-    window.addEventListener("focus", handleFocus);
-
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      subscribers.delete(onUpdate);
       window.removeEventListener("storage", handleStorage);
-
-      window.removeEventListener("focus", handleFocus);
-
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [refresh]);
