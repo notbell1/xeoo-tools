@@ -133,7 +133,7 @@ export const CtfNavbar: React.FC = () => {
               <button
                 type="button"
                 onClick={logout}
-                title="Keluar akun"
+                title="Sign out"
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-xeoo-border text-xeoo-muted transition-colors hover:bg-xeoo-danger/10 hover:border-xeoo-danger/30 hover:text-xeoo-danger cursor-pointer"
               >
                 <LogOut className="h-3.5 w-3.5" />
@@ -170,7 +170,7 @@ export const CtfNavbar: React.FC = () => {
           <div className="h-4 w-px bg-xeoo-border mx-1" />
           <Link
             to="/"
-            title="Kembali ke XeooTools"
+            title="Back to XeooTools"
             className="flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium text-xeoo-muted transition-colors hover:text-xeoo-text"
           >
             <span>XeooTools</span>
@@ -276,7 +276,7 @@ export const CtfNavbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-1.5 text-xs text-xeoo-muted py-1"
             >
-              Kembali ke XeooTools Hub
+              Back to XeooTools Hub
               <ExternalLink className="h-3 w-3" />
             </Link>
           </div>

@@ -16,19 +16,19 @@ interface ToolStatusProps {
 }
 
 const maintenanceMessages = [
-  "Sedang dibongkar. Jangan dipaksa.",
-  "Lagi diperbaiki. Sabar dulu.",
-  "Kabelnya belum diajak kompromi.",
-  "Tool-nya sedang mencari jati diri.",
-  "Sedang dikerjakan. Jangan spam klik.",
+  "Under maintenance. System upgrades in progress.",
+  "Technical calibration underway. Please check back soon.",
+  "Scheduled service overhaul in progress.",
+  "Temporarily offline for scheduled improvements.",
+  "Engineering maintenance active. Work in progress.",
 ];
 
 const upcomingMessages = [
-  "Belum rilis. Jangan di-klik dulu.",
-  "Masih dipanaskan. Tunggu tanggal mainnya.",
-  "Sedang disiapkan. Jangan buru-buru.",
-  "Tool ini belum turun ke lapangan.",
-  "Masih antre untuk dilahirkan.",
+  "Coming soon. Preparing for launch.",
+  "In development. Stay tuned for updates.",
+  "Scheduled for release soon.",
+  "Upcoming utility in active testing.",
+  "Launching soon. Engineering in progress.",
 ];
 
 function getMaintenanceMessage(name = "xeoo") {
@@ -395,7 +395,7 @@ export default function ToolStatus({
             </div>
 
             <p className="mt-0.5 text-[9px] leading-4 text-emerald-700/75">
-              Tool siap digunakan.
+              Tool is ready to use.
             </p>
           </div>
         </div>

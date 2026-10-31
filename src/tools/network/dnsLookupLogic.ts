@@ -520,7 +520,7 @@ export async function lookupDNS(
 
   if (!isValidHostname(normalizedDomain)) {
     throw new Error(
-      "Host atau domain tidak valid.",
+      "Invalid host or domain.",
     );
   }
 
@@ -555,7 +555,7 @@ export async function lookupDNS(
   if (!response.ok || !result.success) {
     throw new Error(
       result.message ||
-        "DNS lookup gagal.",
+        "DNS lookup failed.",
     );
   }
 

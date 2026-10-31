@@ -183,7 +183,7 @@ function ToolSelect({
         <span className="min-w-0">
           <span className="block truncate text-[11px] font-bold text-xeoo-text">
             {loading
-              ? "Memuat tools..."
+              ? "Loading tools..."
               : selectedTool
                 ? selectedTool.name
                 : readyTools.length === 0
@@ -212,7 +212,7 @@ function ToolSelect({
           <div
             className="max-h-60 overflow-y-auto"
             role="listbox"
-            aria-label="Daftar tools ready"
+            aria-label="Ready tools list"
           >
             {readyTools.length === 0 ? (
               <div className="px-3 py-3 text-[10px] text-xeoo-muted">
@@ -577,7 +577,7 @@ export default function Report() {
         setToolsError(
           error instanceof Error
             ? error.message
-            : "Daftar tools tidak dapat dimuat.",
+            : "Tools list could not be loaded.",
         );
       } finally {
         if (mounted) {

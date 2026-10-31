@@ -525,6 +525,7 @@ export default function DashboardMimin({
         throw new Error(result.message || "Sign out failed.");
       }
 
+      sessionStorage.removeItem("xeoo_admin_csrf");
       await showSuccess("Signed out", "See you again.");
 
       window.location.href = "/login/mimin";

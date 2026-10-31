@@ -53,6 +53,36 @@ function setVisitorCookie(value: string) {
   document.cookie = `${VISITOR_COOKIE_NAME}=${value}; path=/; max-age=${maxAge}; SameSite=Lax`;
 }
 
+// 30-minute session deduplication window (industry-standard unique visits)
+const DEDUP_SESSION_WINDOW_MS = 30 * 60 * 1000;
+const CACHE_STORAGE_KEY = "xeoo_traffic_cache";
+
+function isTrackedRecently(path: string): boolean {
+  try {
+    const raw = sessionStorage.getItem(CACHE_STORAGE_KEY);
+    if (!raw) return false;
+    const cache = JSON.parse(raw);
+    const lastTimestamp = cache[path];
+    if (typeof lastTimestamp === "number" && Date.now() - lastTimestamp < DEDUP_SESSION_WINDOW_MS) {
+      return true;
+    }
+  } catch {
+    // Ignore storage parsing errors
+  }
+  return false;
+}
+
+function markPathTracked(path: string): void {
+  try {
+    const raw = sessionStorage.getItem(CACHE_STORAGE_KEY);
+    const cache = raw ? JSON.parse(raw) : {};
+    cache[path] = Date.now();
+    sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(cache));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 // In-memory cache to prevent tracking duplicate rapid transitions within 1 second
 let lastTrackedPath = "";
 let lastTrackedTime = 0;
@@ -82,8 +112,14 @@ export async function trackPageView(payload?: TrackPayload): Promise<void> {
     return;
   }
 
+  // Deduplicate visits to the same path within 30 minutes
+  if (isTrackedRecently(pathname)) {
+    return;
+  }
+
   lastTrackedPath = pathname;
   lastTrackedTime = now;
+  markPathTracked(pathname);
 
   const visitorId = getOrCreateVisitorId();
 

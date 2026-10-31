@@ -11,6 +11,9 @@
   <a href="https://github.com/notbell1/xeoo-tools">
     <img src="https://img.shields.io/badge/Source-Open%20Source-181717?style=for-the-badge&logo=github" alt="Source Code" />
   </a>
+  <a href="CHANGELOG.md">
+    <img src="https://img.shields.io/badge/Changelog-v1.2.0-8b5cf6?style=for-the-badge" alt="Changelog" />
+  </a>
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-16a34a?style=for-the-badge" alt="MIT License" />
   </a>
@@ -19,7 +22,7 @@
 <p align="center">
   <strong>One Platform. Countless Possibilities.</strong>
   <br />
-  A modern collection of free online utilities for developers, creators, and everyday digital tasks.
+  A modern collection of free online utilities for developers, creators, designers, and everyday digital tasks.
 </p>
 
 <p align="center">
@@ -27,25 +30,25 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP" />
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-6-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 6" />
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 8" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" />
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP 8.4" />
+  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL 8.0" />
 </p>
 
 ---
 
 ## ✨ Discover XeooTools
 
-**XeooTools** is an open-source, all-in-one web utility and developer toolkit designed to make digital work easier.
+**XeooTools** is an open-source, all-in-one web utility and developer toolkit designed to simplify digital workflows.
 
-From coding and cybersecurity learning to file manipulation, image processing, networking, and productivity, XeooTools brings practical utilities together in one convenient platform.
+From development, SEO, and cybersecurity training to file manipulation, image processing, networking, psychology, health, and productivity, XeooTools unites high-utility tools under a single, cohesive, modern interface.
 
 <p align="center">
   <a href="https://xeootools.site.je/">
-    <strong>🚀 Launch XeooTools →</strong>
+    <strong>🚀 Launch XeooTools Live Platform →</strong>
   </a>
 </p>
 
@@ -53,179 +56,52 @@ From coding and cybersecurity learning to file manipulation, image processing, n
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" width="25%">
       <h3>⚡</h3>
       <strong>Fast & Practical</strong>
       <br />
-      <sub>Utilities designed to simplify everyday tasks.</sub>
+      <sub>Utilities engineered to simplify tasks with minimal friction and zero bloat.</sub>
     </td>
-    <td align="center" width="33%">
+    <td align="center" width="25%">
       <h3>🎨</h3>
       <strong>Clean & Responsive</strong>
       <br />
-      <sub>A consistent experience across screen sizes.</sub>
+      <sub>Consistent UI design with full responsiveness and seamless Light/Dark modes.</sub>
     </td>
-    <td align="center" width="33%">
+    <td align="center" width="25%">
       <h3>🔒</h3>
       <strong>Privacy Conscious</strong>
       <br />
-      <sub>Client-side processing where practical and supported.</sub>
+      <sub>Client-side processing where practical; your files remain in your browser.</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🛡️</h3>
+      <strong>Security Hardened</strong>
+      <br />
+      <sub>OWASP Top 10 aligned: Anti-CSRF tokens, brute-force rate limiting, and secure cookies.</sub>
     </td>
   </tr>
 </table>
 
 ---
 
-## 🧭 Explore the Categories
+## 🧭 Tool Categories Overview
 
-<sub>👇 Select a category to explore its available tools.</sub>
+XeooTools provides a modular categorization system designed to make utilities easy to discover:
 
-<details>
-<summary><strong>🛡️ Security Tools</strong></summary>
-
-Utilities for security diagnostics, analysis, and password-related workflows.
-
-- Admin Finder
-- WordPress Exposure Scanner
-- Subdomain Scanner
-- Scam Link Checker
-- JWT Decoder
-- Hash Generator & Identifier
-- File Hash Checker
-- Password Generator
-- Password Strength Analyzer
-
-</details>
-
-<details>
-<summary><strong>🏴 CTF & Defacement Lab</strong></summary>
-
-An interactive environment for cybersecurity challenges and authorized learning.
-
-- CTF challenge player
-- Flag submission and hints
-- Player profiles and progress
-- Leaderboard
-- Defacement page builder and generator
-
-</details>
-
-<details>
-<summary><strong>🌐 Network Tools</strong></summary>
-
-- DNS Lookup
-- IP Geolocation Lookup
-- Reverse IP Lookup
-
-</details>
-
-<details>
-<summary><strong>📁 File Tools</strong></summary>
-
-- File Compressor
-- File Encryptor / Decryptor
-- File Extractor
-- File Merger
-- File Splitter
-- File Metadata Viewer
-- Metadata Remover
-- File Signature Analyzer
-- File Type Identifier
-- ZIP Inspector
-
-</details>
-
-<details>
-<summary><strong>🖼️ Image Tools</strong></summary>
-
-- Image Compressor
-- Image Format Converter — WebP, PNG, JPEG, AVIF
-- Image Metadata Viewer
-- Image Resizer
-
-</details>
-
-<details>
-<summary><strong>🩺 Health Tools</strong></summary>
-
-- BMI Calculator
-- Calorie & Macronutrient Calculator
-- Heart Rate Zone Calculator
-- Sleep Cycle Calculator
-- Daily Health Tracker
-
-<sub>Health utilities provide general information and estimates, not professional medical advice.</sub>
-
-</details>
-
-<details>
-<summary><strong>🧠 Psychology Tools</strong></summary>
-
-- Big Five Personality Test
-- Attachment Style Assessment
-- Cognitive Distortion Checker
-- Procrastination Test
-- Stress Level Analyzer
-
-<sub>Designed for self-reflection and educational use, not clinical diagnosis.</sub>
-
-</details>
-
-<details>
-<summary><strong>🔢 Math Tools</strong></summary>
-
-- Multi-Function Calculator
-- Percentage Calculator
-
-</details>
-
-<details>
-<summary><strong>⚡ Productivity Tools</strong></summary>
-
-- QR Code & Barcode Generator
-- Interactive Typing Speed & Accuracy Test
-
-</details>
-
-<details>
-<summary><strong>🔍 SEO Tools</strong></summary>
-
-- Domain Authority (DA) & Page Authority (PA) Checker
-
-</details>
-
-<details>
-<summary><strong>⚙️ Admin Management</strong></summary>
-
-A dedicated dashboard for managing platform operations.
-
-- Category management
-- Tool catalog and status management
-- System reports
-- Contact messages
-- CTF challenge management
-
-</details>
-
----
-
-## 🎬 The Experience
-
-<p align="center">
-  <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" width="75%" alt="Animated coding workflow illustration" />
-</p>
-
-<p align="center">
-  <em>Less friction. More focus. Better workflows.</em>
-</p>
-
-XeooTools aims to bring useful utilities into a unified experience with:
-
-- **Responsive interfaces** for desktop, tablet, and mobile.
-- **Consistent visual design** through shared UI components and theme tokens.
-- **Light and dark themes** through the application's theme system.
-- **Interactive feedback** for supported actions and operations.
-- **Modular categories** that make individual utilities easier to discover and maintain.
+- **🔢 Math Tools**: Scientific calculations, percentages, fractions, prime analysis, algebraic solvers, and geometry calculations.
+- **📁 File Tools**: Browser-based file compression, encryption/decryption, splitting, merging, hash analysis, and metadata inspection.
+- **🖼️ Image Tools**: Client-side format conversion (WebP, PNG, JPEG, AVIF), resizing, compression, and EXIF metadata viewers.
+- **🌐 Network Tools**: Domain diagnostics, IP lookups, reverse IP resolvers, scam link verifiers, and exposure scanners.
+- **🛡️ Security Tools**: Cryptographic hashing, hash identification, password generation and strength auditing, UUIDs, and JWT decoding.
+- **🤖 AI Tools**: Prompt optimization, template builders, token estimation, model parameter exploration, and cost calculators.
+- **🎨 Design Tools**: Color palettes, CSS code generators, glassmorphism, gradient creators, typography scales, and contrast checkers.
+- **🔍 SEO Tools**: Meta tag analyzers, SERP previews, robots.txt and sitemap builders, backlink verifiers, and domain authority checkers.
+- **🧠 Psychology Tools**: Structured self-reflection, personality assessments, stress level tests, and cognitive exploration *(disajikan dalam Bahasa Indonesia)*.
+- **🩺 Health Tools**: Daily health metrics tracking, BMI calculators, macronutrient estimators, heart rate zones, and sleep cycle tools.
+- **🏴 Defacement & CTF Lab**: Authorized security training playground with interactive challenges, page generators, and leaderboard tracking.
+- **⚡ Productivity Tools**: Interactive typing speed and accuracy testing, dynamic barcode and QR code generators.
+- **⚙️ Admin Dashboard**: Centralized operations portal for managing tool statuses, category visibility, user reports, and platform settings.
 
 ---
 
@@ -257,46 +133,25 @@ XeooTools aims to bring useful utilities into a unified experience with:
   </a>
 </p>
 
-<p align="center">
-  React · TypeScript · Vite · Tailwind CSS v4 · PHP · MySQL / MariaDB · PDO · Lucide React
-</p>
+- **Frontend**: React 19, TypeScript, Vite, React Router v7, Tailwind CSS v4, Lucide React, Motion
+- **Backend**: PHP 8.4, PDO Prepared Statements, MySQL 8.0, Apache Server
+- **Security**: Anti-CSRF protection, IP rate limiting, strict cookie policies, OWASP security headers
 
 ---
 
 ## 🔐 Security & Privacy
 
-XeooTools prioritizes responsible development and privacy-conscious workflows.
+XeooTools prioritizes responsible engineering and user privacy:
 
-- **Local processing:** supported file and image operations can run in the browser without uploading the original data.
-- **Backend protection:** authentication, input validation, database access controls, and other protections should be applied according to each endpoint's requirements.
-- **Responsible security testing:** security utilities should only be used on systems you own or are authorized to assess.
-- **Data awareness:** avoid submitting confidential information to tools or services unless you understand how that information is processed.
-
-Actual data handling and security controls depend on the implementation of each tool and endpoint.
-
----
-
-## 🤝 Contribute & Improve
-
-Have an idea for a useful tool? Found a bug? Want to improve the user experience?
-
-Contributions and suggestions are welcome.
-
-1. Check whether a similar feature already exists.
-2. Keep new tools focused on distinct purposes.
-3. Follow existing project conventions and reusable components.
-4. Preserve compatibility with existing tools and backend functionality.
-5. Test changes and document relevant limitations.
-
-When proposing a new tool, describe its purpose, inputs, processing logic, outputs, and how it differs from existing utilities.
+- **Client-Side Processing**: Supported file and image utilities process data directly in your browser without uploading to external servers.
+- **Hardened Backend**: Protected against brute-force attacks, CSRF forgery, and directory traversal.
+- **Safe Testing Ground**: Security and diagnostic tools are strictly built for authorized assessments and educational analysis.
 
 ---
 
 ## 📄 License
 
-XeooTools is open-source software licensed under the **MIT License**.
-
-See [`LICENSE`](LICENSE) for the complete license text.
+XeooTools is open-source software licensed under the **[MIT License](LICENSE)**.
 
 ---
 

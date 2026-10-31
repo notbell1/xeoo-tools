@@ -113,7 +113,7 @@ export default function ScamLinkChecker() {
     const normalized = normalizeUrlInput(query);
 
     if (!normalized) {
-      setError("Masukkan link atau alamat website yang ingin diperiksa.");
+      setError("Enter a link or website address to inspect.");
       return;
     }
 
@@ -139,7 +139,7 @@ export default function ScamLinkChecker() {
       const message =
         requestError instanceof Error
           ? requestError.message
-          : "Gagal memeriksa URL ini.";
+          : "Failed to inspect this URL.";
 
       setError(message);
       showError(message);
@@ -171,9 +171,9 @@ export default function ScamLinkChecker() {
     if (!result?.url) return;
     try {
       await navigator.clipboard.writeText(result.url);
-      showSuccess("Link berhasil disalin ke clipboard.");
+      showSuccess("Link copied to clipboard.");
     } catch {
-      showError("Gagal menyalin link.");
+      showError("Failed to copy link.");
     }
   };
 
@@ -321,10 +321,10 @@ export default function ScamLinkChecker() {
                     <LoaderCircle size={24} className="animate-spin" />
                   </div>
                   <h3 className="mt-3.5 text-sm font-bold text-xeoo-text">
-                    Sedang Memeriksa & Mendekode URL...
+                    Analyzing & Decoding URL...
                   </h3>
                   <p className="mt-1 text-xs text-xeoo-muted">
-                    Memeriksa leetspeak, pencatutan brand, pola modus penipuan, TLD berbahaya, dan intelijen ancaman.
+                    Checking leetspeak, brand impersonation, deceptive patterns, risky TLDs, and threat intelligence.
                   </p>
                 </div>
               )}
@@ -361,7 +361,7 @@ export default function ScamLinkChecker() {
 
                           {result.brandImpersonated && (
                             <span className="inline-flex items-center gap-1 rounded-full border border-red-500/30 bg-red-500/10 px-2.5 py-0.5 text-[10px] font-bold text-red-600 dark:text-red-400">
-                              Mencatut: {result.brandImpersonated}
+                              Impersonating: {result.brandImpersonated}
                             </span>
                           )}
                         </div>
@@ -380,10 +380,10 @@ export default function ScamLinkChecker() {
                             type="button"
                             onClick={handleCopy}
                             className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-xs font-medium text-xeoo-muted hover:text-xeoo-text"
-                            title="Salin URL"
+                            title="Copy URL"
                           >
                             <Clipboard size={12} />
-                            <span>Salin</span>
+                            <span>Copy</span>
                           </button>
 
                           <a
@@ -391,10 +391,10 @@ export default function ScamLinkChecker() {
                             target="_blank"
                             rel="noopener noreferrer nofollow"
                             className="inline-flex items-center gap-1 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 py-1 text-xs font-medium text-xeoo-muted hover:text-xeoo-text"
-                            title="Kunjungi website (Hati-hati)"
+                            title="Visit website (Caution)"
                           >
                             <ExternalLink size={12} />
-                            <span>Buka URL</span>
+                            <span>Open URL</span>
                           </a>
                         </div>
                       </div>
@@ -403,7 +403,7 @@ export default function ScamLinkChecker() {
                       <div className="flex shrink-0 items-center justify-between rounded-2xl border border-xeoo-border bg-xeoo-surface/80 p-4 shadow-xs sm:flex-col sm:justify-center sm:text-center sm:min-w-32">
                         <div>
                           <p className="text-[9px] font-extrabold uppercase tracking-widest text-xeoo-muted">
-                            Skor Risiko
+                            Risk Score
                           </p>
                           <p
                             className={[
@@ -436,23 +436,21 @@ export default function ScamLinkChecker() {
                         <AlertOctagon size={20} className="shrink-0 text-red-600 dark:text-red-400" />
                         <div className="min-w-0 space-y-1.5">
                           <h3 className="text-xs font-black uppercase tracking-wide text-red-700 dark:text-red-400">
-                            Peringatan Modus Penipuan Terdeteksi
+                            Detected Scam Pattern Alert
                           </h3>
                           <ul className="list-inside list-disc space-y-1 text-xs text-xeoo-text">
                             {result.brandImpersonated && (
                               <li>
                                 <strong className="font-bold text-red-600 dark:text-red-400">
-                                  Pencatutan Entitas:
+                                  Entity Impersonation:
                                 </strong>{" "}
-                                Website ini bukan milik{" "}
-                                <strong>{result.brandImpersonated}</strong> dan berupaya
-                                mengelabui korban dengan domain tiruan.
+                                This website does not belong to{" "}
+                                <strong>{result.brandImpersonated}</strong> and mimics official branding.
                               </li>
                             )}
                             {result.detectedModus?.map((modus, idx) => (
                               <li key={idx}>
-                                <strong>{modus}:</strong> Hati-hati terhadap
-                                permintaan data akun, PIN, OTP, atau transfer dana.
+                                <strong>{modus}:</strong> Beware of requests for account credentials, PINs, OTPs, or financial transactions.
                               </li>
                             ))}
                           </ul>
@@ -467,7 +465,7 @@ export default function ScamLinkChecker() {
                       <div className="flex items-center gap-2 border-b border-xeoo-border pb-3">
                         <Shield className="text-xeoo-primary" size={16} />
                         <h3 className="text-xs font-bold uppercase tracking-wider text-xeoo-text">
-                          Langkah & Panduan Keamanan
+                          Safety & Prevention Guide
                         </h3>
                       </div>
                       <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
@@ -494,7 +492,7 @@ export default function ScamLinkChecker() {
                         <div className="flex items-center gap-2">
                           <CheckCircle2 size={16} className="text-xeoo-primary" />
                           <h3 className="text-xs font-bold uppercase tracking-wider text-xeoo-text">
-                            Hasil Pemeriksaan Sinyal ({result.checks.length})
+                            Signal Inspection Results ({result.checks.length})
                           </h3>
                         </div>
                       </div>
@@ -524,50 +522,50 @@ export default function ScamLinkChecker() {
                       <div className="flex items-center gap-2 border-b border-xeoo-border pb-3">
                         <Globe size={16} className="text-xeoo-primary" />
                         <h3 className="text-xs font-bold uppercase tracking-wider text-xeoo-text">
-                          Struktur & Analisis Domain
+                          Domain Structure & Analysis
                         </h3>
                       </div>
 
                       <div className="mt-3 grid grid-cols-2 gap-2">
                         {[
                           {
-                            label: "Protokol HTTPS",
-                            status: result.urlAnalysis.https ? "Aman (HTTPS)" : "Tidak Aman (HTTP)",
+                            label: "HTTPS Protocol",
+                            status: result.urlAnalysis.https ? "Secure (HTTPS)" : "Insecure (HTTP)",
                             valid: result.urlAnalysis.https,
                           },
                           {
-                            label: "Pemendek URL",
-                            status: result.urlAnalysis.shortlink ? "Shortlink" : "Domain Langsung",
+                            label: "URL Shortener",
+                            status: result.urlAnalysis.shortlink ? "Shortlink" : "Direct Domain",
                             valid: !result.urlAnalysis.shortlink,
                           },
                           {
-                            label: "IP Alih-alih Domain",
-                            status: result.urlAnalysis.ipHost ? "Ya (IP Host)" : "Normal (Domain)",
+                            label: "Raw IP Host",
+                            status: result.urlAnalysis.ipHost ? "Yes (IP Host)" : "Normal (Domain)",
                             valid: !result.urlAnalysis.ipHost,
                           },
                           {
-                            label: "Ekstensi Mencurigakan",
-                            status: result.urlAnalysis.suspiciousTld ? "TLD Berisiko" : "TLD Standar",
+                            label: "Suspicious TLD",
+                            status: result.urlAnalysis.suspiciousTld ? "Risky TLD" : "Standard TLD",
                             valid: !result.urlAnalysis.suspiciousTld,
                           },
                           {
-                            label: "Karakter Aneh ($ & _)",
-                            status: result.urlAnalysis.specialCharsInHost ? "Terdeteksi" : "Bersih",
+                            label: "Special Symbols ($ & _)",
+                            status: result.urlAnalysis.specialCharsInHost ? "Detected" : "Clean",
                             valid: !result.urlAnalysis.specialCharsInHost,
                           },
                           {
-                            label: "Subdomain Berlapis",
-                            status: result.urlAnalysis.excessiveSubdomains ? "Terlalu Dalam" : "Normal",
+                            label: "Deep Subdomains",
+                            status: result.urlAnalysis.excessiveSubdomains ? "Deep Subdomains" : "Standard",
                             valid: !result.urlAnalysis.excessiveSubdomains,
                           },
                           {
-                            label: "Punycode / Homograf",
-                            status: result.urlAnalysis.punycode ? "Ya (IDN)" : "Tidak",
+                            label: "Punycode / Homoglyph",
+                            status: result.urlAnalysis.punycode ? "Yes (IDN)" : "No",
                             valid: !result.urlAnalysis.punycode,
                           },
                           {
-                            label: "Sintaks User-Info (@)",
-                            status: result.urlAnalysis.userInfo ? "Terdeteksi (@)" : "Tidak Ada",
+                            label: "User-Info Syntax (@)",
+                            status: result.urlAnalysis.userInfo ? "Detected (@)" : "None",
                             valid: !result.urlAnalysis.userInfo,
                           },
                         ].map((item, i) => (
@@ -603,10 +601,10 @@ export default function ScamLinkChecker() {
                 <KeyRound size={18} />
               </div>
               <h3 className="mt-3 text-xs font-bold text-xeoo-text">
-                Modus Hadiah & Bansos
+                Fake Giveaways & Grants
               </h3>
               <p className="mt-1 text-[11px] leading-4 text-xeoo-muted">
-                Menggunakan link tiruan bank (contoh: <code>sinarm4s</code>) untuk mencuri kode OTP dan PIN m-banking.
+                Uses spoofed banking links (e.g. <code>sinarm4s</code>) to steal OTP codes and credentials.
               </p>
             </div>
 
@@ -615,10 +613,10 @@ export default function ScamLinkChecker() {
                 <Package size={18} />
               </div>
               <h3 className="mt-3 text-xs font-bold text-xeoo-text">
-                Modus Cek Resi Palsu
+                Fake Courier & Parcel Tracking
               </h3>
               <p className="mt-1 text-[11px] leading-4 text-xeoo-muted">
-                Menyerupai nama ekspedisi (contoh: <code>j&t_expre$s.com</code>) untuk menyebarkan file APK berbahaya.
+                Mimics courier brand names (e.g. <code>j&t_expre$s.com</code>) to spread malicious APK files.
               </p>
             </div>
 
@@ -627,10 +625,10 @@ export default function ScamLinkChecker() {
                 <UserCheck size={18} />
               </div>
               <h3 className="mt-3 text-xs font-bold text-xeoo-text">
-                Modus Loker / Tugas
+                Fake Job & Recruitment Scams
               </h3>
               <p className="mt-1 text-[11px] leading-4 text-xeoo-muted">
-                Memodifikasi domain job portal (contoh: <code>job-street.cc</code>) untuk penipuan deposit kerja paruh waktu.
+                Alters recruitment portal domains (e.g. <code>job-street.cc</code>) to run fraudulent deposit tasks.
               </p>
             </div>
 
@@ -639,10 +637,10 @@ export default function ScamLinkChecker() {
                 <Smartphone size={18} />
               </div>
               <h3 className="mt-3 text-xs font-bold text-xeoo-text">
-                Sanggahan Akun Sosmed
+                Social Media Phishing Appeals
               </h3>
               <p className="mt-1 text-[11px] leading-4 text-xeoo-muted">
-                Peringatan penutupan akun palsu (contoh: <code>ig-f0topicture-b0tnet.com</code>) untuk membajak akun.
+                Deceptive copyright or ban appeal notices (e.g. <code>ig-f0topicture-b0tnet.com</code>) to hijack accounts.
               </p>
             </div>
           </section>

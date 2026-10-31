@@ -164,12 +164,12 @@ export default function ToolCard({ tool }: ToolCardProps) {
             ) : isUpcoming ? (
               <>
                 <CalendarClock size={14} />
-                Segera Hadir
+                Coming Soon
               </>
             ) : (
               <>
                 <Wrench size={14} />
-                Sedang Diperbaiki
+                Under Maintenance
               </>
             )}
           </span>

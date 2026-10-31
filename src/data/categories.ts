@@ -17,6 +17,7 @@ import {
   Palette,
   Skull,
   Sparkles,
+  Users,
 } from "lucide-react";
 
 export const categories: Category[] = [
@@ -103,6 +104,13 @@ export const categories: Category[] = [
     description: "Simple tools for website SEO optimization.",
     count: 9,
     icon: Search,
+  },
+  {
+    name: "Productive Tools",
+    slug: "productive-tools",
+    description: "Tools to boost everyday productivity and speed.",
+    count: 2,
+    icon: Users,
   },
   {
     name: "Defacement Tools",

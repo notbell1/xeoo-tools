@@ -46,7 +46,7 @@ const XSS_PATTERNS = [
 const WITTY_XSS_WARNINGS = [
   "Warning: SEO metrics dulu. Drama XSS belakangan. 😏",
   "WARNING • Nice try. DA/PA checks accept URLs, not love letters to the DOM. ❤️",
-  "Warning: Kalau mau cari perhatian, jangan lewat <script>. Input rejected.",
+  "Warning: Script tags are prohibited. Input rejected.",
   "Warning: Hubungan saja perlu validasi, apalagi input. XSS rejected. 💔",
 ];
 

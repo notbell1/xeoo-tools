@@ -6,5 +6,5 @@ const isLocal =
 export const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL ||
   (isLocal
-    ? "http://localhost/PROJECT_GIT/xeoo_tools/backend"
+    ? "/php"
     : `${typeof window !== "undefined" ? window.location.origin : ""}/backend`);

@@ -14,7 +14,7 @@ export default function FrontendTopbar({ onOpenSidebar }: FrontendTopbarProps) {
           type="button"
           onClick={onOpenSidebar}
           className="flex h-9 w-9 items-center justify-center rounded-xl border border-xeoo-border bg-xeoo-surface text-xeoo-text shadow-xs transition hover:bg-xeoo-surface-soft active:scale-95"
-          aria-label="Buka menu navigasi"
+          aria-label="Open navigation menu"
         >
           <Menu size={18} strokeWidth={2} />
         </button>
@@ -38,7 +38,7 @@ export default function FrontendTopbar({ onOpenSidebar }: FrontendTopbarProps) {
         <Link
           to="/tools"
           className="flex h-8 items-center gap-1.5 rounded-lg border border-xeoo-border bg-xeoo-surface px-2.5 text-xs font-semibold text-xeoo-text transition hover:bg-xeoo-surface-soft"
-          title="Lihat semua tools"
+          title="View all tools"
         >
           <Wrench size={13} strokeWidth={2} />
           <span className="hidden sm:inline">Tools</span>

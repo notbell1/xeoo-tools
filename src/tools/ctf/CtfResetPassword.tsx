@@ -22,15 +22,15 @@ export const CtfResetPassword: React.FC = () => {
           <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-xeoo-warning/10 border border-xeoo-warning/30 text-xeoo-warning">
             <AlertCircle className="h-5 w-5" />
           </div>
-          <h2 className="text-base font-bold text-xeoo-text mb-1.5">Reset Password Ditutup</h2>
+          <h2 className="text-base font-bold text-xeoo-text mb-1.5">Password Reset Disabled</h2>
           <p className="text-xs text-xeoo-muted mb-4 leading-relaxed">
-            Fitur reset password dinonaktifkan sementara oleh administrator CTF Command.
+            The password reset feature has been temporarily disabled by the CTF Command administrator.
           </p>
           <Link
             to="/ctf/login"
             className="inline-flex rounded-lg bg-xeoo-primary px-4 py-2 text-xs font-semibold text-white hover:bg-xeoo-primary-hover transition-colors"
           >
-            Kembali ke Login
+            Back to Login
           </Link>
         </div>
       </div>

@@ -527,6 +527,21 @@ const TOOL_REGISTRY: Record<string, ToolDefinition> = {
     component: <SchemaMarkupGenerator />,
     defaultStatus: "ready",
   },
+  "backlink-checker": {
+    name: "Backlink Checker",
+    component: <Soon toolName="Backlink Checker" />,
+    defaultStatus: "ready",
+  },
+  "serp-checker": {
+    name: "SERP Checker",
+    component: <Soon toolName="SERP Checker" />,
+    defaultStatus: "ready",
+  },
+  "broken-link-checker": {
+    name: "Broken Link Checker",
+    component: <Soon toolName="Broken Link Checker" />,
+    defaultStatus: "ready",
+  },
   "prompt-optimizer": {
     name: "Prompt Optimizer",
     component: <PromptOptimizer />,

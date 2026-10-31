@@ -40,10 +40,10 @@ const XSS_PATTERNS = [
 ];
 
 const ROMANTIC_XSS_WARNINGS = [
-  "Warning: Cinta boleh injection, input jangan. 😏",
+  "Warning: Invalid input format. Injection characters rejected.",
   "Warning: Kalau mau cari perhatian, jangan lewat XSS. Cari yang sayang saja. ❤️",
   "Warning: Hubungan saja perlu validasi, apalagi input. XSS rejected. 💔",
-  "Warning: Cinta sepihak masih bisa diperjuangkan. XSS tidak. 🥀",
+  "Warning: Potential XSS detected. Input rejected.",
   "Warning: Jangan spam script di sini. Chat dia saja belum tentu dibalas. 💌",
   "Warning: Hatiku terbuka, tapi form ini tertutup untuk script injection. 🔒",
 ];

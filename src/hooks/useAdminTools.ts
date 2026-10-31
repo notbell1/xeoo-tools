@@ -119,11 +119,17 @@ export function useAdminTools({
       body.append("status", toolForm.status);
       body.append("category_id", String(categoryId));
 
+      const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+      if (csrfToken) {
+        body.append("csrf_token", csrfToken);
+      }
+
       const response = await fetch(`${BACKEND_URL}/api/tools.php`, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
         },
         body,
       });
@@ -215,11 +221,17 @@ export function useAdminTools({
         body.append("tool_id", String(toolId));
         body.append("status", status);
 
+        const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+        if (csrfToken) {
+          body.append("csrf_token", csrfToken);
+        }
+
         const response = await fetch(`${BACKEND_URL}/api/tools.php`, {
           method: "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
           },
           body,
         });
@@ -290,11 +302,17 @@ export function useAdminTools({
         body.append("action", "delete");
         body.append("tool_id", String(toolId));
 
+        const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+        if (csrfToken) {
+          body.append("csrf_token", csrfToken);
+        }
+
         const response = await fetch(`${BACKEND_URL}/api/tools.php`, {
           method: "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
           },
           body,
         });

@@ -136,8 +136,8 @@ export async function showPrompt(
     showCancelButton: true,
     showConfirmButton: true,
 
-    confirmButtonText: "Simpan",
-    cancelButtonText: "Batal",
+    confirmButtonText: "Save",
+    cancelButtonText: "Cancel",
 
     reverseButtons: true,
 

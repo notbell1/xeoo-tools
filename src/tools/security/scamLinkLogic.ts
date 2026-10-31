@@ -140,11 +140,11 @@ function evaluateClientSide(input: string): ScamLinkResult {
     score = 0;
     checks.push({
       key: "officialDomain",
-      label: "Domain Resmi Terverifikasi",
+      label: "Verified Official Domain",
       status: "pass",
-      detail: "Domain ini terdaftar sebagai domain resmi terverifikasi.",
+      detail: "This domain is verified as an authentic official portal.",
     });
-    recommendations.push("Domain ini adalah website resmi terpercaya.");
+    recommendations.push("This domain is a verified authentic website.");
   } else {
     // Brand impersonation check
     const brandMap: Record<string, string[]> = {
@@ -167,47 +167,47 @@ function evaluateClientSide(input: string): ScamLinkResult {
         score += 55;
         checks.push({
           key: "brandImpersonation",
-          label: "Tiruan / Pencatutan Brand Resmi",
+          label: "Brand Impersonation / Spoofing",
           status: "danger",
-          detail: `URL ini meniru atau mencatut nama '${brand}' pada domain tidak resmi.`,
+          detail: `This URL impersonates '${brand}' on an unofficial domain.`,
         });
-        recommendations.push(`Waspada! Website ini BUKAN situs resmi ${brand}. JANGAN masukkan data login, password, atau PIN/OTP.`);
+        recommendations.push(`Warning! This is NOT an official ${brand} website. NEVER enter login credentials, passwords, PINs, or OTPs.`);
         break;
       }
     }
 
     // Modus Checks
     if (/hadiah|giveaway|undian|spin|winner|dana-kaget|klaim|bantuan|bansos|blt|bpum/i.test(fullTarget)) {
-      detectedModus.push("Modus Hadiah, Undian & Bantuan Sosial Palsu");
+      detectedModus.push("Fake Giveaway, Lottery & Social Aid Scam");
       score += 25;
-      recommendations.push("Jangan percaya klaim hadiah/bantuan yang meminta transfer biaya administrasi terlebih dahulu.");
+      recommendations.push("Do not trust prize or aid claims that request upfront administrative fees or deposits.");
     }
 
     if (/cekresi|cek-resi|lacak-resi|resi|paket|kurir|paket-tertahan|ongkir/i.test(fullTarget)) {
-      detectedModus.push("Modus Cek Resi Ekspedisi & Tracking Paket Palsu");
+      detectedModus.push("Fake Courier Tracking & Package Scam");
       score += 25;
-      recommendations.push("Lacak resi hanya melalui website/aplikasi resmi kurir. Jangan mengunduh file APK.");
+      recommendations.push("Track packages exclusively on official courier apps. Never download unknown APK files.");
     }
 
     if (/lowongan|low0ng4n|loker|karir|recruitment|kerja-part-time/i.test(fullTarget)) {
-      detectedModus.push("Modus Lowongan Pekerjaan / Rekrutmen Palsu");
+      detectedModus.push("Fake Job Recruitment & Task Scam");
       score += 25;
-      recommendations.push("Lowongan kerja resmi tidak memungut biaya deposit atau tugas like/follow berbayar.");
+      recommendations.push("Legitimate job recruiters never demand upfront deposits or paid follow/like tasks.");
     }
 
     if (/sanggahan|pengaduan|copyright|appeal|banned|fotopicture|f0topicture|b0tnet|botnet/i.test(fullTarget)) {
-      detectedModus.push("Modus Sanggahan Akun & Phishing Media Sosial / Botnet");
+      detectedModus.push("Account Appeal & Social Phishing / Botnet");
       score += 25;
-      recommendations.push("Pemberitahuan pelanggaran akun palsu sering digunakan untuk membajak akun media sosial Anda.");
+      recommendations.push("Fake account suspension notices are commonly used to hijack your social media credentials.");
     }
 
     if (isShortlink) {
       score += 15;
       checks.push({
         key: "shortlink",
-        label: "Pemendek URL (Shortlink)",
+        label: "URL Shortener (Shortlink)",
         status: "warning",
-        detail: "URL menggunakan pemendek link yang menyamarkan tujuan asli website.",
+        detail: "URL uses a shortlink service hiding the final destination.",
       });
     }
 
@@ -215,9 +215,9 @@ function evaluateClientSide(input: string): ScamLinkResult {
       score += 15;
       checks.push({
         key: "suspiciousTld",
-        label: "Ekstensi Domain (TLD)",
+        label: "Domain Extension (TLD)",
         status: "warning",
-        detail: `Menggunakan ekstensi '.${tld}' yang sering digunakan untuk website phishing massal.`,
+        detail: `Uses extension '.${tld}', commonly associated with spam and phishing campaigns.`,
       });
     }
 
@@ -225,9 +225,9 @@ function evaluateClientSide(input: string): ScamLinkResult {
       score += 20;
       checks.push({
         key: "leetspeak",
-        label: "Modifikasi Karakter & Leetspeak",
+        label: "Character Modification & Leetspeak",
         status: "danger",
-        detail: "Domain menggunakan karakter aneh atau angka pengganti huruf untuk mengecoh korban.",
+        detail: "Domain uses altered characters or numbers substituting letters to deceive users.",
       });
     }
 
@@ -235,9 +235,9 @@ function evaluateClientSide(input: string): ScamLinkResult {
       score += 10;
       checks.push({
         key: "https",
-        label: "Protokol HTTPS",
+        label: "HTTPS Protocol",
         status: "warning",
-        detail: "URL tidak menggunakan protokol HTTPS yang aman.",
+        detail: "URL does not utilize secure HTTPS protocol.",
       });
     }
   }
@@ -245,21 +245,21 @@ function evaluateClientSide(input: string): ScamLinkResult {
   score = Math.max(0, Math.min(100, score));
 
   let riskLevel: ScamRiskLevel = "low";
-  let riskLabel = "Risiko Rendah / Aman (Safe)";
-  let riskSummary = "Tidak ditemukan indikasi bahaya atau pola penipuan yang mencurigakan pada alamat website ini.";
+  let riskLabel = "Low Risk / Safe";
+  let riskSummary = "No suspicious scam patterns or dangerous indicators were detected on this domain.";
 
   if (score >= 70) {
     riskLevel = "dangerous";
-    riskLabel = "Sangat Berbahaya (Scam / Phishing)";
-    riskSummary = "Link ini memiliki indikasi kuat sebagai website penipuan atau pencurian data penting. JANGAN BUKA link ini dan JANGAN masukkan informasi pribadi apapun.";
+    riskLabel = "Dangerous (Scam / Phishing)";
+    riskSummary = "High probability of scam, fraud, or credential harvesting. DO NOT open or enter personal credentials.";
   } else if (score >= 40) {
     riskLevel = "high";
-    riskLabel = "Berisiko Tinggi (High Risk)";
-    riskSummary = "Beberapa sinyal bahaya terdeteksi pada struktur link ini. Berhati-hatilah dan jangan pernah melakukan transaksi atau memasukkan data rahasia.";
+    riskLabel = "High Risk";
+    riskSummary = "Multiple threat indicators detected. Exercise caution and do not perform transactions or submit sensitive data.";
   } else if (score >= 20) {
     riskLevel = "suspicious";
-    riskLabel = "Mencurigakan (Suspicious)";
-    riskSummary = "Ditemukan beberapa kejanggalan pada alamat website ini. Pastikan Anda memverifikasi keaslian pengirim sebelum melanjutkan.";
+    riskLabel = "Suspicious";
+    riskSummary = "Unusual characteristics found in this domain structure. Verify authenticity before proceeding.";
   }
 
   return {
@@ -277,7 +277,7 @@ function evaluateClientSide(input: string): ScamLinkResult {
     },
     brandImpersonated,
     detectedModus,
-    recommendations: recommendations.length > 0 ? recommendations : ["Selalu periksa domain asli sebelum memasukkan informasi sensitif."],
+    recommendations: recommendations.length > 0 ? recommendations : ["Always verify the authentic domain before entering sensitive credentials."],
     urlAnalysis: {
       https: isHttps,
       ipHost: isIpHost,
@@ -302,7 +302,7 @@ export async function checkScamLink(
   const url = normalizeUrlInput(value);
 
   if (!url) {
-    throw new Error("Masukkan link atau URL yang ingin diperiksa.");
+    throw new Error("Enter a link or URL to inspect.");
   }
 
   // Try direct backend API first, then proxy fallback, and finally offline engine

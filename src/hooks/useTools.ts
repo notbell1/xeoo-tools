@@ -115,7 +115,7 @@ async function executeFetchTools(): Promise<PublicTool[]> {
     const result: ToolsResponse = await response.json();
 
     if (!result.success) {
-      throw new Error(result.message || "Gagal mengambil data tools.");
+      throw new Error(result.message || "Failed to fetch tools data.");
     }
 
     const normalizedTools = (result.data ?? [])
@@ -156,7 +156,7 @@ export function useTools(): UseToolsResult {
       setError(null);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Data tools tidak dapat dimuat."
+        err instanceof Error ? err.message : "Tools data could not be loaded."
       );
     } finally {
       setLoading(false);

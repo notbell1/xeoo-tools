@@ -8,6 +8,7 @@ import {
   CalendarClock,
   CheckCircle2,
   Construction,
+  Flame,
   Layers,
   Search,
   Wrench,
@@ -31,6 +32,7 @@ import { getCategoryIcon, getToolIcon } from "../lib/toolIcons";
 import { getCategoryStyle } from "../lib/categoryStyles";
 
 import { useTools } from "../hooks/useTools";
+import { usePopularTools } from "../hooks/usePopularTools";
 
 type DatabaseCategory = {
   id: number;
@@ -166,6 +168,7 @@ export default function Home() {
   const [categoriesLoading, setCategoriesLoading] = useState(true);
 
   const { tools: liveTools } = useTools();
+  const { popularTools } = usePopularTools(3);
 
   const reducedMotion = useReducedMotion();
 
@@ -206,7 +209,7 @@ export default function Home() {
         const result = (await response.json()) as CategoriesResponse;
 
         if (!result.success) {
-          throw new Error(result.message || "Gagal memuat kategori.");
+          throw new Error(result.message || "Failed to load categories.");
         }
 
         const rawCategories = result.data ?? [];
@@ -483,6 +486,52 @@ export default function Home() {
                   </span>
                 </div>
               </motion.div>
+
+              {/* MOST POPULAR TOOLS (1-3 Tools) */}
+              {popularTools.length > 0 && (
+                <motion.div
+                  variants={fadeUp}
+                  className="mx-auto mt-6 w-full max-w-xl"
+                >
+                  <div className="flex flex-col items-center gap-2.5">
+                    <div className="inline-flex items-center gap-1.5 rounded-full border border-xeoo-border bg-xeoo-surface/60 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-xeoo-muted shadow-2xs backdrop-blur">
+                      <Flame size={12} className="text-amber-500" />
+                      <span>Most Visited Tools</span>
+                    </div>
+
+                    <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
+                      {popularTools.map((tool) => {
+                        const Icon = getToolIcon(tool.icon);
+                        return (
+                          <Link
+                            key={tool.id}
+                            to={tool.route}
+                            className="group relative flex items-center gap-2.5 overflow-hidden rounded-2xl border border-xeoo-border bg-xeoo-surface/90 p-2.5 text-left shadow-2xs backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-xeoo-primary/40 hover:bg-xeoo-surface-soft hover:shadow-xs"
+                          >
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-xeoo-border bg-xeoo-bg text-xeoo-text transition-colors group-hover:border-xeoo-primary/30 group-hover:text-xeoo-primary">
+                              <Icon size={16} />
+                            </div>
+
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-xs font-bold text-xeoo-text transition-colors group-hover:text-xeoo-primary">
+                                {tool.name}
+                              </p>
+                              <p className="truncate text-[10px] text-xeoo-muted">
+                                {tool.category_name}
+                              </p>
+                            </div>
+
+                            <ArrowUpRight
+                              size={13}
+                              className="shrink-0 text-xeoo-muted opacity-40 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-xeoo-primary"
+                            />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
 
               <motion.div
                 variants={fadeUp}
