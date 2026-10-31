@@ -33,6 +33,7 @@ import { getCategoryStyle } from "../lib/categoryStyles";
 
 import { useTools } from "../hooks/useTools";
 import { usePopularTools } from "../hooks/usePopularTools";
+import { useActiveVisitors } from "../hooks/useActiveVisitors";
 
 type DatabaseCategory = {
   id: number;
@@ -98,20 +99,14 @@ function CategoryTypewriter({
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  useEffect(() => {
-    if (phrases.length === 0) {
-      return;
-    }
-
-    setPhraseIndex((current) => Math.min(current, phrases.length - 1));
-  }, [phrases]);
+  const activeIndex = phrases.length > 0 ? phraseIndex % phrases.length : 0;
 
   useEffect(() => {
     if (phrases.length === 0) {
       return;
     }
 
-    const target = phrases[phraseIndex % phrases.length] ?? "";
+    const target = phrases[activeIndex] ?? "";
 
     if (reducedMotion) {
       setDisplayText(target);
@@ -147,7 +142,7 @@ function CategoryTypewriter({
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [displayText, isDeleting, phraseIndex, phrases, reducedMotion]);
+  }, [activeIndex, displayText, isDeleting, phrases, reducedMotion]);
 
   return (
     <span className="flex min-h-[1.2em] w-full items-center justify-center">
@@ -169,6 +164,7 @@ export default function Home() {
 
   const { tools: liveTools } = useTools();
   const { popularTools } = usePopularTools(3);
+  const { onlineCount } = useActiveVisitors();
 
   const reducedMotion = useReducedMotion();
 
@@ -402,10 +398,21 @@ export default function Home() {
             >
               <motion.div
                 variants={fadeUp}
-                className="mb-5 flex justify-center"
+                className="mb-5 flex flex-col items-center justify-center gap-2 sm:gap-2.5"
               >
-                <div className="inline-flex items-center gap-2 rounded-full border border-xeoo-border bg-xeoo-surface/90 px-3 py-1.5 text-[10px] font-bold text-xeoo-text-soft shadow-sm backdrop-blur sm:text-xs">
-                  Simple tools for everyday work
+               
+
+                <div
+                  className="inline-flex items-center gap-1.5 rounded-full border border-xeoo-border bg-xeoo-surface/90 px-3 py-1 text-[10px] font-medium text-xeoo-text-soft shadow-xs backdrop-blur sm:text-xs"
+                  title="Estimated active visitors"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                  </span>
+                  <span className="tracking-wide">
+                    <strong className="font-semibold text-xeoo-text">{onlineCount}</strong> Online
+                  </span>
                 </div>
               </motion.div>
 

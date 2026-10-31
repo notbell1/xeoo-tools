@@ -28,6 +28,7 @@ import { TOOLS_UPDATED_EVENT } from "../hooks/useTools";
 import { getCategoryIcon, getToolIcon } from "../lib/toolIcons";
 
 import NotFound from "./NotFound";
+import { clearAdminCsrfToken, setAdminCsrfToken } from "../lib/adminAuth";
 
 import type {
   AdminTool,
@@ -184,6 +185,9 @@ export default function DashboardMimin({
 
       setAvatar(user.avatar || null);
 
+      if (result.data?.csrf_token) {
+        setAdminCsrfToken(result.data.csrf_token);
+      }
       setAuthorized(true);
 
       return true;
@@ -525,7 +529,7 @@ export default function DashboardMimin({
         throw new Error(result.message || "Sign out failed.");
       }
 
-      sessionStorage.removeItem("xeoo_admin_csrf");
+      clearAdminCsrfToken();
       await showSuccess("Signed out", "See you again.");
 
       window.location.href = "/login/mimin";

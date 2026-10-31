@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { showConfirm, showError, showSuccess } from "../alert";
 import { BACKEND_URL } from "../config/backend";
 import { TOOLS_UPDATED_EVENT } from "./useTools";
+import { getAdminCsrfToken } from "../lib/adminAuth";
 
 import type {
   AdminCategory,
@@ -119,7 +120,7 @@ export function useAdminTools({
       body.append("status", toolForm.status);
       body.append("category_id", String(categoryId));
 
-      const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+      const csrfToken = await getAdminCsrfToken();
       if (csrfToken) {
         body.append("csrf_token", csrfToken);
       }
@@ -221,7 +222,7 @@ export function useAdminTools({
         body.append("tool_id", String(toolId));
         body.append("status", status);
 
-        const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+        const csrfToken = await getAdminCsrfToken();
         if (csrfToken) {
           body.append("csrf_token", csrfToken);
         }
@@ -302,7 +303,7 @@ export function useAdminTools({
         body.append("action", "delete");
         body.append("tool_id", String(toolId));
 
-        const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+        const csrfToken = await getAdminCsrfToken();
         if (csrfToken) {
           body.append("csrf_token", csrfToken);
         }

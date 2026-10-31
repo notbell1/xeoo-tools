@@ -31,6 +31,7 @@ export interface AuthResponse {
   message?: string;
   data?: {
     user?: AdminUser;
+    csrf_token?: string;
   };
 }
 

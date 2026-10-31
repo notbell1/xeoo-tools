@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { showConfirm, showError, showSuccess } from "../alert";
 import { BACKEND_URL } from "../config/backend";
 import { DEFAULT_CATEGORY_FORM, normalizeSlug } from "../lib/adminCategories";
+import { getAdminCsrfToken } from "../lib/adminAuth";
 
 import type {
   AdminCategory,
@@ -175,7 +176,7 @@ export function useAdminCategories({
       body.append("icon", icon);
       body.append("color", color);
 
-      const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+      const csrfToken = await getAdminCsrfToken();
       if (csrfToken) {
         body.append("csrf_token", csrfToken);
       }
@@ -275,7 +276,7 @@ export function useAdminCategories({
         body.append("action", "delete");
         body.append("category_id", String(category.id));
 
-        const csrfToken = sessionStorage.getItem("xeoo_admin_csrf") || "";
+        const csrfToken = await getAdminCsrfToken();
         if (csrfToken) {
           body.append("csrf_token", csrfToken);
         }

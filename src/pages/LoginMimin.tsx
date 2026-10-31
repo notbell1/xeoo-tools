@@ -7,6 +7,7 @@ import { Eye, EyeOff, LockKeyhole, LogIn, UserRound } from "lucide-react";
 import { showError, showSuccess } from "../alert";
 
 import { BACKEND_URL } from "../config/backend";
+import { setAdminCsrfToken } from "../lib/adminAuth";
 
 type AuthResponse = {
   success: boolean;
@@ -22,6 +23,7 @@ type AuthResponse = {
       last_login_at?: string | null;
       last_login_ip?: string | null;
     };
+    csrf_token?: string;
   };
 };
 
@@ -129,6 +131,9 @@ export default function LoginMimin() {
 
       await showSuccess("Login successful", `Welcome back, ${loggedUsername}.`);
 
+      if (result.data?.csrf_token) {
+        setAdminCsrfToken(result.data.csrf_token);
+      }
       window.location.href = "/mimin/dashboard";
     } catch (error) {
       console.error("Login error:", error);
