@@ -677,9 +677,9 @@ export const DEFAULT_TOOLS: PublicTool[] = [
     category_slug: "defacement",
   },
   {
-    id: 110,
-    name: "Defacement Challenge Generator",
-    slug: "defacement-challenge-generator",
+    id: 64,
+    name: "Defacement CTF",
+    slug: "defacement-ctf",
     description: "Create and investigate browser-first web defacement CTF forensic challenges",
     icon: "shield-alert",
     status: "ready",
