@@ -32,6 +32,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Local Development & Proxy Routing**:
   - Configured local development API proxying to eliminate cross-origin request issues.
 
+### ⚡ Performance & Caching
+- **Database Query & Response Optimization**:
+  - Replaced correlated subqueries in category queries with optimized aggregate joins.
+  - Implemented two-step indexed aggregation for popular tools telemetry.
+  - Optimized visit deduplication lookups with dedicated single-index filters.
+  - Enabled HTTP response caching with `stale-while-revalidate` for public endpoints.
+
 ### 🛡️ Security & Dependencies
 - Patched development server dependencies addressing command-line argument handling and file system check advisories.
 - Patched data validation libraries addressing memory exhaustion advisories on constrained collections.
